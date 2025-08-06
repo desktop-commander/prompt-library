@@ -35,7 +35,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <div className="relative">
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 py-12">
           <div className="text-center max-w-4xl mx-auto">
             <div className="flex items-center justify-center gap-2 mb-6">
               <div className="p-2 bg-primary/10 rounded-lg">
@@ -49,62 +49,15 @@ const Index = () => {
               Use Case Library
             </h2>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Discover powerful AI workflows and automation prompts for Desktop Commander. 
-              Browse, filter, and copy proven use cases from the community.
+              Discover powerful AI workflows and automation prompts for Desktop Commander
             </p>
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <Button asChild size="lg" className="dc-button-primary">
-                <Link to="/use-cases" className="flex items-center gap-2">
-                  Browse Use Cases
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild>
-                <a
-                  href="https://desktopcommander.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  Get Desktop Commander
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </Button>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* Stats Section */}
-      <div className="py-8 bg-card">
+      {/* Popular Use Cases */}
+      <div className="pb-16">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {stats.map((stat) => {
-              const IconComponent = stat.icon;
-              return (
-                <div key={stat.label} className="text-center">
-                  <div className="flex items-center justify-center mb-2">
-                    <IconComponent className="h-5 w-5 text-primary" />
-                  </div>
-                  <div className="text-xl font-bold text-foreground mb-1">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground">{stat.label}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* Featured Use Cases */}
-      <div className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Most Popular Use Cases</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Top-voted use cases from our community - ready to copy and use with Desktop Commander
-            </p>
-          </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
             {popularUseCases.map((useCase) => (
               <Card key={useCase.id} className="dc-card">
