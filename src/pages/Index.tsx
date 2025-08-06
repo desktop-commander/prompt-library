@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Clock, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCases } from '@/data/useCases';
 
 const Index = () => {
   const stats = [
@@ -12,29 +13,10 @@ const Index = () => {
     { label: 'Active Users', value: '500+', icon: Users }
   ];
 
-  const featuredUseCases = [
-    {
-      title: 'Explore and Understand New Repository',
-      description: 'Quickly understand a new codebase structure, key files, and architecture patterns.',
-      difficulty: 'Simple',
-      category: 'Code Exploration',
-      votes: 156
-    },
-    {
-      title: 'Organize Downloads Folder',
-      description: 'Automatically sort and organize files in your downloads folder by type, date, or project.',
-      difficulty: 'Simple', 
-      category: 'File Management',
-      votes: 203
-    },
-    {
-      title: 'Build Simple Web App Locally',
-      description: 'Create a complete web application with frontend and basic backend functionality.',
-      difficulty: 'Medium',
-      category: 'Development', 
-      votes: 187
-    }
-  ];
+  // Get top 10 most popular use cases
+  const popularUseCases = useCases
+    .sort((a, b) => b.votes - a.votes)
+    .slice(0, 10);
 
   const getDifficultyClass = (difficulty: string) => {
     switch (difficulty) {
@@ -117,24 +99,24 @@ const Index = () => {
       <div className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Popular Use Cases</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Most Popular Use Cases</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore the most popular and highly-voted use cases from our community
+              Top-voted use cases from our community - ready to copy and use with Desktop Commander
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {featuredUseCases.map((useCase, index) => (
-              <Card key={index} className="dc-card">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+            {popularUseCases.map((useCase) => (
+              <Card key={useCase.id} className="dc-card">
                 <CardHeader>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1">
-                      <CardTitle className="text-lg leading-tight">{useCase.title}</CardTitle>
+                      <CardTitle className="text-base leading-tight">{useCase.title}</CardTitle>
                       <div className="flex items-center gap-2 mt-2">
                         <Badge className={`difficulty-badge ${getDifficultyClass(useCase.difficulty)}`}>
                           {useCase.difficulty}
                         </Badge>
-                        <span className="text-sm text-muted-foreground">{useCase.category}</span>
+                        <span className="text-xs text-muted-foreground">{useCase.category}</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
@@ -144,9 +126,21 @@ const Index = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="leading-relaxed">
+                  <CardDescription className="leading-relaxed text-sm">
                     {useCase.description}
                   </CardDescription>
+                  <div className="flex flex-wrap gap-1 mt-3">
+                    {useCase.targetRoles.slice(0, 2).map((role) => (
+                      <Badge key={role} variant="secondary" className="role-tag text-xs">
+                        {role}
+                      </Badge>
+                    ))}
+                    {useCase.targetRoles.length > 2 && (
+                      <Badge variant="secondary" className="role-tag text-xs">
+                        +{useCase.targetRoles.length - 2}
+                      </Badge>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             ))}
