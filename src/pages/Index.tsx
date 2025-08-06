@@ -6,6 +6,7 @@ import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Clock, Shield, Us
 import { Link } from 'react-router-dom';
 import { useCases } from '@/data/useCases';
 import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
+import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
 
 const Index = () => {
   const [selectedUseCase, setSelectedUseCase] = useState(null);
@@ -34,6 +35,11 @@ const Index = () => {
       ...prev,
       [id]: (prev[id] || 0) + 1
     }));
+  };
+
+  const handleSubmitUseCase = (newUseCase) => {
+    // In a real app, this would save to a backend
+    console.log('New use case submitted:', newUseCase);
   };
 
   const getDifficultyClass = (difficulty: string) => {
@@ -69,6 +75,26 @@ const Index = () => {
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               Discover powerful AI workflows and automation prompts for Desktop Commander
             </p>
+            <div className="flex items-center justify-center gap-4 flex-wrap">
+              <Button asChild size="lg" className="dc-button-primary">
+                <Link to="/use-cases" className="flex items-center gap-2">
+                  Browse All Use Cases
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+              <SubmitUseCaseModal onSubmit={handleSubmitUseCase} />
+              <Button variant="outline" size="lg" asChild>
+                <a
+                  href="https://desktopcommander.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  Get Desktop Commander
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
