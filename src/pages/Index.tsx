@@ -157,50 +157,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Features Section */}
-      <div className="py-16 bg-card">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Why Use This Library?</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Save time and discover new possibilities with our curated collection of Desktop Commander workflows
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="p-3 bg-primary/10 rounded-lg w-fit mx-auto mb-4">
-                <Search className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">Smart Filtering</h3>
-              <p className="text-muted-foreground">
-                Find exactly what you need with advanced filtering by role, difficulty, category, and popularity.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="p-3 bg-primary/10 rounded-lg w-fit mx-auto mb-4">
-                <Clock className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">Ready to Use</h3>
-              <p className="text-muted-foreground">
-                Copy and paste proven prompts that work. No need to start from scratch or wonder if it will work.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="p-3 bg-primary/10 rounded-lg w-fit mx-auto mb-4">
-                <Shield className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">Community Tested</h3>
-              <p className="text-muted-foreground">
-                All use cases are voted on and validated by the Desktop Commander community.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* CTA Section */}
       <div className="py-16">
         <div className="container mx-auto px-4">
