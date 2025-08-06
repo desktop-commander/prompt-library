@@ -1,11 +1,17 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Clock, Shield } from 'lucide-react';
+import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Clock, Shield, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCases } from '@/data/useCases';
+import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
 
 const Index = () => {
+  const [selectedUseCase, setSelectedUseCase] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [useCaseVotes, setUseCaseVotes] = useState({});
+
   const stats = [
     { label: 'Use Cases', value: '15+', icon: Code },
     { label: 'Community Votes', value: '2,000+', icon: Heart },
@@ -17,6 +23,18 @@ const Index = () => {
   const popularUseCases = useCases
     .sort((a, b) => b.votes - a.votes)
     .slice(0, 10);
+
+  const handleUseCaseClick = (useCase) => {
+    setSelectedUseCase(useCase);
+    setIsModalOpen(true);
+  };
+
+  const handleVote = (id) => {
+    setUseCaseVotes(prev => ({
+      ...prev,
+      [id]: (prev[id] || 0) + 1
+    }));
+  };
 
   const getDifficultyClass = (difficulty: string) => {
     switch (difficulty) {
@@ -60,7 +78,11 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
             {popularUseCases.map((useCase) => (
-              <Card key={useCase.id} className="dc-card">
+              <Card 
+                key={useCase.id} 
+                className="dc-card cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => handleUseCaseClick(useCase)}
+              >
                 <CardHeader>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1">
@@ -74,8 +96,14 @@ const Index = () => {
                     </div>
                     <div className="flex items-center gap-1">
                       <Heart className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm text-muted-foreground">{useCase.votes}</span>
+                      <span className="text-sm text-muted-foreground">
+                        {useCase.votes + (useCaseVotes[useCase.id] || 0)}
+                      </span>
                     </div>
+                  </div>
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">
+                    <User className="h-3 w-3" />
+                    <span>{useCase.author}</span>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -109,6 +137,13 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      <UseCaseDetailModal
+        useCase={selectedUseCase}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onVote={handleVote}
+      />
 
       {/* CTA Section */}
       <div className="py-16">

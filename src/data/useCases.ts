@@ -9,6 +9,8 @@ export interface UseCase {
   votes: number;
   icon: string;
   tags: string[];
+  author: string;
+  dateAdded: string;
 }
 
 export const useCases: UseCase[] = [
@@ -22,7 +24,9 @@ export const useCases: UseCase[] = [
     category: 'Code Exploration',
     votes: 156,
     icon: 'FolderSearch',
-    tags: ['repository', 'code-analysis', 'documentation']
+    tags: ['repository', 'code-analysis', 'documentation'],
+    author: 'CodeExplorer_Dev',
+    dateAdded: '2024-01-15'
   },
   {
     id: '2',
@@ -34,7 +38,9 @@ export const useCases: UseCase[] = [
     category: 'File Management',
     votes: 203,
     icon: 'FolderOrganize',
-    tags: ['organization', 'cleanup', 'files']
+    tags: ['organization', 'cleanup', 'files'],
+    author: 'OrganizePro',
+    dateAdded: '2024-01-12'
   },
   {
     id: '3',
@@ -46,7 +52,9 @@ export const useCases: UseCase[] = [
     category: 'Development',
     votes: 187,
     icon: 'Code',
-    tags: ['web-development', 'frontend', 'project-setup']
+    tags: ['web-development', 'frontend', 'project-setup'],
+    author: 'WebBuilder_JS',
+    dateAdded: '2024-01-10'
   },
   {
     id: '4',
@@ -58,7 +66,9 @@ export const useCases: UseCase[] = [
     category: 'Data Analytics',
     votes: 234,
     icon: 'BarChart3',
-    tags: ['data-analysis', 'visualization', 'insights']
+    tags: ['data-analysis', 'visualization', 'insights'],
+    author: 'DataGuru_2024',
+    dateAdded: '2024-01-08'
   },
   {
     id: '5',
@@ -70,7 +80,9 @@ export const useCases: UseCase[] = [
     category: 'DevOps',
     votes: 145,
     icon: 'Settings',
-    tags: ['setup', 'configuration', 'development']
+    tags: ['setup', 'configuration', 'development'],
+    author: 'DevEnvExpert',
+    dateAdded: '2024-01-07'
   },
   {
     id: '6',
@@ -82,7 +94,9 @@ export const useCases: UseCase[] = [
     category: 'Documentation',
     votes: 98,
     icon: 'FileText',
-    tags: ['documentation', 'readme', 'api-docs']
+    tags: ['documentation', 'readme', 'api-docs'],
+    author: 'DocMaster',
+    dateAdded: '2024-01-06'
   },
   {
     id: '7',
@@ -94,7 +108,9 @@ export const useCases: UseCase[] = [
     category: 'System Management',
     votes: 167,
     icon: 'Archive',
-    tags: ['backup', 'automation', 'security']
+    tags: ['backup', 'automation', 'security'],
+    author: 'BackupNinja',
+    dateAdded: '2024-01-05'
   },
   {
     id: '8',
@@ -106,7 +122,9 @@ export const useCases: UseCase[] = [
     category: 'Security',
     votes: 89,
     icon: 'Shield',
-    tags: ['security', 'audit', 'vulnerability']
+    tags: ['security', 'audit', 'vulnerability'],
+    author: 'SecureCode_Pro',
+    dateAdded: '2024-01-04'
   },
   {
     id: '9',
@@ -118,7 +136,9 @@ export const useCases: UseCase[] = [
     category: 'Database',
     votes: 124,
     icon: 'Database',
-    tags: ['database', 'optimization', 'performance']
+    tags: ['database', 'optimization', 'performance'],
+    author: 'DBOptimizer',
+    dateAdded: '2024-01-03'
   },
   {
     id: '10',
@@ -130,7 +150,9 @@ export const useCases: UseCase[] = [
     category: 'Testing',
     votes: 112,
     icon: 'TestTube',
-    tags: ['api', 'testing', 'automation']
+    tags: ['api', 'testing', 'automation'],
+    author: 'TestMaster_QA',
+    dateAdded: '2024-01-02'
   },
   {
     id: '11',
@@ -142,7 +164,9 @@ export const useCases: UseCase[] = [
     category: 'Automation',
     votes: 198,
     icon: 'Clock',
-    tags: ['automation', 'scheduling', 'productivity']
+    tags: ['automation', 'scheduling', 'productivity'],
+    author: 'AutomationWiz',
+    dateAdded: '2024-01-01'
   },
   {
     id: '12',
@@ -154,7 +178,9 @@ export const useCases: UseCase[] = [
     category: 'Code Quality',
     votes: 156,
     icon: 'RefreshCw',
-    tags: ['refactoring', 'code-quality', 'modernization']
+    tags: ['refactoring', 'code-quality', 'modernization'],
+    author: 'RefactorExpert',
+    dateAdded: '2023-12-30'
   },
   {
     id: '13',
@@ -166,7 +192,9 @@ export const useCases: UseCase[] = [
     category: 'DevOps',
     votes: 87,
     icon: 'ArrowRightLeft',
-    tags: ['migration', 'deployment', 'infrastructure']
+    tags: ['migration', 'deployment', 'infrastructure'],
+    author: 'MigrationPro',
+    dateAdded: '2023-12-29'
   },
   {
     id: '14',
@@ -178,7 +206,9 @@ export const useCases: UseCase[] = [
     category: 'Monitoring',
     votes: 143,
     icon: 'Activity',
-    tags: ['monitoring', 'performance', 'alerting']
+    tags: ['monitoring', 'performance', 'alerting'],
+    author: 'MonitoringGuru',
+    dateAdded: '2023-12-28'
   },
   {
     id: '15',
@@ -190,7 +220,9 @@ export const useCases: UseCase[] = [
     category: 'SEO',
     votes: 176,
     icon: 'Search',
-    tags: ['seo', 'optimization', 'marketing']
+    tags: ['seo', 'optimization', 'marketing'],
+    author: 'SEO_Specialist',
+    dateAdded: '2023-12-27'
   }
 ];
 
