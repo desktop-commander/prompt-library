@@ -76,18 +76,18 @@ const Index = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="py-16 bg-card">
+      <div className="py-8 bg-card">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((stat) => {
               const IconComponent = stat.icon;
               return (
                 <div key={stat.label} className="text-center">
-                  <div className="flex items-center justify-center mb-3">
-                    <IconComponent className="h-8 w-8 text-primary" />
+                  <div className="flex items-center justify-center mb-2">
+                    <IconComponent className="h-5 w-5 text-primary" />
                   </div>
-                  <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className="text-xl font-bold text-foreground mb-1">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground">{stat.label}</div>
                 </div>
               );
             })}
