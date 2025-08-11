@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Clock, Shield, User } from 'lucide-react';
+import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Play, Clock, Shield, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCases } from '@/data/useCases';
 import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
@@ -122,7 +122,7 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Heart className="h-4 w-4 text-muted-foreground" />
+                      <Play className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm text-muted-foreground">
                         {useCase.votes + (useCaseVotes[useCase.id] || 0)}
                       </span>
