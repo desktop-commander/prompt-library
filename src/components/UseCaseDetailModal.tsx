@@ -138,7 +138,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <div className="flex items-start gap-4">
+          <div className="flex items-start gap-4 pr-12">
             <div className="p-3 bg-dc-surface-elevated rounded-lg">
               <IconComponent className="h-6 w-6 text-primary" />
             </div>
