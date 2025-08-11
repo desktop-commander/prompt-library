@@ -17,6 +17,8 @@ export function SubmitUseCaseModal({ onSubmit }: SubmitUseCaseModalProps) {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
+    nickname: '',
+    email: '',
     description: '',
     prompt: '',
     difficulty: '',
@@ -28,11 +30,22 @@ export function SubmitUseCaseModal({ onSubmit }: SubmitUseCaseModalProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!formData.title || !formData.description || !formData.prompt || !formData.difficulty || !formData.category) {
+
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+
+    if (
+      !formData.title ||
+      !formData.nickname ||
+      !formData.email ||
+      !emailValid ||
+      !formData.description ||
+      !formData.prompt ||
+      !formData.difficulty ||
+      !formData.category
+    ) {
       toast({
         title: "Validation Error",
-        description: "Please fill in all required fields.",
+        description: "Please fill in all required fields with a valid email address.",
         variant: "destructive",
       });
       return;
@@ -48,6 +61,8 @@ export function SubmitUseCaseModal({ onSubmit }: SubmitUseCaseModalProps) {
       category: formData.category,
       votes: 0,
       icon: 'Code',
+      author: formData.nickname,
+      contactEmail: formData.email,
       tags: formData.tags.split(',').map(tag => tag.trim()).filter(Boolean)
     };
 
@@ -55,6 +70,8 @@ export function SubmitUseCaseModal({ onSubmit }: SubmitUseCaseModalProps) {
     setOpen(false);
     setFormData({
       title: '',
+      nickname: '',
+      email: '',
       description: '',
       prompt: '',
       difficulty: '',
@@ -65,7 +82,7 @@ export function SubmitUseCaseModal({ onSubmit }: SubmitUseCaseModalProps) {
 
     toast({
       title: "Use Case Submitted!",
-      description: "Thank you for contributing to the community.",
+      description: "Thanks! We'll reach out by email and add it to the use case library.",
     });
   };
 
@@ -106,6 +123,31 @@ export function SubmitUseCaseModal({ onSubmit }: SubmitUseCaseModalProps) {
               placeholder="e.g., Explore and Understand New Repository"
               required
             />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="nickname">Your nickname *</Label>
+              <Input
+                id="nickname"
+                value={formData.nickname}
+                onChange={(e) => setFormData(prev => ({ ...prev, nickname: e.target.value }))}
+                placeholder="e.g., dev_jane"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email">Email *</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                placeholder="you@example.com"
+                required
+              />
+            </div>
           </div>
 
           <div className="space-y-2">
