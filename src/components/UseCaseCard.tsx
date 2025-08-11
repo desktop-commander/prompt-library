@@ -29,6 +29,7 @@ import { useToast } from '@/hooks/use-toast';
 interface UseCaseCardProps {
   useCase: UseCase;
   onVote: (id: string) => void;
+  onOpen?: (useCase: UseCase) => void;
 }
 
 const iconMap = {
@@ -49,7 +50,7 @@ const iconMap = {
   Search
 };
 
-export function UseCaseCard({ useCase, onVote }: UseCaseCardProps) {
+export function UseCaseCard({ useCase, onVote, onOpen }: UseCaseCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasVoted, setHasVoted] = useState(false);
   const { toast } = useToast();
@@ -177,7 +178,7 @@ export function UseCaseCard({ useCase, onVote }: UseCaseCardProps) {
             </div>
           )}
 
-          <Button className="w-full dc-button-primary">
+          <Button className="w-full dc-button-primary" onClick={() => onOpen?.(useCase)}>
             Try This Use Case
           </Button>
         </div>

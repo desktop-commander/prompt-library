@@ -6,6 +6,7 @@ import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
 
 export default function UseCases() {
   const [useCases, setUseCases] = useState<UseCase[]>(initialUseCases);
@@ -14,6 +15,8 @@ export default function UseCases() {
   const [selectedRole, setSelectedRole] = useState('All Roles');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All Difficulties');
   const [sortBy, setSortBy] = useState('popularity');
+  const [selectedUseCase, setSelectedUseCase] = useState<UseCase | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleVote = (id: string) => {
     setUseCases(prev => 
@@ -152,12 +155,20 @@ export default function UseCases() {
                   key={useCase.id}
                   useCase={useCase}
                   onVote={handleVote}
+                  onOpen={(uc) => { setSelectedUseCase(uc); setIsModalOpen(true); }}
                 />
               ))}
             </div>
           )}
         </div>
       </div>
+
+      <UseCaseDetailModal
+        useCase={selectedUseCase}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onVote={handleVote}
+      />
     </div>
   );
 }
