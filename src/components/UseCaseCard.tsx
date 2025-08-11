@@ -68,7 +68,7 @@ export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardPro
 
   return (
     <Card
-      className="dc-card h-full flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50"
+      className="dc-card h-full flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 relative group after:content-['↗'] after:absolute after:bottom-3 after:right-3 after:text-xs after:text-muted-foreground/70 after:pointer-events-none after:transition-transform after:transition-colors after:duration-200 hover:after:text-primary hover:after:translate-x-0.5 hover:after:-translate-y-0.5"
       onClick={() => onOpen?.(useCase)}
       role="button"
       tabIndex={0}
