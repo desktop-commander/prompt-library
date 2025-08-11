@@ -243,9 +243,33 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
             <Button variant="outline" onClick={onClose}>
               Close
             </Button>
-            <Button className="dc-button-primary">
-              Try This Use Case
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button className="dc-button-primary flex items-center gap-2">
+                  Use Prompt
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" sideOffset={8} className="z-50 bg-popover border rounded-md p-1 w-72 shadow-lg">
+                <DropdownMenuItem onClick={openInDC} className="flex items-center gap-3 rounded-md cursor-pointer">
+                  <Rocket className="h-4 w-4 text-primary" />
+                  <span className="text-sm flex-1">Open in Desktop Commander</span>
+                  <span className="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary">Recommended</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={openInClaude} className="flex items-center gap-3 rounded-md cursor-pointer">
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm">Open in Claude</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={openInCursor} className="flex items-center gap-3 rounded-md cursor-pointer">
+                  <Code className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm">Open in Cursor</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleCopyPrompt} className="flex items-center gap-3 rounded-md cursor-pointer">
+                  <Copy className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm">Copy Prompt</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </DialogContent>
