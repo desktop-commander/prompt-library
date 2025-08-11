@@ -20,10 +20,10 @@ const Index = () => {
     { label: 'Active Users', value: '500+', icon: Users }
   ];
 
-  // Get top 10 most popular use cases
-  const popularUseCases = useCases
+  // Featured use cases: top 6 by popularity
+  const featuredUseCases = useCases
     .sort((a, b) => b.votes - a.votes)
-    .slice(0, 10);
+    .slice(0, 6);
 
   const handleUseCaseClick = (useCase) => {
     setSelectedUseCase(useCase);
@@ -99,11 +99,23 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Popular Use Cases */}
+      {/* Featured Use Cases */}
       <div className="pb-16">
         <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-2xl font-bold text-foreground">Featured Use Cases</h2>
+              <p className="text-muted-foreground">A handpicked set to get you started</p>
+            </div>
+            <Button asChild variant="ghost" className="hidden md:inline-flex">
+              <Link to="/use-cases" className="flex items-center gap-2">
+                Browse library
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-            {popularUseCases.map((useCase) => (
+            {featuredUseCases.map((useCase) => (
               <Card 
                 key={useCase.id} 
                 className="dc-card cursor-pointer hover:shadow-lg transition-shadow"
@@ -156,7 +168,7 @@ const Index = () => {
           <div className="text-center">
             <Button asChild size="lg" variant="outline">
               <Link to="/use-cases" className="flex items-center gap-2">
-                View All Use Cases
+                Browse Library
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
