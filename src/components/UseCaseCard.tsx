@@ -88,7 +88,7 @@ export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardPro
             <div className="flex-1">
               <CardTitle className="text-lg leading-tight">{useCase.title}</CardTitle>
               <div className="flex items-center gap-2 mt-2">
-                <Badge className={`difficulty-badge ${getDifficultyClass(useCase.difficulty)}`}>
+                <Badge variant="outline" className="text-foreground/70 border-foreground/20 bg-transparent font-normal">
                   {useCase.difficulty}
                 </Badge>
                 <span className="text-sm text-muted-foreground">{useCase.category}</span>
