@@ -25,6 +25,7 @@ const Index = () => {
   const featuredUseCases = useCases
     .sort((a, b) => b.votes - a.votes)
     .slice(0, 6);
+  const hotIds = new Set(featuredUseCases.slice(0, 2).map((u) => u.id));
 
   const handleUseCaseClick = (useCase) => {
     setSelectedUseCase(useCase);
@@ -98,7 +99,7 @@ const Index = () => {
             {featuredUseCases.map((useCase) => (
               <Card 
                 key={useCase.id} 
-                className="dc-card cursor-pointer hover:shadow-lg transition-shadow relative group focus:outline-none focus:ring-2 focus:ring-primary/50 after:content-['↗'] after:absolute after:bottom-3 after:right-3 after:text-xs after:text-muted-foreground/70 after:pointer-events-none after:transition-transform after:transition-colors after:duration-200 hover:after:text-primary hover:after:translate-x-0.5 hover:after:-translate-y-0.5"
+                className={`dc-card cursor-pointer hover:shadow-lg transition-shadow relative group focus:outline-none focus:ring-2 focus:ring-primary/50 ${hotIds.has(useCase.id) ? 'border-2 border-primary hover:animate-pulse hover:ring-2 hover:ring-primary/30' : ''} after:content-['↗'] after:absolute after:bottom-3 after:right-3 after:text-xs after:text-muted-foreground/70 after:pointer-events-none after:transition-transform after:transition-colors after:duration-200 hover:after:text-primary hover:after:translate-x-0.5 hover:after:-translate-y-0.5`}
                 onClick={() => handleUseCaseClick(useCase)}
                 role="button"
                 tabIndex={0}
@@ -109,6 +110,11 @@ const Index = () => {
                   }
                 }}
               >
+                {hotIds.has(useCase.id) && (
+                  <div className="absolute top-3 right-3">
+                    <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs">🔥</span>
+                  </div>
+                )}
                 <CardHeader>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1">
