@@ -162,7 +162,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
             </div>
             <Badge variant="secondary" className="flex items-center gap-1.5">
               <Rocket className="h-4 w-4 text-primary" />
-              <span>{formatCompactNumber(useCase.votes + (hasVoted ? 1 : 0))} tried</span>
+              <span>used {formatCompactNumber(useCase.votes + (hasVoted ? 1 : 0))} times</span>
             </Badge>
           </div>
         </DialogHeader>
