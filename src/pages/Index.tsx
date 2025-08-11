@@ -43,18 +43,6 @@ const Index = () => {
     console.log('New use case submitted:', newUseCase);
   };
 
-  const getDifficultyClass = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Simple':
-        return 'difficulty-simple';
-      case 'Medium':
-        return 'difficulty-medium';
-      case 'Complex':
-        return 'difficulty-complex';
-      default:
-        return 'difficulty-simple';
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -110,15 +98,23 @@ const Index = () => {
             {featuredUseCases.map((useCase) => (
               <Card 
                 key={useCase.id} 
-                className="dc-card cursor-pointer hover:shadow-lg transition-shadow"
+                className="dc-card cursor-pointer hover:shadow-lg transition-shadow relative group focus:outline-none focus:ring-2 focus:ring-primary/50 after:content-['↗'] after:absolute after:bottom-3 after:right-3 after:text-xs after:text-muted-foreground/70 after:pointer-events-none after:transition-transform after:transition-colors after:duration-200 hover:after:text-primary hover:after:translate-x-0.5 hover:after:-translate-y-0.5"
                 onClick={() => handleUseCaseClick(useCase)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleUseCaseClick(useCase);
+                  }
+                }}
               >
                 <CardHeader>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1">
                       <CardTitle className="text-base leading-tight">{useCase.title}</CardTitle>
                       <div className="flex items-center gap-2 mt-2">
-                        <Badge className={`difficulty-badge ${getDifficultyClass(useCase.difficulty)}`}>
+                        <Badge variant="outline" className="text-foreground/70 border-foreground/20 bg-transparent font-normal">
                           {useCase.difficulty}
                         </Badge>
                         <span className="text-xs text-muted-foreground">{useCase.category}</span>
