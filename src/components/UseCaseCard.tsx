@@ -3,8 +3,9 @@ import { UseCase } from '@/data/useCases';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { formatCompactNumber } from '@/lib/utils';
 import {
-  Heart,
+  Rocket,
   FolderSearch,
   FolderOpen,
   Code,
@@ -95,9 +96,12 @@ export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardPro
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-1 min-w-[60px]" aria-label="Votes">
-            <Heart className="h-4 w-4 text-primary" />
-            <span className="text-sm">{useCase.votes}</span>
+          <div className="flex items-center min-w-[60px]" aria-label="Tried">
+            <Badge variant="secondary" className="flex items-center gap-1.5">
+              <Rocket className="h-4 w-4 text-primary" />
+              <span className="text-xs sm:text-sm">{formatCompactNumber(useCase.votes)}</span>
+              <span className="hidden sm:inline text-xs sm:text-sm">tried</span>
+            </Badge>
           </div>
         </div>
       </CardHeader>

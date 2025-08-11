@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { UseCase } from '@/data/useCases';
+import { formatCompactNumber } from '@/lib/utils';
 import { 
   Copy, 
   Heart, 
@@ -159,15 +160,10 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
                 </div>
               </div>
             </div>
-            <Button
-              variant="ghost"
-              onClick={handleVote}
-              disabled={hasVoted}
-              className="flex items-center gap-2"
-            >
-              <Heart className={`h-5 w-5 ${hasVoted ? 'fill-current text-red-500' : ''}`} />
-              <span>{useCase.votes + (hasVoted ? 1 : 0)}</span>
-            </Button>
+            <Badge variant="secondary" className="flex items-center gap-1.5">
+              <Rocket className="h-4 w-4 text-primary" />
+              <span>{formatCompactNumber(useCase.votes + (hasVoted ? 1 : 0))} tried</span>
+            </Badge>
           </div>
         </DialogHeader>
 
