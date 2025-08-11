@@ -119,29 +119,6 @@ export default function UseCases() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
         <div className="space-y-8">
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-card p-6 rounded-lg border">
-              <div className="text-2xl font-bold text-primary">{useCases.length}</div>
-              <div className="text-sm text-muted-foreground">Total Use Cases</div>
-            </div>
-            <div className="bg-card p-6 rounded-lg border">
-              <div className="text-2xl font-bold text-primary">{filteredAndSortedUseCases.length}</div>
-              <div className="text-sm text-muted-foreground">Filtered Results</div>
-            </div>
-            <div className="bg-card p-6 rounded-lg border">
-              <div className="text-2xl font-bold text-primary">
-                {useCases.reduce((sum, useCase) => sum + useCase.votes, 0)}
-              </div>
-              <div className="text-sm text-muted-foreground">Total Votes</div>
-            </div>
-            <div className="bg-card p-6 rounded-lg border">
-              <div className="text-2xl font-bold text-primary">
-                {new Set(useCases.flatMap(useCase => useCase.category)).size}
-              </div>
-              <div className="text-sm text-muted-foreground">Categories</div>
-            </div>
-          </div>
 
           {/* Filters */}
           <FilterControls

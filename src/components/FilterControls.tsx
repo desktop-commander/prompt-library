@@ -38,18 +38,17 @@ export function FilterControls({
     searchTerm.length > 0;
 
   return (
-    <div className="space-y-4 p-6 bg-card rounded-lg border">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Filter Use Cases</h2>
+    <div className="space-y-3 p-3 bg-card rounded-md border">
+      <div className="flex items-center justify-end">
         {hasActiveFilters && (
           <Button
             variant="ghost"
             size="sm"
             onClick={onClearFilters}
-            className="text-muted-foreground hover:text-foreground"
+            className="h-8 px-2 text-muted-foreground hover:text-foreground"
           >
             <X className="h-4 w-4 mr-1" />
-            Clear All
+            Clear
           </Button>
         )}
       </div>
@@ -60,11 +59,11 @@ export function FilterControls({
           placeholder="Search use cases..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-10"
+          className="pl-10 h-9"
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
         <div className="space-y-2">
           <label className="text-sm font-medium text-muted-foreground">Category</label>
           <Select value={selectedCategory} onValueChange={onCategoryChange}>
