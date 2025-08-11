@@ -101,20 +101,20 @@ const Index = () => {
 
       {/* Featured Use Cases */}
       <div className="pb-16">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground">Featured Use Cases</h2>
-              <p className="text-muted-foreground">A handpicked set to get you started</p>
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="mb-6 text-center">
+            <h2 className="text-2xl font-bold text-foreground">Featured Use Cases</h2>
+            <p className="text-muted-foreground">A handpicked set to get you started</p>
+            <div className="mt-3 hidden md:flex justify-center">
+              <Button asChild variant="ghost">
+                <Link to="/use-cases" className="flex items-center gap-2">
+                  Browse library
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
             </div>
-            <Button asChild variant="ghost" className="hidden md:inline-flex">
-              <Link to="/use-cases" className="flex items-center gap-2">
-                Browse library
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {featuredUseCases.map((useCase) => (
               <Card 
                 key={useCase.id} 
