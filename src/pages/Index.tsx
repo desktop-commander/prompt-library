@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Clock, Shield, User, Rocket } from 'lucide-react';
+import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Clock, Shield, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCases } from '@/data/useCases';
 import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
 import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
 import TestimonialsRow from '@/components/TestimonialsRow';
-import { formatCompactNumber } from '@/lib/utils';
 
 const Index = () => {
   const [selectedUseCase, setSelectedUseCase] = useState(null);
@@ -123,11 +122,10 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge variant="secondary" className="flex items-center gap-1.5">
-                        <Rocket className="h-4 w-4 text-primary" />
-                        <span className="text-xs sm:text-sm">{formatCompactNumber(useCase.votes + (useCaseVotes[useCase.id] || 0))}</span>
-                        <span className="hidden sm:inline text-xs sm:text-sm">times used</span>
-                      </Badge>
+                      <Heart className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">
+                        {useCase.votes + (useCaseVotes[useCase.id] || 0)}
+                      </span>
                       {hotIds.has(useCase.id) && (
                         <span aria-label="Hot use case" title="Hot use case" className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary border border-primary/20 text-[10px]">🔥</span>
                       )}

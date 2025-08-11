@@ -96,11 +96,11 @@ export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardPro
               </div>
             </div>
           </div>
-          <div className="flex items-center min-w-[60px]" aria-label="Times used">
+          <div className="flex items-center min-w-[60px]" aria-label="Tried">
             <Badge variant="secondary" className="flex items-center gap-1.5">
               <Rocket className="h-4 w-4 text-primary" />
               <span className="text-xs sm:text-sm">{formatCompactNumber(useCase.votes)}</span>
-              <span className="hidden sm:inline text-xs sm:text-sm">times used</span>
+              <span className="hidden sm:inline text-xs sm:text-sm">tried</span>
             </Badge>
           </div>
         </div>
