@@ -126,7 +126,7 @@ const Index = () => {
                       <Badge variant="secondary" className="flex items-center gap-1.5">
                         <Rocket className="h-4 w-4 text-primary" />
                         <span className="text-xs sm:text-sm">{formatCompactNumber(useCase.votes + (useCaseVotes[useCase.id] || 0))}</span>
-                        <span className="hidden sm:inline text-xs sm:text-sm">tried</span>
+                        <span className="hidden sm:inline text-xs sm:text-sm">times used</span>
                       </Badge>
                       {hotIds.has(useCase.id) && (
                         <span aria-label="Hot use case" title="Hot use case" className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary border border-primary/20 text-[10px]">🔥</span>
