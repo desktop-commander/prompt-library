@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -143,6 +143,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
             </div>
             <div className="flex-1">
               <DialogTitle className="text-2xl leading-tight mb-3">{useCase.title}</DialogTitle>
+              <DialogDescription className="sr-only">Detailed information and actions for this use case.</DialogDescription>
               <div className="flex items-center gap-3 flex-wrap">
                 <Badge className={`difficulty-badge ${getDifficultyClass(useCase.difficulty)}`}>
                   {useCase.difficulty}
