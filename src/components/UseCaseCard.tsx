@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { UseCase } from '@/data/useCases';
-import { Button } from '@/components/ui/button';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  ChevronDown, 
-  ChevronUp, 
-  Copy, 
-  Heart, 
+import {
+  Heart,
   FolderSearch,
   FolderOpen,
   Code,
@@ -24,7 +21,7 @@ import {
   Activity,
   Search
 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+
 
 interface UseCaseCardProps {
   useCase: UseCase;
@@ -50,39 +47,11 @@ const iconMap = {
   Search
 };
 
-export function UseCaseCard({ useCase, onVote, onOpen }: UseCaseCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [hasVoted, setHasVoted] = useState(false);
-  const { toast } = useToast();
+export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardProps) {
 
   const IconComponent = iconMap[useCase.icon as keyof typeof iconMap] || Code;
 
-  const handleCopyPrompt = async () => {
-    try {
-      await navigator.clipboard.writeText(useCase.prompt);
-      toast({
-        title: "Copied to clipboard!",
-        description: "The use case prompt has been copied to your clipboard.",
-      });
-    } catch (err) {
-      toast({
-        title: "Copy failed",
-        description: "Failed to copy to clipboard. Please copy manually.",
-        variant: "destructive",
-      });
-    }
-  };
 
-  const handleVote = () => {
-    if (!hasVoted) {
-      onVote(useCase.id);
-      setHasVoted(true);
-      toast({
-        title: "Vote recorded!",
-        description: "Thank you for voting on this use case.",
-      });
-    }
-  };
 
   const getDifficultyClass = (difficulty: string) => {
     switch (difficulty) {
@@ -98,7 +67,18 @@ export function UseCaseCard({ useCase, onVote, onOpen }: UseCaseCardProps) {
   };
 
   return (
-    <Card className="dc-card h-full flex flex-col">
+    <Card
+      className="dc-card h-full flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50"
+      onClick={() => onOpen?.(useCase)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen?.(useCase);
+        }
+      }}
+    >
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3 flex-1">
@@ -115,16 +95,10 @@ export function UseCaseCard({ useCase, onVote, onOpen }: UseCaseCardProps) {
               </div>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleVote}
-            disabled={hasVoted}
-            className="flex items-center gap-1 min-w-[60px]"
-          >
-            <Heart className={`h-4 w-4 ${hasVoted ? 'fill-current text-red-500' : ''}`} />
-            <span className="text-sm">{useCase.votes + (hasVoted ? 1 : 0)}</span>
-          </Button>
+          <div className="flex items-center gap-1 min-w-[60px]" aria-label="Votes">
+            <Heart className="h-4 w-4 text-primary" />
+            <span className="text-sm">{useCase.votes}</span>
+          </div>
         </div>
       </CardHeader>
 
@@ -141,47 +115,6 @@ export function UseCaseCard({ useCase, onVote, onOpen }: UseCaseCardProps) {
           ))}
         </div>
 
-        <div className="mt-auto space-y-3">
-          <Button
-            variant="outline"
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="w-full flex items-center justify-center gap-2"
-          >
-            {isExpanded ? (
-              <>
-                <ChevronUp className="h-4 w-4" />
-                Hide Prompt
-              </>
-            ) : (
-              <>
-                <ChevronDown className="h-4 w-4" />
-                View Prompt
-              </>
-            )}
-          </Button>
-
-          {isExpanded && (
-            <div className="space-y-3">
-              <div className="p-3 bg-dc-surface-elevated rounded-lg border">
-                <pre className="text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed">
-                  {useCase.prompt}
-                </pre>
-              </div>
-              <Button
-                onClick={handleCopyPrompt}
-                className="w-full flex items-center justify-center gap-2"
-                variant="outline"
-              >
-                <Copy className="h-4 w-4" />
-                Copy Prompt
-              </Button>
-            </div>
-          )}
-
-          <Button className="w-full dc-button-primary" onClick={() => onOpen?.(useCase)}>
-            Try This Use Case
-          </Button>
-        </div>
       </CardContent>
     </Card>
   );
