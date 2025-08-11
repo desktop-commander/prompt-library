@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useCases } from '@/data/useCases';
 import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
 import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
+import TestimonialsRow from '@/components/TestimonialsRow';
 
 const Index = () => {
   const [selectedUseCase, setSelectedUseCase] = useState(null);
@@ -166,6 +167,9 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {/* Testimonials */}
+      <TestimonialsRow />
 
       <UseCaseDetailModal
         useCase={selectedUseCase}
