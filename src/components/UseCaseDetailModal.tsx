@@ -154,9 +154,9 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
                   <User className="h-4 w-4" />
                   {useCase.author}
                 </div>
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                <div className="flex items-center gap-1 text-sm text-muted-foreground" aria-label={`Added on ${new Date(useCase.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}>
                   <Calendar className="h-4 w-4" />
-                  {new Date(useCase.dateAdded).toLocaleDateString()}
+                  <span>Added {new Date(useCase.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                 </div>
               </div>
             </div>
