@@ -35,6 +35,7 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { EngagementMeter } from '@/components/EngagementMeter';
 
 interface UseCaseDetailModalProps {
   useCase: UseCase | null;
@@ -244,10 +245,9 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
                 </div>
               </div>
             </div>
-            <Badge variant="secondary" className="flex items-center gap-1.5">
-              <Rocket className="h-4 w-4 text-primary" />
-              <span>used {formatCompactNumber(useCase.votes + (hasVoted ? 1 : 0))} times</span>
-            </Badge>
+            <div className="shrink-0" aria-label="All-time engagement">
+              <EngagementMeter count={useCase.votes + (hasVoted ? 1 : 0)} />
+            </div>
           </div>
         </DialogHeader>
 

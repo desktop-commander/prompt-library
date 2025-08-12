@@ -23,6 +23,7 @@ import {
   Search,
   User
 } from 'lucide-react';
+import { EngagementMeter } from '@/components/EngagementMeter';
 
 
 interface UseCaseCardProps {
@@ -97,12 +98,8 @@ export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardPro
               </div>
             </div>
           </div>
-          <div className="flex items-center shrink-0 min-w-[60px] whitespace-nowrap" aria-label="Tried">
-            <Badge variant="secondary" className="flex items-center gap-1.5">
-              <Rocket className="h-4 w-4 text-primary" />
-              <span className="text-xs sm:text-sm">{formatCompactNumber(useCase.votes)}</span>
-              <span className="hidden sm:inline text-xs sm:text-sm">tried</span>
-            </Badge>
+          <div className="flex items-center shrink-0 min-w-[90px] whitespace-nowrap" aria-label="All-time engagement">
+            <EngagementMeter count={useCase.votes} size="sm" />
           </div>
         </div>
       </CardHeader>

@@ -10,6 +10,7 @@ import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
 import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
 import TestimonialsRow from '@/components/TestimonialsRow';
 import { SiteHeader } from '@/components/SiteHeader';
+import { EngagementMeter } from '@/components/EngagementMeter';
 
 const Index = () => {
   const [selectedUseCase, setSelectedUseCase] = useState(null);
@@ -118,10 +119,7 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Play className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm text-muted-foreground">
-                        {useCase.votes + (useCaseVotes[useCase.id] || 0)}
-                      </span>
+                      <EngagementMeter count={useCase.votes + (useCaseVotes[useCase.id] || 0)} size="sm" />
                       {hotIds.has(useCase.id) && (
                         <span aria-label="Hot use case" title="Hot use case" className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary border border-primary/20 text-[10px]">🔥</span>
                       )}
