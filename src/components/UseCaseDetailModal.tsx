@@ -60,27 +60,15 @@ const iconMap = {
 
 export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCaseDetailModalProps) {
   const [hasVoted, setHasVoted] = useState(false);
-  const [pendingProvider, setPendingProvider] = useState<null | 'claude' | 'cursor'>(null);
+  const [pendingProvider, setPendingProvider] = useState<null | 'claude' | 'cursor' | 'copy'>(null);
   const { toast } = useToast();
 
   if (!useCase) return null;
 
   const IconComponent = iconMap[useCase.icon as keyof typeof iconMap] || Code;
 
-  const handleCopyPrompt = async () => {
-    try {
-      await navigator.clipboard.writeText(useCase.prompt);
-      toast({
-        title: "Copied to clipboard!",
-        description: "The use case prompt has been copied to your clipboard.",
-      });
-    } catch (err) {
-      toast({
-        title: "Copy failed",
-        description: "Failed to copy to clipboard. Please copy manually.",
-        variant: "destructive",
-      });
-    }
+  const handleCopyPrompt = () => {
+    setPendingProvider('copy');
   };
 
   const handleVote = () => {
@@ -141,6 +129,20 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
       await openProvider('https://claude.ai/new', 'claude', 'Opening Claude');
     } else if (pendingProvider === 'cursor') {
       await openProvider('https://www.cursor.com/', 'cursor', 'Opening Cursor');
+    } else if (pendingProvider === 'copy') {
+      try {
+        await navigator.clipboard.writeText(useCase.prompt);
+        toast({
+          title: "Copied to clipboard!",
+          description: "The use case prompt has been copied to your clipboard.",
+        });
+      } catch (err) {
+        toast({
+          title: "Copy failed",
+          description: "Failed to copy to clipboard. Please copy manually.",
+          variant: "destructive",
+        });
+      }
     }
     setPendingProvider(null);
   };
@@ -262,7 +264,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
       <AlertDialog open={!!pendingProvider} onOpenChange={(open) => { if (!open) setPendingProvider(null); }}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{pendingProvider === 'claude' ? 'Open in Claude' : 'Open in Cursor'}</AlertDialogTitle>
+            <AlertDialogTitle>{pendingProvider === 'claude' ? 'Open in Claude' : pendingProvider === 'cursor' ? 'Open in Cursor' : 'Copy Prompt'}</AlertDialogTitle>
             <AlertDialogDescription>
               For this prompt to work, you need to install Desktop Commander MCP.
               <div className="mt-3 text-foreground">
