@@ -238,9 +238,9 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" sideOffset={8} className="z-50 bg-popover border rounded-md p-1 w-72 shadow-lg">
-                <DropdownMenuItem disabled className="flex items-center gap-3 rounded-md cursor-not-allowed">
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="flex items-center gap-3 rounded-md cursor-not-allowed">
                   <Rocket className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm flex-1">Open in Desktop Commander App</span>
+                  <span className="text-sm flex-1 text-muted-foreground">Open in Desktop Commander App</span>
                   <button
                     type="button"
                     className="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 pointer-events-auto"
