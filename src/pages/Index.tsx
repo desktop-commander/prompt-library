@@ -109,8 +109,8 @@ const Index = () => {
               >
                 <CardHeader>
                   <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1">
-                      <CardTitle className="text-base leading-tight">{useCase.title}</CardTitle>
+                    <div className="flex-1 min-w-0">
+                      <CardTitle className="text-base leading-tight line-clamp-2">{useCase.title}</CardTitle>
                       <div className="flex items-center gap-2 mt-2">
                         <Badge variant="outline" className="text-foreground/70 border-foreground/20 bg-transparent font-normal">
                           {useCase.difficulty}
@@ -118,8 +118,8 @@ const Index = () => {
                         <span className="text-xs text-muted-foreground">{useCase.category}</span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <EngagementMeter count={useCase.votes + (useCaseVotes[useCase.id] || 0)} size="sm" />
+                    <div className="flex items-center gap-2 shrink-0">
+                      <EngagementMeter count={useCase.votes + (useCaseVotes[useCase.id] || 0)} size="sm" showLabel={false} />
                       {hotIds.has(useCase.id) && (
                         <span aria-label="Hot use case" title="Hot use case" className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary border border-primary/20 text-[10px]">🔥</span>
                       )}
