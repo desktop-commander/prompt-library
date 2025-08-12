@@ -165,27 +165,35 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
   const handleShare = async () => {
     const shareUrl = getShareUrl();
     const title = `Use Case: ${useCase.title}`;
+    const isMobile =
+      typeof navigator !== 'undefined' &&
+      (/(Mobi|Android|iPhone|iPad|iPod)/i.test(navigator.userAgent) ||
+        (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: coarse)').matches));
+
     try {
-      if (navigator.share) {
+      // Mobile: use native share sheet when available
+      if (isMobile && navigator.share) {
         await navigator.share({
           title,
           text: 'Check out this Desktop Commander use case',
           url: shareUrl,
         });
-      } else {
-        await navigator.clipboard.writeText(shareUrl);
-        setCopiedLink(true);
-        setTimeout(() => setCopiedLink(false), 1500);
-        toast({
-          title: 'Link copied',
-          description: 'Share it with your team.',
-          action: (
-            <ToastAction altText="Open link" onClick={() => window.open(shareUrl, '_blank', 'noopener,noreferrer')}>
-              Open
-            </ToastAction>
-          ),
-        });
+        return;
       }
+
+      // Desktop (or when share is unavailable): copy immediately
+      await navigator.clipboard.writeText(shareUrl);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 1500);
+      toast({
+        title: 'Link copied',
+        description: 'Share it with your team.',
+        action: (
+          <ToastAction altText="Open link" onClick={() => window.open(shareUrl, '_blank', 'noopener,noreferrer')}>
+            Open
+          </ToastAction>
+        ),
+      });
     } catch {
       try {
         await navigator.clipboard.writeText(shareUrl);
