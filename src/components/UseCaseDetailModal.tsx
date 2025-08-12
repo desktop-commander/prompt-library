@@ -70,6 +70,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
   const { toast } = useToast();
 
   const [exactUses, setExactUses] = useState(0);
+  const [tooltipsReady, setTooltipsReady] = useState(false);
 
   useEffect(() => {
     if (!useCase) return;
@@ -78,6 +79,19 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
     const value = raw ? Number(raw) : 0;
     setExactUses(Number.isFinite(value) ? value : 0);
   }, [useCase?.id]);
+
+  // Defer tooltips activation to avoid immediate hover on modal open
+  useEffect(() => {
+    if (!isOpen) {
+      setTooltipsReady(false);
+      return;
+    }
+    const t = window.setTimeout(() => setTooltipsReady(true), 600);
+    return () => {
+      window.clearTimeout(t);
+      setTooltipsReady(false);
+    };
+  }, [isOpen]);
 
   const incrementUses = () => {
     if (!useCase) return;
@@ -271,22 +285,27 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
             </div>
             <div className="shrink-0 flex items-center gap-2" aria-label="All-time engagement">
               <EngagementMeter count={useCase.votes + (hasVoted ? 1 : 0)} />
-              <TooltipProvider delayDuration={800}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span
-                      aria-label={`Exact uses: ${exactUses} (all-time)`}
-                      className="text-muted-foreground hover:text-foreground"
-                      role="img"
-                    >
-                      <Info className="h-4 w-4" />
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    Exact uses: {exactUses} (all-time)
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              {tooltipsReady ? (
+                <TooltipProvider delayDuration={800}>
+                  <Tooltip disableHoverableContent>
+                    <TooltipTrigger asChild>
+                      <span
+                        aria-label={`Exact uses: ${exactUses} (all-time)`}
+                        className="text-muted-foreground hover:text-foreground"
+                      >
+                        <Info className="h-4 w-4" />
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      Exact uses: {exactUses} (all-time)
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ) : (
+                <span aria-label={`Exact uses: ${exactUses} (all-time)`} className="text-muted-foreground">
+                  <Info className="h-4 w-4" />
+                </span>
+              )}
             </div>
           </div>
         </DialogHeader>
