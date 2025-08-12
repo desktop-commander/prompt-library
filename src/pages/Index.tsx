@@ -164,8 +164,9 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Testimonials */}
-      <TestimonialsRow />
+      <section id="testimonials" aria-label="Testimonials">
+        <TestimonialsRow />
+      </section>
 
       <UseCaseDetailModal
         useCase={selectedUseCase}

@@ -44,6 +44,20 @@ export const SiteHeader = () => {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link to="/#testimonials" className="rounded-md px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground">
+                    Testimonials
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <a href="https://desktopcommander.app/resources" target="_blank" rel="noopener noreferrer" className="rounded-md px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground">
+                    Resources
+                  </a>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </nav>
