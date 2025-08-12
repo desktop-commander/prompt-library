@@ -4,11 +4,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 export type EngagementTier = {
   level: 1 | 2 | 3 | 4 | 5;
-  label: 'New' | 'Emerging' | 'Growing' | 'Popular' | 'Elite';
+  label: 'New' | 'Emerging' | 'Growing' | 'Popular' | 'Hot';
 };
 
 function getEngagementTier(count: number): EngagementTier {
-  if (count >= 200) return { level: 5, label: 'Elite' };
+  if (count >= 200) return { level: 5, label: 'Hot' };
   if (count >= 100) return { level: 4, label: 'Popular' };
   if (count >= 30) return { level: 3, label: 'Growing' };
   if (count >= 10) return { level: 2, label: 'Emerging' };
