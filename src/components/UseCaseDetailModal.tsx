@@ -153,29 +153,36 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
   const openInCursor = () => setPendingProvider('cursor');
 
   const continueWithProvider = async () => {
-    if (pendingProvider === 'claude') {
-      await openProvider('https://claude.ai/new', 'claude', 'Opening Claude');
-      incrementUses();
-    } else if (pendingProvider === 'cursor') {
-      await openProvider('https://www.cursor.com/', 'cursor', 'Opening Cursor');
-      incrementUses();
-    } else if (pendingProvider === 'copy') {
-      try {
-        await navigator.clipboard.writeText(useCase.prompt);
+    try {
+      if (pendingProvider === 'claude' || pendingProvider === 'cursor') {
+        await copyPromptSilently();
+        localStorage.setItem('preferredPromptProvider', pendingProvider);
         toast({
-          title: "Copied to clipboard!",
-          description: "The use case prompt has been copied to your clipboard.",
+          title: 'Prompt copied',
+          description: `Prompt is copied — open ${pendingProvider === 'claude' ? 'Claude Desktop' : 'Cursor'} and paste it to try it out.`,
         });
         incrementUses();
-      } catch (err) {
-        toast({
-          title: "Copy failed",
-          description: "Failed to copy to clipboard. Please copy manually.",
-          variant: "destructive",
-        });
+        onClose();
+        return;
       }
+
+      if (pendingProvider === 'copy') {
+        await navigator.clipboard.writeText(useCase.prompt);
+        toast({
+          title: 'Copied to clipboard!',
+          description: 'The use case prompt has been copied to your clipboard.',
+        });
+        incrementUses();
+      }
+    } catch (err) {
+      toast({
+        title: 'Copy failed',
+        description: 'Failed to copy to clipboard. Please copy manually.',
+        variant: 'destructive',
+      });
+    } finally {
+      setPendingProvider(null);
     }
-    setPendingProvider(null);
   };
 
   const handleInstallMCP = () => {
