@@ -15,9 +15,13 @@ export default function UseCases() {
   const [selectedRole, setSelectedRole] = useState('All Roles');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All Difficulties');
   const [sortBy, setSortBy] = useState('popularity');
-  const [selectedUseCase, setSelectedUseCase] = useState<UseCase | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const initialSelected = (() => {
+    const id = searchParams.get('i') || new URLSearchParams(window.location.search).get('i');
+    return initialUseCases.find((u) => u.id === id) || null;
+  })();
+  const [selectedUseCase, setSelectedUseCase] = useState<UseCase | null>(initialSelected);
+  const [isModalOpen, setIsModalOpen] = useState(!!initialSelected);
   const handleVote = (id: string) => {
     setUseCases(prev => 
       prev.map(useCase => 
@@ -80,6 +84,17 @@ export default function UseCases() {
 
     return filtered;
   }, [useCases, searchTerm, selectedCategory, selectedRole, selectedDifficulty, sortBy]);
+
+  useEffect(() => {
+    const id = searchParams.get('i');
+    if (id) {
+      const found = useCases.find((u) => u.id === id);
+      if (found) {
+        setSelectedUseCase(found);
+        setIsModalOpen(true);
+      }
+    }
+  }, [searchParams, useCases]);
 
   return (
     <div className="min-h-screen bg-background">
