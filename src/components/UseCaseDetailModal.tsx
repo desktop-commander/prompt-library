@@ -30,7 +30,8 @@ import {
   Rocket,
   MessageSquare,
   ChevronDown,
-  Share2
+  Share2,
+  Info
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
@@ -67,6 +68,26 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
   const [pendingProvider, setPendingProvider] = useState<null | 'claude' | 'cursor' | 'copy'>(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const { toast } = useToast();
+
+  const [exactUses, setExactUses] = useState(0);
+
+  useEffect(() => {
+    if (!useCase) return;
+    const key = `useCase_uses_${useCase.id}`;
+    const raw = localStorage.getItem(key);
+    const value = raw ? Number(raw) : 0;
+    setExactUses(Number.isFinite(value) ? value : 0);
+  }, [useCase?.id]);
+
+  const incrementUses = () => {
+    if (!useCase) return;
+    const key = `useCase_uses_${useCase.id}`;
+    setExactUses((prev) => {
+      const next = prev + 1;
+      localStorage.setItem(key, String(next));
+      return next;
+    });
+  };
 
   if (!useCase) return null;
 
@@ -132,8 +153,10 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
   const continueWithProvider = async () => {
     if (pendingProvider === 'claude') {
       await openProvider('https://claude.ai/new', 'claude', 'Opening Claude');
+      incrementUses();
     } else if (pendingProvider === 'cursor') {
       await openProvider('https://www.cursor.com/', 'cursor', 'Opening Cursor');
+      incrementUses();
     } else if (pendingProvider === 'copy') {
       try {
         await navigator.clipboard.writeText(useCase.prompt);
@@ -141,6 +164,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
           title: "Copied to clipboard!",
           description: "The use case prompt has been copied to your clipboard.",
         });
+        incrementUses();
       } catch (err) {
         toast({
           title: "Copy failed",
@@ -245,8 +269,22 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
                 </div>
               </div>
             </div>
-            <div className="shrink-0" aria-label="All-time engagement">
+            <div className="shrink-0 flex items-center gap-2" aria-label="All-time engagement">
               <EngagementMeter count={useCase.votes + (hasVoted ? 1 : 0)} />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    type="button"
+                    aria-label={`Exact uses: ${exactUses} (all-time)`}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <Info className="h-4 w-4" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  Exact uses: {exactUses} (all-time)
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
         </DialogHeader>
