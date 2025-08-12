@@ -35,7 +35,7 @@ import {
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
-import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 import { EngagementMeter } from '@/components/EngagementMeter';
 
 interface UseCaseDetailModalProps {
@@ -271,20 +271,22 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
             </div>
             <div className="shrink-0 flex items-center gap-2" aria-label="All-time engagement">
               <EngagementMeter count={useCase.votes + (hasVoted ? 1 : 0)} />
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span
-                    aria-label={`Exact uses: ${exactUses} (all-time)`}
-                    className="text-muted-foreground hover:text-foreground"
-                    role="img"
-                  >
-                    <Info className="h-4 w-4" />
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent>
-                  Exact uses: {exactUses} (all-time)
-                </TooltipContent>
-              </Tooltip>
+              <TooltipProvider delayDuration={800}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span
+                      aria-label={`Exact uses: ${exactUses} (all-time)`}
+                      className="text-muted-foreground hover:text-foreground"
+                      role="img"
+                    >
+                      <Info className="h-4 w-4" />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Exact uses: {exactUses} (all-time)
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </div>
         </DialogHeader>
