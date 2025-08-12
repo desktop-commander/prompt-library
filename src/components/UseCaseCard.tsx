@@ -81,8 +81,8 @@ export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardPro
       }}
     >
       <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3 flex-1">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
             <div className="p-2 bg-dc-surface-elevated rounded-lg">
               <IconComponent className="h-5 w-5 text-primary" />
             </div>
@@ -96,7 +96,7 @@ export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardPro
               </div>
             </div>
           </div>
-          <div className="flex items-center min-w-[60px]" aria-label="Tried">
+          <div className="flex items-center shrink-0 min-w-[60px] whitespace-nowrap" aria-label="Tried">
             <Badge variant="secondary" className="flex items-center gap-1.5">
               <Rocket className="h-4 w-4 text-primary" />
               <span className="text-xs sm:text-sm">{formatCompactNumber(useCase.votes)}</span>
