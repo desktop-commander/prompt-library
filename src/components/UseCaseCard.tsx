@@ -20,7 +20,8 @@ import {
   RefreshCw,
   ArrowRightLeft,
   Activity,
-  Search
+  Search,
+  User
 } from 'lucide-react';
 
 
@@ -107,6 +108,10 @@ export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardPro
       </CardHeader>
 
       <CardContent className="flex-1 flex flex-col">
+        <div className="flex items-center gap-1 text-xs text-muted-foreground mb-2">
+          <User className="h-3 w-3" />
+          <span>{useCase.author}</span>
+        </div>
         <CardDescription className="text-sm leading-relaxed mb-4">
           {useCase.description}
         </CardDescription>
