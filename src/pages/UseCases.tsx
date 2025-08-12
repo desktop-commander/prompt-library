@@ -4,10 +4,10 @@ import { UseCaseCard } from '@/components/UseCaseCard';
 import { FilterControls } from '@/components/FilterControls';
 import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
-
+import { SiteHeader } from '@/components/SiteHeader';
 export default function UseCases() {
   const [useCases, setUseCases] = useState<UseCase[]>(initialUseCases);
   const [searchTerm, setSearchTerm] = useState('');
@@ -84,37 +84,30 @@ export default function UseCases() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link to="/">
-                <Button variant="ghost" size="sm" className="flex items-center gap-2">
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to Home
-                </Button>
-              </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-foreground">Desktop Commander Use Cases</h1>
-                <p className="text-muted-foreground mt-1">
-                  Discover and share powerful use cases for Desktop Commander
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <SubmitUseCaseModal onSubmit={handleSubmitUseCase} />
-              <Button variant="outline" asChild>
-                <a
-                  href="https://desktopcommander.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  Visit Desktop Commander
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </Button>
-            </div>
+      <SiteHeader />
+
+      {/* Page Intro */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight text-foreground">Use Case Library</h1>
+            <p className="text-muted-foreground mt-2">
+              Discover and share powerful use cases for Desktop Commander
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <SubmitUseCaseModal onSubmit={handleSubmitUseCase} />
+            <Button variant="outline" asChild>
+              <a
+                href="https://desktopcommander.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                Visit Desktop Commander
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </Button>
           </div>
         </div>
       </div>
