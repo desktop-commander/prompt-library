@@ -273,13 +273,13 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
               <EngagementMeter count={useCase.votes + (hasVoted ? 1 : 0)} />
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <button
-                    type="button"
+                  <span
                     aria-label={`Exact uses: ${exactUses} (all-time)`}
                     className="text-muted-foreground hover:text-foreground"
+                    role="img"
                   >
                     <Info className="h-4 w-4" />
-                  </button>
+                  </span>
                 </TooltipTrigger>
                 <TooltipContent>
                   Exact uses: {exactUses} (all-time)
