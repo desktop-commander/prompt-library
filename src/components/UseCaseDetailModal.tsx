@@ -36,6 +36,7 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { EngagementMeter } from '@/components/EngagementMeter';
 
 interface UseCaseDetailModalProps {
@@ -68,9 +69,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
   const [pendingProvider, setPendingProvider] = useState<null | 'claude' | 'cursor' | 'copy'>(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const { toast } = useToast();
-
   const [exactUses, setExactUses] = useState(0);
-  const [tooltipsReady, setTooltipsReady] = useState(false);
 
   useEffect(() => {
     if (!useCase) return;
@@ -80,18 +79,6 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
     setExactUses(Number.isFinite(value) ? value : 0);
   }, [useCase?.id]);
 
-  // Defer tooltips activation to avoid immediate hover on modal open
-  useEffect(() => {
-    if (!isOpen) {
-      setTooltipsReady(false);
-      return;
-    }
-    const t = window.setTimeout(() => setTooltipsReady(true), 600);
-    return () => {
-      window.clearTimeout(t);
-      setTooltipsReady(false);
-    };
-  }, [isOpen]);
 
   const incrementUses = () => {
     if (!useCase) return;
@@ -286,21 +273,20 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
             <div className="shrink-0 flex items-center gap-2" aria-label="All-time engagement">
               <EngagementMeter count={useCase.votes + (hasVoted ? 1 : 0)} />
               {tooltipsReady ? (
-                <TooltipProvider delayDuration={800}>
-                  <Tooltip disableHoverableContent>
-                    <TooltipTrigger asChild>
-                      <span
-                        aria-label={`Exact uses: ${exactUses} (all-time)`}
-                        className="text-muted-foreground hover:text-foreground"
-                      >
-                        <Info className="h-4 w-4" />
-                      </span>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      Exact uses: {exactUses} (all-time)
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <button
+                      type="button"
+                      aria-label={`Exact uses: ${exactUses} (all-time)`}
+                      className="inline-flex items-center justify-center text-muted-foreground hover:text-foreground"
+                    >
+                      <Info className="h-4 w-4" />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent align="end" side="bottom">
+                    Exact uses: {exactUses} (all-time)
+                  </PopoverContent>
+                </Popover>
               ) : (
                 <span aria-label={`Exact uses: ${exactUses} (all-time)`} className="text-muted-foreground">
                   <Info className="h-4 w-4" />
