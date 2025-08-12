@@ -264,7 +264,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
           <AlertDialogHeader>
             <AlertDialogTitle>{pendingProvider === 'claude' ? 'Open in Claude' : 'Open in Cursor'}</AlertDialogTitle>
             <AlertDialogDescription>
-              For the best experience, install Desktop Commander MCP. It enables secure local files and tools via the Model Context Protocol.
+              For this prompt to work, you need to install Desktop Commander MCP.
               <div className="mt-3 text-foreground">
                 <strong>Why do I need an MCP?</strong>
                 <ul className="list-disc pl-5 mt-2 text-muted-foreground">
