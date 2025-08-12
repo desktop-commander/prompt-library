@@ -1,11 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useCases as initialUseCases, UseCase } from '@/data/useCases';
 import { UseCaseCard } from '@/components/UseCaseCard';
 import { FilterControls } from '@/components/FilterControls';
 import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
 import { SiteHeader } from '@/components/SiteHeader';
 export default function UseCases() {
@@ -17,7 +17,7 @@ export default function UseCases() {
   const [sortBy, setSortBy] = useState('popularity');
   const [selectedUseCase, setSelectedUseCase] = useState<UseCase | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const handleVote = (id: string) => {
     setUseCases(prev => 
       prev.map(useCase => 
@@ -148,7 +148,13 @@ export default function UseCases() {
                   key={useCase.id}
                   useCase={useCase}
                   onVote={handleVote}
-                  onOpen={(uc) => { setSelectedUseCase(uc); setIsModalOpen(true); }}
+                  onOpen={(uc) => { 
+                    setSelectedUseCase(uc); 
+                    setIsModalOpen(true); 
+                    const params = new URLSearchParams(searchParams);
+                    params.set('i', uc.id);
+                    setSearchParams(params);
+                  }}
                 />
               ))}
             </div>
@@ -159,7 +165,13 @@ export default function UseCases() {
       <UseCaseDetailModal
         useCase={selectedUseCase}
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedUseCase(null);
+          const params = new URLSearchParams(searchParams);
+          params.delete('i');
+          setSearchParams(params);
+        }}
         onVote={handleVote}
       />
     </div>

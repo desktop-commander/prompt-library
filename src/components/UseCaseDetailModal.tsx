@@ -29,9 +29,12 @@ import {
   Search,
   Rocket,
   MessageSquare,
-  ChevronDown
+  ChevronDown,
+  Share2
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { ToastAction } from '@/components/ui/toast';
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 
 interface UseCaseDetailModalProps {
   useCase: UseCase | null;
@@ -61,6 +64,7 @@ const iconMap = {
 export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCaseDetailModalProps) {
   const [hasVoted, setHasVoted] = useState(false);
   const [pendingProvider, setPendingProvider] = useState<null | 'claude' | 'cursor' | 'copy'>(null);
+  const [copiedLink, setCopiedLink] = useState(false);
   const { toast } = useToast();
 
   if (!useCase) return null;
@@ -152,6 +156,60 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
     setPendingProvider(null);
   };
 
+  const getShareUrl = () => {
+    const url = new URL('/use-cases', window.location.origin);
+    url.searchParams.set('i', useCase.id);
+    return url.toString();
+  };
+
+  const handleShare = async () => {
+    const shareUrl = getShareUrl();
+    const title = `Use Case: ${useCase.title}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title,
+          text: 'Check out this Desktop Commander use case',
+          url: shareUrl,
+        });
+      } else {
+        await navigator.clipboard.writeText(shareUrl);
+        setCopiedLink(true);
+        setTimeout(() => setCopiedLink(false), 1500);
+        toast({
+          title: 'Link copied',
+          description: 'Share it with your team.',
+          action: (
+            <ToastAction altText="Open link" onClick={() => window.open(shareUrl, '_blank', 'noopener,noreferrer')}>
+              Open
+            </ToastAction>
+          ),
+        });
+      }
+    } catch {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        setCopiedLink(true);
+        setTimeout(() => setCopiedLink(false), 1500);
+        toast({
+          title: 'Link copied',
+          description: 'Share it with your team.',
+          action: (
+            <ToastAction altText="Open link" onClick={() => window.open(shareUrl, '_blank', 'noopener,noreferrer')}>
+              Open
+            </ToastAction>
+          ),
+        });
+      } catch {
+        toast({
+          title: 'Share failed',
+          description: 'Could not share or copy the link.',
+          variant: 'destructive',
+        });
+      }
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -230,6 +288,22 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
             <Button variant="outline" onClick={onClose}>
               Close
             </Button>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  onClick={handleShare}
+                  aria-label="Share this use case"
+                  className="flex items-center gap-2"
+                >
+                  <Share2 className="h-4 w-4" />
+                  {copiedLink ? 'Copied' : 'Share'}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Copy link to share</TooltipContent>
+            </Tooltip>
+
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button className="dc-button-primary flex items-center gap-2">
