@@ -50,9 +50,9 @@ export const SiteHeader = () => {
 
         {/* Right actions */}
         <div className="flex items-center gap-2">
-          <Button asChild size="sm">
-            <a href="https://desktopcommander.app" target="_blank" rel="noopener noreferrer">
-              Free Consultation
+          <Button asChild size="sm" variant="outline">
+            <a href="https://desktopcommander.app/#installation" target="_blank" rel="noopener noreferrer">
+              Install Desktop Commander
             </a>
           </Button>
         </div>
