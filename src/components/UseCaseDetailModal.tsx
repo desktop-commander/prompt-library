@@ -211,7 +211,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-start gap-4 pr-12">
