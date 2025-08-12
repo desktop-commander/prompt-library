@@ -11,6 +11,7 @@ export interface UseCase {
   tags: string[];
   author: string;
   dateAdded: string;
+  verified?: boolean;
 }
 
 export const useCases: UseCase[] = [
@@ -166,7 +167,8 @@ export const useCases: UseCase[] = [
     icon: 'Mail',
     tags: ['automation', 'newsletter', 'content'],
     author: 'Internal',
-    dateAdded: '2024-01-01'
+    dateAdded: '2024-01-01',
+    verified: true,
   }
 ];
 

@@ -31,7 +31,8 @@ import {
   MessageSquare,
   ChevronDown,
   Share2,
-  Info
+  Info,
+  BadgeCheck
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
@@ -256,6 +257,12 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
               <DialogTitle className="text-2xl leading-tight mb-3">{useCase.title}</DialogTitle>
               <DialogDescription className="sr-only">Detailed information and actions for this use case.</DialogDescription>
               <div className="flex items-center gap-3 flex-wrap">
+                {useCase.verified && (
+                  <span className="inline-flex items-center gap-1 text-xs rounded-full border border-primary/20 bg-primary/10 text-primary px-2 py-0.5">
+                    <BadgeCheck className="h-3 w-3" />
+                    Verified by DC team
+                  </span>
+                )}
                 <Badge className={`difficulty-badge ${getDifficultyClass(useCase.difficulty)}`}>
                   {useCase.difficulty}
                 </Badge>
