@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,6 +9,7 @@ import { useCases } from '@/data/useCases';
 import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
 import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
 import TestimonialsRow from '@/components/TestimonialsRow';
+import { SiteHeader } from '@/components/SiteHeader';
 
 const Index = () => {
   const [selectedUseCase, setSelectedUseCase] = useState(null);
@@ -44,9 +46,11 @@ const Index = () => {
     console.log('New use case submitted:', newUseCase);
   };
 
-
   return (
     <div className="min-h-screen bg-background">
+      {/* Header */}
+      <SiteHeader />
+
       {/* Hero Section */}
       <div className="relative">
         <div className="container mx-auto px-4 py-12">
