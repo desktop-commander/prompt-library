@@ -81,8 +81,8 @@ export function SubmitUseCaseModal({ onSubmit }: SubmitUseCaseModalProps) {
     });
 
     toast({
-      title: "Use Case Submitted!",
-      description: "Thanks! We'll reach out by email and add it to the use case library.",
+      title: "🎉 Use Case Submitted!",
+      description: "You'll get an email once your use case is published to the library!",
     });
   };
 
