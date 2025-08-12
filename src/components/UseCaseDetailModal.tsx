@@ -4,6 +4,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { UseCase } from '@/data/useCases';
 import { formatCompactNumber } from '@/lib/utils';
 import { 
@@ -59,6 +60,7 @@ const iconMap = {
 
 export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCaseDetailModalProps) {
   const [hasVoted, setHasVoted] = useState(false);
+  const [pendingProvider, setPendingProvider] = useState<null | 'claude' | 'cursor'>(null);
   const { toast } = useToast();
 
   if (!useCase) return null;
@@ -131,8 +133,22 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
   };
 
   const openInDC = () => openProvider('https://desktopcommander.app', 'dc', 'Opening Desktop Commander');
-  const openInClaude = () => openProvider('https://claude.ai/new', 'claude', 'Opening Claude');
-  const openInCursor = () => openProvider('https://www.cursor.com/', 'cursor', 'Opening Cursor');
+  const openInClaude = () => setPendingProvider('claude');
+  const openInCursor = () => setPendingProvider('cursor');
+
+  const continueWithProvider = async () => {
+    if (pendingProvider === 'claude') {
+      await openProvider('https://claude.ai/new', 'claude', 'Opening Claude');
+    } else if (pendingProvider === 'cursor') {
+      await openProvider('https://www.cursor.com/', 'cursor', 'Opening Cursor');
+    }
+    setPendingProvider(null);
+  };
+
+  const handleInstallMCP = () => {
+    window.open('https://desktopcommander.app/', '_blank', 'noopener,noreferrer');
+    setPendingProvider(null);
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -242,6 +258,30 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
           </div>
         </div>
       </DialogContent>
+
+      <AlertDialog open={!!pendingProvider} onOpenChange={(open) => { if (!open) setPendingProvider(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{pendingProvider === 'claude' ? 'Open in Claude' : 'Open in Cursor'}</AlertDialogTitle>
+            <AlertDialogDescription>
+              For the best experience, install Desktop Commander MCP. It enables secure local files and tools via the Model Context Protocol.
+              <div className="mt-3 text-foreground">
+                <strong>Why do I need an MCP?</strong>
+                <ul className="list-disc pl-5 mt-2 text-muted-foreground">
+                  <li>Gives AI controlled access to your local files and apps.</li>
+                  <li>Makes prompts reproducible and safer with explicit permissions.</li>
+                  <li>Works across tools like Claude and Cursor.</li>
+                </ul>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setPendingProvider(null)}>Cancel</AlertDialogCancel>
+            <Button variant="outline" onClick={handleInstallMCP}>Install MCP</Button>
+            <AlertDialogAction onClick={continueWithProvider}>I have it installed — Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Dialog>
   );
 }
