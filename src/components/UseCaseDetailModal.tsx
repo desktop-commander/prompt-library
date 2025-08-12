@@ -272,26 +272,20 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
             </div>
             <div className="shrink-0 flex items-center gap-2" aria-label="All-time engagement">
               <EngagementMeter count={useCase.votes + (hasVoted ? 1 : 0)} />
-              {tooltipsReady ? (
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <button
-                      type="button"
-                      aria-label={`Exact uses: ${exactUses} (all-time)`}
-                      className="inline-flex items-center justify-center text-muted-foreground hover:text-foreground"
-                    >
-                      <Info className="h-4 w-4" />
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent align="end" side="bottom">
-                    Exact uses: {exactUses} (all-time)
-                  </PopoverContent>
-                </Popover>
-              ) : (
-                <span aria-label={`Exact uses: ${exactUses} (all-time)`} className="text-muted-foreground">
-                  <Info className="h-4 w-4" />
-                </span>
-              )}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button
+                    type="button"
+                    aria-label={`Exact uses: ${exactUses} (all-time)`}
+                    className="inline-flex items-center justify-center text-muted-foreground hover:text-foreground"
+                  >
+                    <Info className="h-4 w-4" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent align="end" side="bottom">
+                  Exact uses: {exactUses} (all-time)
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
         </DialogHeader>
