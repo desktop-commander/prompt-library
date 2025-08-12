@@ -41,7 +41,8 @@ export const useCases: UseCase[] = [
     icon: 'Code',
     tags: ['feature', 'development', 'implementation'],
     author: 'Internal',
-    dateAdded: '2024-01-12'
+    dateAdded: '2024-01-12',
+    verified: true
   },
   {
     id: '3',
@@ -69,7 +70,8 @@ export const useCases: UseCase[] = [
     icon: 'Settings',
     tags: ['setup', 'environment', 'configuration'],
     author: 'Internal',
-    dateAdded: '2024-01-08'
+    dateAdded: '2024-01-08',
+    verified: true
   },
   {
     id: '5',
