@@ -1,20 +1,20 @@
-# Use Cases Sync Guide
+# Prompts Sync Guide
 
 ## Overview
-This sync system allows you to manage all use cases in Excel and automatically update the website with real usage data from Google Analytics. **IDs are stable and permanent for URL persistence.**
+This sync system allows you to manage all prompts in Excel and automatically update the website with real usage data from Google Analytics. **IDs are stable and permanent for URL persistence.**
 
 ## Important: Stable ID System
 - **IDs never change** once assigned
-- URLs remain permanent (e.g., `/?i=1` always points to the same use case)
-- Deleted use cases have their IDs reserved (not reused)
+- URLs remain permanent (e.g., `/?i=1` always points to the same prompt)
+- Deleted prompts have their IDs reserved (not reused)
 - See `ID_MANAGEMENT.md` for detailed ID documentation
 
 ## Workflow
 
-1. **Update Excel File** (`Desktop Commander/DC Context - General/Use case library.xlsx`)
-   - Add new use cases
+1. **Update Excel File** (`Desktop Commander/DC Context - General/Prompt library.xlsx`)
+   - Add new prompts
    - Update "Prompt uses (GA)" column with clicks data from Google Analytics
-   - Mark use cases as "Verified" = Yes when reviewed
+   - Mark prompts as "Verified" = Yes when reviewed
    - Update descriptions, prompts, categories, etc.
 
 2. **Run Sync Script**
@@ -40,15 +40,15 @@ Simple and transparent:
 - Only real usage data counts
 
 Example:
-- Use case with 0 GA clicks: 0 votes
-- Use case with 10 GA clicks: 10 votes
-- Use case with 100 GA clicks: 100 votes
+- Prompt with 0 GA clicks: 0 votes
+- Prompt with 10 GA clicks: 10 votes
+- Prompt with 100 GA clicks: 100 votes
 
 ## Excel Columns Mapping
 
 | Excel Column | JSON Field | Notes |
 |-------------|------------|-------|
-| Title | title | Use case name |
+| Title | title | Prompt name |
 | Description | description | Brief explanation |
 | Prompt | prompt | Full prompt text |
 | Difficulty | difficulty | Simple/Medium/Complex |
@@ -59,7 +59,7 @@ Example:
 
 ## Features
 
-- **Automatic sorting**: Use cases are sorted by popularity (votes)
+- **Automatic sorting**: Prompts are sorted by popularity (votes)
 - **Smart tags**: Generated from titles and descriptions
 - **Category icons**: Assigned based on category
 - **GA tracking**: Raw GA clicks stored separately for analytics
@@ -68,7 +68,7 @@ Example:
 ## Tips
 
 1. **Update GA data regularly** (weekly/monthly) to keep popularity accurate
-2. **Verify high-performing use cases** to build trust
+2. **Verify high-performing prompts** to build trust
 3. **Keep descriptions concise** for better display
 4. **Use clear categories** for better organization
 
@@ -76,8 +76,8 @@ Example:
 
 - `sync_use_cases.py` - Main sync script
 - `sync.sh` - Simple bash wrapper
-- `src/data/useCases.json` - Output JSON file
-- `USE_CASES_GUIDE.md` - Data format documentation
+- `src/data/useCases.json` - Output JSON file (kept for backwards compatibility)
+- `PROMPTS_GUIDE.md` - Data format documentation
 
 ## Troubleshooting
 

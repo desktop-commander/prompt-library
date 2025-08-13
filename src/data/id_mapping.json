@@ -53,5 +53,5 @@
     "Analyze Code Complexity": 50
   },
   "deleted_ids": [],
-  "notes": "This file maintains stable IDs for use cases. DO NOT edit manually unless necessary."
+  "notes": "This file maintains stable IDs for prompts. DO NOT edit manually unless necessary."
 }

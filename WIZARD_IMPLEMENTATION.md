@@ -1,7 +1,7 @@
 # Use Prompt Wizard Implementation Summary
 
 ## Overview
-Successfully implemented a 3-step wizard flow for the "Use Prompt" button in the Use Case Library, enhancing user experience and tracking key metrics.
+Successfully implemented a 3-step wizard flow for the "Use Prompt" button in the Prompt Library, enhancing user experience and tracking key metrics.
 
 ## Features Implemented
 
@@ -80,7 +80,7 @@ Created comprehensive analytics system tracking:
 
 ## User Experience Flow
 
-1. User clicks "Use Prompt" on any use case
+1. User clicks "Use Prompt" on any prompt
 2. **First-time users**:
    - See installation check → Client selection → Copy prompt
    - Preferences saved for next time
@@ -131,7 +131,7 @@ Created comprehensive analytics system tracking:
 
 ## Testing Instructions
 
-1. Open the site and click any use case
+1. Open the site and click any prompt
 2. Click "Use Prompt" button
 3. Go through the 3-step wizard
 4. Verify cookies are saved (DevTools → Application → Cookies)

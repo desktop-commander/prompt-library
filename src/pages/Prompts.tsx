@@ -1,15 +1,15 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useCases as initialUseCases, UseCase } from '@/data/useCases';
-import { UseCaseCard } from '@/components/UseCaseCard';
+import { PromptCard } from '@/components/PromptCard';
 import { FilterControls } from '@/components/FilterControls';
-import { SubmitUseCaseButton } from '@/components/SubmitUseCaseButton';
+import { SubmitPromptButton } from '@/components/SubmitPromptButton';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
+import { PromptDetailModal } from '@/components/PromptDetailModal';
 import { SiteHeader } from '@/components/SiteHeader';
 
-export default function UseCases() {
+export default function Prompts() {
   const [useCases, setUseCases] = useState<UseCase[]>(initialUseCases);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -116,13 +116,13 @@ export default function UseCases() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">Use Case Library</h1>
+              <h1 className="text-3xl font-bold text-foreground">Prompt Library</h1>
               <p className="text-muted-foreground mt-2">
-                Discover and share powerful use cases for Desktop Commander
+                Discover and share powerful prompts for Desktop Commander
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <SubmitUseCaseButton />
+              <SubmitPromptButton />
               <Button variant="outline" asChild>
                 <a
                   href="https://desktopcommander.app"
@@ -157,7 +157,7 @@ export default function UseCases() {
         {filteredAndSortedUseCases.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-muted-foreground text-lg mb-4">
-              No use cases found matching your filters.
+              No prompts found matching your filters.
             </p>
             <Button variant="outline" onClick={handleClearFilters}>
               Clear Filters
@@ -166,7 +166,7 @@ export default function UseCases() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredAndSortedUseCases.map((useCase) => (
-              <UseCaseCard
+              <PromptCard
                 key={useCase.id}
                 useCase={useCase}
                 onOpen={() => handleUseCaseClick(useCase)}
@@ -177,11 +177,11 @@ export default function UseCases() {
         )}
 
         <div className="mt-8 text-center text-sm text-muted-foreground">
-          Showing {filteredAndSortedUseCases.length} of {useCases.length} use cases
+          Showing {filteredAndSortedUseCases.length} of {useCases.length} prompts
         </div>
       </div>
 
-      <UseCaseDetailModal
+      <PromptDetailModal
         useCase={selectedUseCase}
         isOpen={isModalOpen}
         onClose={handleCloseModal}

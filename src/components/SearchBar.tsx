@@ -15,7 +15,7 @@ interface SearchBarProps {
 export function SearchBar({ 
   value, 
   onChange, 
-  placeholder = "Search use cases...",
+  placeholder = "Search prompts...",
   className,
   autoFocus = false
 }: SearchBarProps) {
@@ -49,7 +49,7 @@ export function SearchBar({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const displayPlaceholder = isMobile ? "Search use cases..." : placeholder;
+  const displayPlaceholder = isMobile ? "Search prompts..." : placeholder;
 
   return (
     <div className={cn("relative w-full max-w-2xl mx-auto", className)}>

@@ -6,8 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Play, Clock, Shield, User } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useCases } from '@/data/useCases';
-import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
-import { SubmitUseCaseButton } from '@/components/SubmitUseCaseButton';
+import { PromptDetailModal } from '@/components/PromptDetailModal';
+import { SubmitPromptButton } from '@/components/SubmitPromptButton';
 import TestimonialsRow from '@/components/TestimonialsRow';
 import { SiteHeader } from '@/components/SiteHeader';
 import { EngagementMeter } from '@/components/EngagementMeter';
@@ -20,7 +20,7 @@ const Index = () => {
   const [useCaseVotes, setUseCaseVotes] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Check if there's a use case ID in the URL on mount
+  // Check if there's a prompt ID in the URL on mount
   useEffect(() => {
     const id = searchParams.get('i');
     if (id) {
@@ -44,7 +44,7 @@ const Index = () => {
   }, [isModalOpen]);
 
   const stats = [
-    { label: 'Use Cases', value: '15+', icon: Code },
+    { label: 'Prompts', value: '15+', icon: Code },
     { label: 'Community Votes', value: '2,000+', icon: Heart },
     { label: 'Categories', value: '12', icon: Search },
     { label: 'Active Users', value: '500+', icon: Users }
@@ -71,7 +71,7 @@ const Index = () => {
     });
   }, [searchQuery]);
 
-  // Featured use cases: specific curated list
+  // Featured prompts: specific curated list
   const featuredUseCases = useMemo(() => {
     const featuredTitles = [
       'Explore and Understand New Repository',  // 1st with fire
@@ -82,7 +82,7 @@ const Index = () => {
       'Understand React Component Architecture'
     ];
     
-    // Find these specific use cases (with flexible matching for whitespace)
+    // Find these specific prompts (with flexible matching for whitespace)
     const featured = [];
     for (const title of featuredTitles) {
       const useCase = useCases.find(uc => 
@@ -97,22 +97,22 @@ const Index = () => {
     
     // If we don't find all 6, log a warning
     if (featured.length < 6) {
-      console.warn(`Only found ${featured.length} of 6 featured use cases`);
+      console.warn(`Only found ${featured.length} of 6 featured prompts`);
     }
     
     return featured;
   }, []);
   
-  // Set fire emoji for first two use cases
+  // Set fire emoji for first two prompts
   const hotIds = new Set(featuredUseCases.slice(0, 2).map((u) => u.id));
   
-  // Determine which use cases to display
+  // Determine which prompts to display
   const displayedUseCases = searchQuery.trim() ? filteredUseCases : featuredUseCases;
 
   const handleUseCaseClick = (useCase) => {
     setSelectedUseCase(useCase);
     setIsModalOpen(true);
-    // Update URL with use case ID
+    // Update URL with prompt ID
     setSearchParams({ i: useCase.id });
   };
 
@@ -140,7 +140,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-12">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-              Use Case Library
+              Prompt Library
             </h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               Discover powerful AI workflows and automation prompts for Desktop Commander
@@ -158,12 +158,12 @@ const Index = () => {
             
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <Button asChild size="lg" className="dc-button-primary">
-                <Link to="/use-cases" className="flex items-center gap-2">
-                  Browse All Use Cases
+                <Link to="/prompts" className="flex items-center gap-2">
+                  Browse All Prompts
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-              <SubmitUseCaseButton size="lg" />
+              <SubmitPromptButton size="lg" />
               <Button variant="outline" size="lg" asChild>
                 <a
                   href="https://desktopcommander.app"
@@ -180,14 +180,14 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Featured Use Cases or Search Results */}
+      {/* Featured Prompts or Search Results */}
       <div className="pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="mb-6 text-center">
             <h2 className="text-2xl font-bold text-foreground">
               {searchQuery.trim() 
                 ? `Search Results (${filteredUseCases.length} found)` 
-                : 'Featured Use Cases'}
+                : 'Featured Prompts'}
             </h2>
           </div>
           
@@ -222,7 +222,7 @@ const Index = () => {
                     <div className="flex items-center gap-2 shrink-0">
                       <EngagementMeter count={useCase.votes + (useCaseVotes[useCase.id] || 0)} size="sm" showLabel={false} />
                       {hotIds.has(useCase.id) && (
-                        <span aria-label="Hot use case" title="Hot use case" className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary border border-primary/20 text-[10px]">🔥</span>
+                        <span aria-label="Hot prompt" title="Hot prompt" className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary border border-primary/20 text-[10px]">🔥</span>
                       )}
                     </div>
                   </div>
@@ -254,7 +254,7 @@ const Index = () => {
 
               <div className="text-center">
                 <Button asChild size="lg" variant="outline">
-                  <Link to="/use-cases" className="flex items-center gap-2">
+                  <Link to="/prompts" className="flex items-center gap-2">
                     Browse Library
                     <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -265,7 +265,7 @@ const Index = () => {
             // Empty state for search with no results
             <div className="text-center py-12">
               <p className="text-muted-foreground text-lg mb-4">
-                No use cases found matching "{searchQuery}"
+                No prompts found matching "{searchQuery}"
               </p>
               <Button 
                 variant="outline" 
@@ -282,7 +282,7 @@ const Index = () => {
         <TestimonialsRow />
       </section>
 
-      <UseCaseDetailModal
+      <PromptDetailModal
         useCase={selectedUseCase}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
@@ -302,7 +302,7 @@ const Index = () => {
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <Button asChild size="lg" className="dc-button-primary">
                 <Link to="/use-cases">
-                  Explore Use Cases
+                  Explore Prompts
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>

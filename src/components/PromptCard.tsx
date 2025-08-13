@@ -26,7 +26,7 @@ import {
 import { EngagementMeter } from '@/components/EngagementMeter';
 
 
-interface UseCaseCardProps {
+interface PromptCardProps {
   useCase: UseCase;
   onVote: (id: string) => void;
   onOpen?: (useCase: UseCase) => void;
@@ -50,7 +50,7 @@ const iconMap = {
   Search
 };
 
-export function UseCaseCard({ useCase, onVote: _onVote, onOpen }: UseCaseCardProps) {
+export function PromptCard({ useCase, onVote: _onVote, onOpen }: PromptCardProps) {
 
   const IconComponent = iconMap[useCase.icon as keyof typeof iconMap] || Code;
 

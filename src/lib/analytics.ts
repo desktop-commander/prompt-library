@@ -44,7 +44,7 @@ class Analytics {
       if ((window as any).gtag) {
         (window as any).gtag('event', eventName, {
           ...properties,
-          event_category: 'Use Case Library',
+          event_category: 'Prompt Library',
           event_timestamp: event.timestamp
         });
       }
@@ -122,16 +122,16 @@ if (typeof window !== 'undefined') {
 }
 
 // Export specific tracking functions for convenience
-export const trackUseCaseView = (useCaseId: string, title: string) => {
-  analytics.track('use_case_viewed', { use_case_id: useCaseId, title });
+export const trackPromptView = (promptId: string, title: string) => {
+  analytics.track('prompt_viewed', { prompt_id: promptId, title });
 };
 
-export const trackUseCaseVote = (useCaseId: string, title: string) => {
-  analytics.track('use_case_voted', { use_case_id: useCaseId, title });
+export const trackPromptVote = (promptId: string, title: string) => {
+  analytics.track('prompt_voted', { prompt_id: promptId, title });
 };
 
-export const trackPromptCopied = (useCaseId: string, title: string, client: string) => {
-  analytics.track('prompt_copied', { use_case_id: useCaseId, title, client });
+export const trackPromptCopied = (promptId: string, title: string, client: string) => {
+  analytics.track('prompt_copied', { prompt_id: promptId, title, client });
 };
 
 export const trackInstallationStatus = (hasInstalled: boolean) => {
@@ -142,6 +142,6 @@ export const trackClientSelection = (client: string) => {
   analytics.track('dc_client_selected', { client });
 };
 
-export const trackWizardCompletion = (useCaseId: string, skippedSteps: boolean) => {
-  analytics.track('wizard_completed', { use_case_id: useCaseId, skipped_steps: skippedSteps });
+export const trackWizardCompletion = (promptId: string, skippedSteps: boolean) => {
+  analytics.track('wizard_completed', { prompt_id: promptId, skipped_steps: skippedSteps });
 };

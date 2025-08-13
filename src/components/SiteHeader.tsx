@@ -33,11 +33,11 @@ export const SiteHeader = () => {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Use Cases</NavigationMenuTrigger>
+                <NavigationMenuTrigger>Prompts</NavigationMenuTrigger>
                 <NavigationMenuContent className="p-3">
                   <ul className="grid gap-2 p-2 md:w-[240px]">
                     <li>
-                      <Link to="/use-cases" className="block rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground">
+                      <Link to="/prompts" className="block rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground">
                         Browse Library
                       </Link>
                     </li>

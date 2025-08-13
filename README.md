@@ -1,8 +1,12 @@
-# Welcome to your Lovable project
+# Desktop Commander Prompt Library
 
 ## Project info
 
 **URL**: https://lovable.dev/projects/d59bd04d-86e8-41d7-bbba-f71c8d704429
+
+## Project Description
+
+A comprehensive prompt library for Desktop Commander users, featuring community-created prompts for development, data analysis, DevOps, file management, and more. Users can browse, search, filter, and contribute their own prompts to help others maximize their productivity with Desktop Commander.
 
 ## How can I edit this code?
 

@@ -16,13 +16,13 @@ export interface UseCase {
   verified?: boolean;
 }
 
-// Import use cases from JSON file
+// Import prompts from JSON file
 export const useCases: UseCase[] = useCasesData.useCases;
 
-// Extract unique categories from use cases
+// Extract unique categories from prompts
 export const categories = Array.from(new Set(useCases.map(uc => uc.category))).sort();
 
-// Extract unique roles from use cases
+// Extract unique roles from prompts
 export const roles = Array.from(new Set(useCases.flatMap(uc => uc.targetRoles))).sort();
 
 export const difficulties = ['Simple', 'Medium', 'Complex'];

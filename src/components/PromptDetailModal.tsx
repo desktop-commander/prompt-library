@@ -36,7 +36,7 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { EngagementMeter } from '@/components/EngagementMeter';
 import { UsePromptWizard } from '@/components/UsePromptWizard';
 
-interface UseCaseDetailModalProps {
+interface PromptDetailModalProps {
   useCase: UseCase | null;
   isOpen: boolean;
   onClose: () => void;
@@ -61,7 +61,7 @@ const iconMap = {
   Search
 };
 
-export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCaseDetailModalProps) {
+export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDetailModalProps) {
   const [hasVoted, setHasVoted] = useState(false);
   const [showWizard, setShowWizard] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
@@ -102,7 +102,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
       setHasVoted(true);
       toast({
         title: "Vote recorded!",
-        description: "Thank you for voting on this use case.",
+        description: "Thank you for voting on this prompt.",
       });
     }
   };
@@ -128,7 +128,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
 
   const handleShare = async () => {
     const shareUrl = getShareUrl();
-    const title = `Use Case: ${useCase.title}`;
+    const title = `Prompt: ${useCase.title}`;
     const isMobile =
       typeof navigator !== 'undefined' &&
       (/(Mobi|Android|iPhone|iPad|iPod)/i.test(navigator.userAgent) ||
@@ -139,7 +139,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
       if (isMobile && navigator.share) {
         await navigator.share({
           title,
-          text: 'Check out this Desktop Commander use case',
+          text: 'Check out this Desktop Commander prompt',
           url: shareUrl,
         });
         return;
@@ -192,7 +192,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
             </div>
             <div className="flex-1">
               <DialogTitle className="text-2xl leading-tight mb-3">{useCase.title}</DialogTitle>
-              <DialogDescription className="sr-only">Detailed information and actions for this use case.</DialogDescription>
+              <DialogDescription className="sr-only">Detailed information and actions for this prompt.</DialogDescription>
               <div className="flex items-center gap-3 flex-wrap">
                 {useCase.verified && (
                   <span className="inline-flex items-center gap-1 text-xs rounded-full border border-primary/20 bg-primary/10 text-primary px-2 py-0.5">
@@ -285,7 +285,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
                 <Button
                   variant="outline"
                   onClick={handleShare}
-                  aria-label="Share this use case"
+                  aria-label="Share this prompt"
                   className="flex items-center gap-2"
                 >
                   <Share2 className="h-4 w-4" />
@@ -310,7 +310,7 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
         isOpen={showWizard}
         onClose={() => setShowWizard(false)}
         prompt={useCase.prompt}
-        useCaseTitle={useCase.title}
+        promptTitle={useCase.title}
       />
     </Dialog>
   );

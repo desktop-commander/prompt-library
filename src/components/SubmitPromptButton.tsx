@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Plus, ExternalLink } from 'lucide-react';
 
-interface SubmitUseCaseButtonProps {
+interface SubmitPromptButtonProps {
   variant?: 'default' | 'outline';
   size?: 'default' | 'sm' | 'lg';
   className?: string;
@@ -9,13 +9,13 @@ interface SubmitUseCaseButtonProps {
   text?: string;
 }
 
-export function SubmitUseCaseButton({ 
+export function SubmitPromptButton({ 
   variant = 'default',
   size = 'default',
   className = '',
   showIcon = true,
-  text = 'Submit Use Case'
-}: SubmitUseCaseButtonProps) {
+  text = 'Submit Your Prompt'
+}: SubmitPromptButtonProps) {
   const handleClick = () => {
     window.open('https://tally.so/r/m6BbEN', '_blank', 'noopener,noreferrer');
   };
@@ -26,7 +26,7 @@ export function SubmitUseCaseButton({
       variant={variant}
       size={size}
       className={`${variant === 'default' ? 'dc-button-primary' : ''} ${className}`}
-      title="Submit your use case via our form"
+      title="Submit your prompt via our form"
     >
       {showIcon && <Plus className="h-4 w-4 mr-2" />}
       {text}

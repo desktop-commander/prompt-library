@@ -13,7 +13,7 @@ interface UsePromptWizardProps {
   isOpen: boolean;
   onClose: () => void;
   prompt: string;
-  useCaseTitle: string;
+  promptTitle: string;
 }
 
 type ClientType = 'claude-desktop' | 'cursor' | 'vscode' | 'claude-code' | 'other';
@@ -61,7 +61,7 @@ const getCookie = (name: string): string | null => {
 
 // We're now using the centralized analytics utility from @/lib/analytics
 
-export function UsePromptWizard({ isOpen, onClose, prompt, useCaseTitle }: UsePromptWizardProps) {
+export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePromptWizardProps) {
   const [step, setStep] = useState(1);
   const [hasInstalled, setHasInstalled] = useState<boolean | null>(null);
   const [selectedClient, setSelectedClient] = useState<ClientType | null>(null);
@@ -87,11 +87,11 @@ export function UsePromptWizard({ isOpen, onClose, prompt, useCaseTitle }: UsePr
 
       // Track wizard opened
       analytics.track('use_prompt_wizard_opened', { 
-        use_case: useCaseTitle,
+        prompt: promptTitle,
         initial_step: step 
       });
     }
-  }, [isOpen, useCaseTitle]);
+  }, [isOpen, promptTitle]);
 
   const handleInstallationResponse = (installed: boolean) => {
     setHasInstalled(installed);
@@ -125,8 +125,8 @@ export function UsePromptWizard({ isOpen, onClose, prompt, useCaseTitle }: UsePr
       setCopied(true);
       
       // Track completion with proper analytics
-      trackPromptCopied(useCaseTitle, useCaseTitle, selectedClient || 'unknown');
-      trackWizardCompletion(useCaseTitle, false);
+      trackPromptCopied(promptTitle, promptTitle, selectedClient || 'unknown');
+      trackWizardCompletion(promptTitle, false);
       analytics.track('wizard_step_completed', { 
         step: 3, 
         client: selectedClient
