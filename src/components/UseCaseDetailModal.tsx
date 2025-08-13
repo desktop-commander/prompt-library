@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { UseCase } from '@/data/useCases';
 import { formatCompactNumber } from '@/lib/utils';
 import { 
-  Copy, 
   Heart, 
   Calendar,
   User,
@@ -28,8 +25,6 @@ import {
   Activity,
   Search,
   Rocket,
-  MessageSquare,
-  ChevronDown,
   Share2,
   Info,
   BadgeCheck
@@ -39,6 +34,7 @@ import { ToastAction } from '@/components/ui/toast';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { EngagementMeter } from '@/components/EngagementMeter';
+import { UsePromptWizard } from '@/components/UsePromptWizard';
 
 interface UseCaseDetailModalProps {
   useCase: UseCase | null;
@@ -67,7 +63,7 @@ const iconMap = {
 
 export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCaseDetailModalProps) {
   const [hasVoted, setHasVoted] = useState(false);
-  const [pendingProvider, setPendingProvider] = useState<null | 'claude' | 'cursor' | 'copy'>(null);
+  const [showWizard, setShowWizard] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const { toast } = useToast();
   const [exactUses, setExactUses] = useState(0);
@@ -95,8 +91,9 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
 
   const IconComponent = iconMap[useCase.icon as keyof typeof iconMap] || Code;
 
-  const handleCopyPrompt = () => {
-    setPendingProvider('copy');
+  const handleUsePrompt = () => {
+    setShowWizard(true);
+    incrementUses();
   };
 
   const handleVote = () => {
@@ -121,73 +118,6 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
       default:
         return 'difficulty-simple';
     }
-  };
-
-  const copyPromptSilently = async () => {
-    try {
-      await navigator.clipboard.writeText(useCase.prompt);
-    } catch (err) {
-      toast({
-        title: "Copy failed",
-        description: "Failed to copy to clipboard. Please copy manually.",
-        variant: "destructive",
-      });
-      throw err;
-    }
-  };
-
-  const openProvider = async (url: string, providerKey: string, message: string) => {
-    try {
-      await copyPromptSilently();
-      localStorage.setItem('preferredPromptProvider', providerKey);
-      window.open(url, '_blank', 'noopener,noreferrer');
-      toast({
-        title: message,
-        description: 'Prompt copied — paste to start.',
-      });
-    } catch {}
-  };
-
-  const openInDC = () => openProvider('https://desktopcommander.app', 'dc', 'Opening Desktop Commander');
-  const openInClaude = () => setPendingProvider('claude');
-  const openInCursor = () => setPendingProvider('cursor');
-
-  const continueWithProvider = async () => {
-    try {
-      if (pendingProvider === 'claude' || pendingProvider === 'cursor') {
-        await copyPromptSilently();
-        localStorage.setItem('preferredPromptProvider', pendingProvider);
-        toast({
-          title: 'Prompt copied',
-          description: `Prompt is copied — open ${pendingProvider === 'claude' ? 'Claude Desktop' : 'Cursor'} and paste it to try it out.`,
-        });
-        incrementUses();
-        onClose();
-        return;
-      }
-
-      if (pendingProvider === 'copy') {
-        await navigator.clipboard.writeText(useCase.prompt);
-        toast({
-          title: 'Copied to clipboard!',
-          description: 'The use case prompt has been copied to your clipboard.',
-        });
-        incrementUses();
-      }
-    } catch (err) {
-      toast({
-        title: 'Copy failed',
-        description: 'Failed to copy to clipboard. Please copy manually.',
-        variant: 'destructive',
-      });
-    } finally {
-      setPendingProvider(null);
-    }
-  };
-
-  const handleInstallMCP = () => {
-    window.open('https://desktopcommander.app/', '_blank', 'noopener,noreferrer');
-    setPendingProvider(null);
   };
 
   const getShareUrl = () => {
@@ -365,69 +295,23 @@ export function UseCaseDetailModal({ useCase, isOpen, onClose, onVote }: UseCase
               <TooltipContent>Copy link to share</TooltipContent>
             </Tooltip>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button className="dc-button-primary flex items-center gap-2">
-                  Use Prompt
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" sideOffset={8} className="z-50 bg-popover border rounded-md p-1 w-72 shadow-lg">
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="flex items-center gap-3 rounded-md cursor-not-allowed">
-                  <Rocket className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm flex-1 text-muted-foreground">Open in Desktop Commander App</span>
-                  <button
-                    type="button"
-                    className="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 pointer-events-auto"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open('https://desktopcommander.app/', '_blank', 'noopener,noreferrer');
-                    }}
-                  >
-                    Coming soon
-                  </button>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={openInClaude} className="flex items-center gap-3 rounded-md cursor-pointer">
-                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">Open in Claude</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={openInCursor} className="flex items-center gap-3 rounded-md cursor-pointer">
-                  <Code className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">Open in Cursor</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleCopyPrompt} className="flex items-center gap-3 rounded-md cursor-pointer">
-                  <Copy className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">Copy Prompt</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Button 
+              className="dc-button-primary flex items-center gap-2"
+              onClick={handleUsePrompt}
+            >
+              <Rocket className="h-4 w-4" />
+              Use Prompt
+            </Button>
           </div>
         </div>
       </DialogContent>
 
-      <AlertDialog open={!!pendingProvider} onOpenChange={(open) => { if (!open) setPendingProvider(null); }}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{pendingProvider === 'claude' ? 'Open in Claude' : pendingProvider === 'cursor' ? 'Open in Cursor' : 'Copy Prompt'}</AlertDialogTitle>
-            <AlertDialogDescription>
-              For this prompt to work, you need to install Desktop Commander MCP.
-              <div className="mt-3 text-foreground">
-                <strong>Why do I need an MCP?</strong>
-                <ul className="list-disc pl-5 mt-2 text-muted-foreground">
-                  <li>Gives AI controlled access to your local files and apps.</li>
-                  <li>Makes prompts reproducible and safer with explicit permissions.</li>
-                  <li>Works across tools like Claude and Cursor.</li>
-                </ul>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => setPendingProvider(null)}>Cancel</AlertDialogCancel>
-            <Button variant="outline" onClick={handleInstallMCP}>Install MCP</Button>
-            <AlertDialogAction onClick={continueWithProvider}>I have it installed — Continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <UsePromptWizard
+        isOpen={showWizard}
+        onClose={() => setShowWizard(false)}
+        prompt={useCase.prompt}
+        useCaseTitle={useCase.title}
+      />
     </Dialog>
   );
 }
