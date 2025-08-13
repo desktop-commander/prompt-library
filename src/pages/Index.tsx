@@ -1,21 +1,47 @@
 
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Play, Clock, Shield, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useCases } from '@/data/useCases';
 import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
-import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
+import { SubmitUseCaseButton } from '@/components/SubmitUseCaseButton';
 import TestimonialsRow from '@/components/TestimonialsRow';
 import { SiteHeader } from '@/components/SiteHeader';
 import { EngagementMeter } from '@/components/EngagementMeter';
+import { SearchBar } from '@/components/SearchBar';
 
 const Index = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedUseCase, setSelectedUseCase] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [useCaseVotes, setUseCaseVotes] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
+  
+  // Check if there's a use case ID in the URL on mount
+  useEffect(() => {
+    const id = searchParams.get('i');
+    if (id) {
+      const useCase = useCases.find(uc => uc.id === id);
+      if (useCase) {
+        setSelectedUseCase(useCase);
+        setIsModalOpen(true);
+      }
+    }
+  }, [searchParams]);
+  
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        handleCloseModal();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isModalOpen]);
 
   const stats = [
     { label: 'Use Cases', value: '15+', icon: Code },
@@ -24,15 +50,77 @@ const Index = () => {
     { label: 'Active Users', value: '500+', icon: Users }
   ];
 
-  // Featured use cases: top 6 by popularity
-  const featuredUseCases = useCases
-    .sort((a, b) => b.votes - a.votes)
-    .slice(0, 6);
+  // Search functionality
+  const filteredUseCases = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    
+    const query = searchQuery.toLowerCase();
+    return useCases.filter(useCase => {
+      // Search through multiple fields
+      const searchableText = [
+        useCase.title,
+        useCase.description,
+        useCase.prompt,
+        useCase.category,
+        useCase.difficulty,
+        ...(useCase.tags || []),
+        ...(useCase.targetRoles || [])
+      ].join(' ').toLowerCase();
+      
+      return searchableText.includes(query);
+    });
+  }, [searchQuery]);
+
+  // Featured use cases: specific curated list
+  const featuredUseCases = useMemo(() => {
+    const featuredTitles = [
+      'Explore and Understand New Repository',  // 1st with fire
+      'Organise my Downloads folder',            // 2nd with fire
+      'Build Complete Feature from Scratch',
+      'Analyze My Data File',
+      'Set Up Development Environment',
+      'Understand React Component Architecture'
+    ];
+    
+    // Find these specific use cases (with flexible matching for whitespace)
+    const featured = [];
+    for (const title of featuredTitles) {
+      const useCase = useCases.find(uc => 
+        uc.title.trim() === title || 
+        uc.title.trim() === title.trim() ||
+        uc.title.replace(/\s+/g, ' ').trim() === title.trim()
+      );
+      if (useCase) {
+        featured.push(useCase);
+      }
+    }
+    
+    // If we don't find all 6, log a warning
+    if (featured.length < 6) {
+      console.warn(`Only found ${featured.length} of 6 featured use cases`);
+    }
+    
+    return featured;
+  }, []);
+  
+  // Set fire emoji for first two use cases
   const hotIds = new Set(featuredUseCases.slice(0, 2).map((u) => u.id));
+  
+  // Determine which use cases to display
+  const displayedUseCases = searchQuery.trim() ? filteredUseCases : featuredUseCases;
 
   const handleUseCaseClick = (useCase) => {
     setSelectedUseCase(useCase);
     setIsModalOpen(true);
+    // Update URL with use case ID
+    setSearchParams({ i: useCase.id });
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedUseCase(null);
+    // Clear URL params when closing
+    setSearchParams({});
   };
 
   const handleVote = (id) => {
@@ -40,11 +128,6 @@ const Index = () => {
       ...prev,
       [id]: (prev[id] || 0) + 1
     }));
-  };
-
-  const handleSubmitUseCase = (newUseCase) => {
-    // In a real app, this would save to a backend
-    console.log('New use case submitted:', newUseCase);
   };
 
   return (
@@ -62,6 +145,17 @@ const Index = () => {
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               Discover powerful AI workflows and automation prompts for Desktop Commander
             </p>
+            
+            {/* Search Bar */}
+            <div className="mb-8">
+              <SearchBar 
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder="Search by title, description, category, difficulty, or tags..."
+                className="w-full"
+              />
+            </div>
+            
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <Button asChild size="lg" className="dc-button-primary">
                 <Link to="/use-cases" className="flex items-center gap-2">
@@ -69,7 +163,7 @@ const Index = () => {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-              <SubmitUseCaseModal onSubmit={handleSubmitUseCase} />
+              <SubmitUseCaseButton size="lg" />
               <Button variant="outline" size="lg" asChild>
                 <a
                   href="https://desktopcommander.app"
@@ -86,18 +180,25 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Featured Use Cases */}
+      {/* Featured Use Cases or Search Results */}
       <div className="pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="mb-6 text-center">
-            <h2 className="text-2xl font-bold text-foreground">Featured Use Cases</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              {searchQuery.trim() 
+                ? `Search Results (${filteredUseCases.length} found)` 
+                : 'Featured Use Cases'}
+            </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {featuredUseCases.map((useCase) => (
-              <Card 
-                key={useCase.id} 
-                className={`dc-card cursor-pointer hover:shadow-lg transition-shadow relative group focus:outline-none focus:ring-2 focus:ring-primary/50 ${hotIds.has(useCase.id) ? 'border-2 border-primary hover:animate-pulse hover:ring-2 hover:ring-primary/30' : ''} after:content-['↗'] after:absolute after:bottom-3 after:right-3 after:text-xs after:text-muted-foreground/70 after:pointer-events-none after:transition-transform after:transition-colors after:duration-200 hover:after:text-primary hover:after:translate-x-0.5 hover:after:-translate-y-0.5`}
-                onClick={() => handleUseCaseClick(useCase)}
+          
+          {displayedUseCases.length > 0 ? (
+            <>
+              <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 ${searchQuery ? 'search-results-grid' : ''}`}>
+                {displayedUseCases.map((useCase) => (
+                <Card 
+                  key={useCase.id} 
+                  className={`dc-card cursor-pointer hover:shadow-lg transition-shadow relative group focus:outline-none focus:ring-2 focus:ring-primary/50 ${!searchQuery && hotIds.has(useCase.id) ? 'border-2 border-primary hover:animate-pulse hover:ring-2 hover:ring-primary/30' : ''} after:content-['↗'] after:absolute after:bottom-3 after:right-3 after:text-xs after:text-muted-foreground/70 after:pointer-events-none after:transition-transform after:transition-colors after:duration-200 hover:after:text-primary hover:after:translate-x-0.5 hover:after:-translate-y-0.5`}
+                  onClick={() => handleUseCaseClick(useCase)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
@@ -151,14 +252,29 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="text-center">
-            <Button asChild size="lg" variant="outline">
-              <Link to="/use-cases" className="flex items-center gap-2">
-                Browse Library
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+              <div className="text-center">
+                <Button asChild size="lg" variant="outline">
+                  <Link to="/use-cases" className="flex items-center gap-2">
+                    Browse Library
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </>
+          ) : searchQuery.trim() ? (
+            // Empty state for search with no results
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg mb-4">
+                No use cases found matching "{searchQuery}"
+              </p>
+              <Button 
+                variant="outline" 
+                onClick={() => setSearchQuery('')}
+              >
+                Clear search
+              </Button>
+            </div>
+          ) : null}
         </div>
       </div>
 
@@ -169,7 +285,7 @@ const Index = () => {
       <UseCaseDetailModal
         useCase={selectedUseCase}
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={handleCloseModal}
         onVote={handleVote}
       />
 

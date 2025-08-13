@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Keep ID mapping in version control
+# This file maintains stable URLs
+!src/data/id_mapping.json

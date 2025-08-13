@@ -152,4 +152,51 @@ All colors MUST be HSL.
   .role-tag {
     @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-muted text-muted-foreground;
   }
+  
+  /* Smooth transitions for search results */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .search-results-grid > * {
+    animation: fadeInUp 0.3s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .search-results-grid > *:nth-child(1) { animation-delay: 0ms; }
+  .search-results-grid > *:nth-child(2) { animation-delay: 50ms; }
+  .search-results-grid > *:nth-child(3) { animation-delay: 100ms; }
+  .search-results-grid > *:nth-child(4) { animation-delay: 150ms; }
+  .search-results-grid > *:nth-child(5) { animation-delay: 200ms; }
+  .search-results-grid > *:nth-child(6) { animation-delay: 250ms; }
+  
+  /* Custom scrollbar for dropdowns */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.5);
+  }
 }

@@ -2,26 +2,29 @@ import { useState, useMemo, useEffect } from 'react';
 import { useCases as initialUseCases, UseCase } from '@/data/useCases';
 import { UseCaseCard } from '@/components/UseCaseCard';
 import { FilterControls } from '@/components/FilterControls';
-import { SubmitUseCaseModal } from '@/components/SubmitUseCaseModal';
+import { SubmitUseCaseButton } from '@/components/SubmitUseCaseButton';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { UseCaseDetailModal } from '@/components/UseCaseDetailModal';
 import { SiteHeader } from '@/components/SiteHeader';
+
 export default function UseCases() {
   const [useCases, setUseCases] = useState<UseCase[]>(initialUseCases);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All Categories');
-  const [selectedRole, setSelectedRole] = useState('All Roles');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('All Difficulties');
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
+  const [selectedDifficulties, setSelectedDifficulties] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState('popularity');
   const [searchParams, setSearchParams] = useSearchParams();
+  
   const initialSelected = (() => {
     const id = searchParams.get('i') || new URLSearchParams(window.location.search).get('i');
     return initialUseCases.find((u) => u.id === id) || null;
   })();
   const [selectedUseCase, setSelectedUseCase] = useState<UseCase | null>(initialSelected);
   const [isModalOpen, setIsModalOpen] = useState(!!initialSelected);
+  
   const handleVote = (id: string) => {
     setUseCases(prev => 
       prev.map(useCase => 
@@ -32,15 +35,11 @@ export default function UseCases() {
     );
   };
 
-  const handleSubmitUseCase = (newUseCase: UseCase) => {
-    setUseCases(prev => [newUseCase, ...prev]);
-  };
-
   const handleClearFilters = () => {
     setSearchTerm('');
-    setSelectedCategory('All Categories');
-    setSelectedRole('All Roles');
-    setSelectedDifficulty('All Difficulties');
+    setSelectedCategories([]);
+    setSelectedRoles([]);
+    setSelectedDifficulties([]);
   };
 
   const filteredAndSortedUseCases = useMemo(() => {
@@ -51,16 +50,20 @@ export default function UseCases() {
         useCase.prompt.toLowerCase().includes(searchTerm.toLowerCase()) ||
         useCase.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
 
+      // For categories: show all if none selected, otherwise match any selected
       const matchesCategory = 
-        selectedCategory === 'All Categories' || useCase.category === selectedCategory;
+        selectedCategories.length === 0 || 
+        selectedCategories.includes(useCase.category);
 
+      // For roles: show all if none selected, otherwise match if any role matches
       const matchesRole = 
-        selectedRole === 'All Roles' || 
-        useCase.targetRoles.includes(selectedRole) ||
-        useCase.targetRoles.includes('Everyone');
+        selectedRoles.length === 0 || 
+        useCase.targetRoles.some(role => selectedRoles.includes(role));
 
+      // For difficulty: show all if none selected, otherwise match any selected
       const matchesDifficulty = 
-        selectedDifficulty === 'All Difficulties' || useCase.difficulty === selectedDifficulty;
+        selectedDifficulties.length === 0 || 
+        selectedDifficulties.includes(useCase.difficulty);
 
       return matchesSearch && matchesCategory && matchesRole && matchesDifficulty;
     });
@@ -76,119 +79,114 @@ export default function UseCases() {
           const difficultyOrder = { 'Simple': 1, 'Medium': 2, 'Complex': 3 };
           return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
         case 'recent':
-          return parseInt(b.id) - parseInt(a.id);
+          return new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime();
         default:
           return 0;
       }
     });
 
     return filtered;
-  }, [useCases, searchTerm, selectedCategory, selectedRole, selectedDifficulty, sortBy]);
+  }, [useCases, searchTerm, selectedCategories, selectedRoles, selectedDifficulties, sortBy]);
+
+  const handleUseCaseClick = (useCase: UseCase) => {
+    setSelectedUseCase(useCase);
+    setIsModalOpen(true);
+    setSearchParams({ i: useCase.id });
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSearchParams({});
+  };
 
   useEffect(() => {
-    const id = searchParams.get('i');
-    if (id) {
-      const found = useCases.find((u) => u.id === id);
-      if (found) {
-        setSelectedUseCase(found);
-        setIsModalOpen(true);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        handleCloseModal();
       }
-    }
-  }, [searchParams, useCases]);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isModalOpen]);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
+    <>
       <SiteHeader />
-
-      {/* Page Intro */}
       <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight text-foreground">Use Case Library</h1>
-            <p className="text-muted-foreground mt-2">
-              Discover and share powerful use cases for Desktop Commander
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <SubmitUseCaseModal onSubmit={handleSubmitUseCase} />
-            <Button variant="outline" asChild>
-              <a
-                href="https://desktopcommander.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2"
-              >
-                Visit Desktop Commander
-                <ExternalLink className="h-4 w-4" />
-              </a>
-            </Button>
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground">Use Case Library</h1>
+              <p className="text-muted-foreground mt-2">
+                Discover and share powerful use cases for Desktop Commander
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <SubmitUseCaseButton />
+              <Button variant="outline" asChild>
+                <a
+                  href="https://desktopcommander.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  Visit Desktop Commander
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="space-y-8">
-
-          {/* Filters */}
+        <div className="mb-6">
           <FilterControls
             searchTerm={searchTerm}
-            selectedCategory={selectedCategory}
-            selectedRole={selectedRole}
-            selectedDifficulty={selectedDifficulty}
+            selectedCategories={selectedCategories}
+            selectedRoles={selectedRoles}
+            selectedDifficulties={selectedDifficulties}
             sortBy={sortBy}
             onSearchChange={setSearchTerm}
-            onCategoryChange={setSelectedCategory}
-            onRoleChange={setSelectedRole}
-            onDifficultyChange={setSelectedDifficulty}
+            onCategoriesChange={setSelectedCategories}
+            onRolesChange={setSelectedRoles}
+            onDifficultiesChange={setSelectedDifficulties}
             onSortChange={setSortBy}
             onClearFilters={handleClearFilters}
           />
+        </div>
 
-          {/* Use Cases Grid */}
-          {filteredAndSortedUseCases.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-muted-foreground mb-4">
-                No use cases found matching your filters.
-              </div>
-              <Button onClick={handleClearFilters} variant="outline">
-                Clear Filters
-              </Button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredAndSortedUseCases.map((useCase) => (
-                <UseCaseCard
-                  key={useCase.id}
-                  useCase={useCase}
-                  onVote={handleVote}
-                  onOpen={(uc) => { 
-                    setSelectedUseCase(uc); 
-                    setIsModalOpen(true); 
-                    const params = new URLSearchParams(searchParams);
-                    params.set('i', uc.id);
-                    setSearchParams(params);
-                  }}
-                />
-              ))}
-            </div>
-          )}
+        {filteredAndSortedUseCases.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground text-lg mb-4">
+              No use cases found matching your filters.
+            </p>
+            <Button variant="outline" onClick={handleClearFilters}>
+              Clear Filters
+            </Button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredAndSortedUseCases.map((useCase) => (
+              <UseCaseCard
+                key={useCase.id}
+                useCase={useCase}
+                onOpen={() => handleUseCaseClick(useCase)}
+                onVote={() => handleVote(useCase.id)}
+              />
+            ))}
+          </div>
+        )}
+
+        <div className="mt-8 text-center text-sm text-muted-foreground">
+          Showing {filteredAndSortedUseCases.length} of {useCases.length} use cases
         </div>
       </div>
 
       <UseCaseDetailModal
         useCase={selectedUseCase}
         isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-          setSelectedUseCase(null);
-          const params = new URLSearchParams(searchParams);
-          params.delete('i');
-          setSearchParams(params);
-        }}
-        onVote={handleVote}
+        onClose={handleCloseModal}
+        onVote={(id) => handleVote(id)}
       />
-    </div>
+    </>
   );
 }
