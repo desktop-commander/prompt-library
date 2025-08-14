@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ExternalLink } from "lucide-react";
 // Using the uploaded logo directly to avoid asset import issues
 const logoSrc = "/lovable-uploads/34ab283d-cdc2-40f8-9036-23471f2503c9.png";
 import {
@@ -65,8 +66,9 @@ export const SiteHeader = () => {
         {/* Right actions */}
         <div className="flex items-center gap-2">
           <Button asChild size="sm" variant="outline">
-            <a href="https://desktopcommander.app/#installation" target="_blank" rel="noopener noreferrer">
-              Install Desktop Commander
+            <a href="https://desktopcommander.app" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              Get Desktop Commander
+              <ExternalLink className="h-3 w-3" />
             </a>
           </Button>
         </div>

@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, ExternalLink, Code, Users, Search, Heart, Play, Clock, Shield, User } from 'lucide-react';
+import { ArrowRight, Code, Users, Search, Heart, User } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useCases } from '@/data/useCases';
 import { PromptDetailModal } from '@/components/PromptDetailModal';
@@ -11,14 +11,13 @@ import { SubmitPromptButton } from '@/components/SubmitPromptButton';
 import TestimonialsRow from '@/components/TestimonialsRow';
 import { SiteHeader } from '@/components/SiteHeader';
 import { EngagementMeter } from '@/components/EngagementMeter';
-import { SearchBar } from '@/components/SearchBar';
+
 
 const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedUseCase, setSelectedUseCase] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [useCaseVotes, setUseCaseVotes] = useState({});
-  const [searchQuery, setSearchQuery] = useState('');
   
   // Check if there's a prompt ID in the URL on mount
   useEffect(() => {
@@ -50,27 +49,6 @@ const Index = () => {
     { label: 'Active Users', value: '500+', icon: Users }
   ];
 
-  // Search functionality
-  const filteredUseCases = useMemo(() => {
-    if (!searchQuery.trim()) return [];
-    
-    const query = searchQuery.toLowerCase();
-    return useCases.filter(useCase => {
-      // Search through multiple fields
-      const searchableText = [
-        useCase.title,
-        useCase.description,
-        useCase.prompt,
-        useCase.category,
-        useCase.difficulty,
-        ...(useCase.tags || []),
-        ...(useCase.targetRoles || [])
-      ].join(' ').toLowerCase();
-      
-      return searchableText.includes(query);
-    });
-  }, [searchQuery]);
-
   // Featured prompts: specific curated list
   const featuredUseCases = useMemo(() => {
     const featuredTitles = [
@@ -79,7 +57,10 @@ const Index = () => {
       'Build Complete Feature from Scratch',
       'Analyze My Data File',
       'Set Up Development Environment',
-      'Understand React Component Architecture'
+      'Understand React Component Architecture',
+      'Clean Up Unused Code',
+      'Build Personal Finance Tracker',
+      'Automated Competitor Research'
     ];
     
     // Find these specific prompts (with flexible matching for whitespace)
@@ -95,9 +76,9 @@ const Index = () => {
       }
     }
     
-    // If we don't find all 6, log a warning
-    if (featured.length < 6) {
-      console.warn(`Only found ${featured.length} of 6 featured prompts`);
+    // If we don't find all 9, log a warning
+    if (featured.length < 9) {
+      console.warn(`Only found ${featured.length} of 9 featured prompts`);
     }
     
     return featured;
@@ -106,8 +87,8 @@ const Index = () => {
   // Set fire emoji for first two prompts
   const hotIds = new Set(featuredUseCases.slice(0, 2).map((u) => u.id));
   
-  // Determine which prompts to display
-  const displayedUseCases = searchQuery.trim() ? filteredUseCases : featuredUseCases;
+  // Always display featured prompts on home page
+  const displayedUseCases = featuredUseCases;
 
   const handleUseCaseClick = (useCase) => {
     setSelectedUseCase(useCase);
@@ -131,7 +112,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <div className="min-h-screen bg-background">
       {/* Header */}
       <SiteHeader />
 
@@ -142,62 +124,30 @@ const Index = () => {
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
               Prompt Library
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-xl text-muted-foreground mb-4 leading-relaxed">
               Discover powerful AI workflows and automation prompts for Desktop Commander
             </p>
-            
-            {/* Search Bar */}
-            <div className="mb-8">
-              <SearchBar 
-                value={searchQuery}
-                onChange={setSearchQuery}
-                placeholder="Search by title, description, category, difficulty, or tags..."
-                className="w-full"
-              />
-            </div>
-            
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <Button asChild size="lg" className="dc-button-primary">
-                <Link to="/prompts" className="flex items-center gap-2">
-                  Browse All Prompts
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              <SubmitPromptButton size="lg" />
-              <Button variant="outline" size="lg" asChild>
-                <a
-                  href="https://desktopcommander.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  Get Desktop Commander
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </Button>
-            </div>
+
           </div>
         </div>
       </div>
 
-      {/* Featured Prompts or Search Results */}
+      {/* Featured Prompts */}
       <div className="pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="mb-6 text-center">
             <h2 className="text-2xl font-bold text-foreground">
-              {searchQuery.trim() 
-                ? `Search Results (${filteredUseCases.length} found)` 
-                : 'Featured Prompts'}
+              Featured Prompts
             </h2>
           </div>
           
-          {displayedUseCases.length > 0 ? (
+          {displayedUseCases.length > 0 && (
             <>
-              <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 ${searchQuery ? 'search-results-grid' : ''}`}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 {displayedUseCases.map((useCase) => (
                 <Card 
                   key={useCase.id} 
-                  className={`dc-card cursor-pointer hover:shadow-lg transition-shadow relative group focus:outline-none focus:ring-2 focus:ring-primary/50 ${!searchQuery && hotIds.has(useCase.id) ? 'border-2 border-primary hover:animate-pulse hover:ring-2 hover:ring-primary/30' : ''} after:content-['↗'] after:absolute after:bottom-3 after:right-3 after:text-xs after:text-muted-foreground/70 after:pointer-events-none after:transition-transform after:transition-colors after:duration-200 hover:after:text-primary hover:after:translate-x-0.5 hover:after:-translate-y-0.5`}
+                  className={`dc-card cursor-pointer hover:shadow-lg transition-shadow relative group focus:outline-none focus:ring-2 focus:ring-primary/50 ${hotIds.has(useCase.id) ? 'border-2 border-primary hover:animate-pulse hover:ring-2 hover:ring-primary/30' : ''} after:content-['↗'] after:absolute after:bottom-3 after:right-3 after:text-xs after:text-muted-foreground/70 after:pointer-events-none after:transition-transform after:transition-colors after:duration-200 hover:after:text-primary hover:after:translate-x-0.5 hover:after:-translate-y-0.5`}
                   onClick={() => handleUseCaseClick(useCase)}
                 role="button"
                 tabIndex={0}
@@ -251,30 +201,33 @@ const Index = () => {
               </Card>
             ))}
           </div>
-
-              <div className="text-center">
-                <Button asChild size="lg" variant="outline">
-                  <Link to="/prompts" className="flex items-center gap-2">
-                    Browse Library
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
             </>
-          ) : searchQuery.trim() ? (
-            // Empty state for search with no results
-            <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg mb-4">
-                No prompts found matching "{searchQuery}"
-              </p>
-              <Button 
-                variant="outline" 
-                onClick={() => setSearchQuery('')}
-              >
-                Clear search
+          )}
+        </div>
+      </div>
+
+      {/* Browse All Prompts Section */}
+      <div className="pb-16">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-foreground mb-4">
+              Explore our complete library of 50+ prompts
+            </h2>
+            <div className="flex items-center justify-center gap-4 flex-wrap">
+              <Button asChild size="lg" className="dc-button-primary">
+                <Link to="/prompts" className="flex items-center gap-2">
+                  Browse All Prompts
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </Button>
+              <SubmitPromptButton 
+                variant="outline" 
+                size="lg"
+                text="Submit your own prompt"
+                showIcon={true}
+              />
             </div>
-          ) : null}
+          </div>
         </div>
       </div>
 
@@ -318,7 +271,8 @@ const Index = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

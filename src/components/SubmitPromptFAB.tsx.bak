@@ -1,0 +1,41 @@
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+
+export const SubmitPromptFAB = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleSubmit = () => {
+    window.open('https://tally.so/r/m6BbEN', '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50">
+      <Button
+        onClick={handleSubmit}
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
+        title="Submit your prompt via our form"
+        className={`
+          group transition-all duration-300 ease-out
+          ${isExpanded 
+            ? 'rounded-full pl-4 pr-6 py-3' 
+            : 'rounded-full p-3 w-12 h-12'
+          }
+          bg-primary hover:bg-primary/90 text-primary-foreground
+          shadow-lg hover:shadow-xl
+          border-0 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2
+        `}
+        size="lg"
+      >
+        <Plus className={`h-5 w-5 transition-transform duration-300 ${isExpanded ? 'rotate-45' : 'rotate-0'}`} />
+        <span className={`
+          overflow-hidden transition-all duration-300 whitespace-nowrap text-sm font-medium
+          ${isExpanded ? 'ml-2 opacity-100 max-w-[200px]' : 'ml-0 opacity-0 max-w-0'}
+        `}>
+          Submit Your Prompt
+        </span>
+      </Button>
+    </div>
+  );
+};
