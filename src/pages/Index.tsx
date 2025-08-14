@@ -216,8 +216,8 @@ const Index = () => {
                       <CardHeader>
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex-1 min-w-0">
-                            <CardTitle className="text-base leading-tight line-clamp-2">{useCase.title}</CardTitle>
-                            <div className="flex items-center gap-2 mt-2">
+                            <CardTitle className="text-base leading-snug mb-2 min-h-[2.5rem] flex items-start">{useCase.title}</CardTitle>
+                            <div className="flex items-center gap-2">
                               <Badge variant="outline" className="text-foreground/70 border-foreground/20 bg-transparent font-normal">
                                 {useCase.difficulty}
                               </Badge>

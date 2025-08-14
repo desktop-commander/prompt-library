@@ -10,7 +10,6 @@ export interface UseCase {
   category: string;
   votes: number;
   icon: string;
-  tags: string[];
   author: string;
   dateAdded: string;
   verified?: boolean;

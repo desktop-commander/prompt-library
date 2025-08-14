@@ -65,39 +65,6 @@ def get_stable_id(title, mapping):
     
     return str(new_id)
 
-def generate_tags(title, description):
-    """Generate tags from title and description"""
-    tags = []
-    if pd.notna(title):
-        # Extract meaningful words from title
-        words = title.lower().split()
-        for word in words:
-            # Skip common words and short words
-            if len(word) > 4 and word not in ['with', 'from', 'your', 'this', 'that', 'create', 'build']:
-                tags.append(word.replace(',', '').replace('.', ''))
-    
-    # Add some category-based tags
-    if pd.notna(description):
-        desc_lower = description.lower()
-        if 'automat' in desc_lower:
-            tags.append('automation')
-        if 'analyz' in desc_lower or 'analysis' in desc_lower:
-            tags.append('analysis')
-        if 'optimi' in desc_lower:
-            tags.append('optimization')
-        if 'debug' in desc_lower:
-            tags.append('debugging')
-    
-    # Remove duplicates and limit to 5
-    seen = set()
-    unique_tags = []
-    for tag in tags:
-        if tag not in seen:
-            seen.add(tag)
-            unique_tags.append(tag)
-    
-    return unique_tags[:5]
-
 def sync_excel_to_json():
     """Main sync function"""
     print("🔄 Starting Excel to JSON sync...")
@@ -140,12 +107,6 @@ def sync_excel_to_json():
         # Simple: votes = GA clicks (or 0 if no data yet)
         votes = ga_clicks
         
-        # Generate tags
-        tags = generate_tags(
-            row['Title'] if pd.notna(row['Title']) else '',
-            row['Description'] if pd.notna(row['Description']) else ''
-        )
-        
         # Determine icon based on category
         category = row['Category'] if pd.notna(row['Category']) else 'General'
         icon = ICON_MAP.get(category, 'Code')
@@ -161,8 +122,7 @@ def sync_excel_to_json():
             "votes": votes,
             "gaClicks": ga_clicks,  # Store raw GA clicks separately
             "icon": icon,
-            "tags": tags,
-            "author": "Internal",
+            "author": "DC team",
             "dateAdded": "2024-11-15",
             "verified": row['Verified'] == 'Yes' if pd.notna(row['Verified']) else False
         }

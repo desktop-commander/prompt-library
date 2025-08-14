@@ -55,8 +55,7 @@ export default function Prompts() {
       const matchesSearch = 
         useCase.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         useCase.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        useCase.prompt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        useCase.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+        useCase.prompt.toLowerCase().includes(searchTerm.toLowerCase());
 
       // For categories: show all if none selected, otherwise match any selected
       const matchesCategory = 

@@ -89,8 +89,8 @@ export function PromptCard({ useCase, onVote: _onVote, onOpen }: PromptCardProps
               <IconComponent className="h-5 w-5 text-primary" />
             </div>
             <div className="flex-1">
-              <CardTitle className="text-lg leading-tight">{useCase.title}</CardTitle>
-              <div className="flex items-center gap-2 mt-2">
+              <CardTitle className="text-lg leading-snug mb-2 min-h-[3rem] flex items-start">{useCase.title}</CardTitle>
+              <div className="flex items-center gap-2">
                 <Badge variant="outline" className="text-foreground/70 border-foreground/20 bg-transparent font-normal">
                   {useCase.difficulty}
                 </Badge>

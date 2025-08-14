@@ -60,7 +60,6 @@ Example:
 ## Features
 
 - **Automatic sorting**: Prompts are sorted by popularity (votes)
-- **Smart tags**: Generated from titles and descriptions
 - **Category icons**: Assigned based on category
 - **GA tracking**: Raw GA clicks stored separately for analytics
 - **Metadata**: Tracks last update time and version

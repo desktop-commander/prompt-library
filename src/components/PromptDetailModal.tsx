@@ -251,16 +251,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
             </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-3">Tags</h3>
-            <div className="flex flex-wrap gap-2">
-              {useCase.tags.map((tag) => (
-                <Badge key={tag} variant="outline" className="text-xs">
-                  #{tag}
-                </Badge>
-              ))}
-            </div>
-          </div>
+
 
           <Separator />
 

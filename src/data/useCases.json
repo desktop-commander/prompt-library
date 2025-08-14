@@ -10,15 +10,10 @@
         "Developers"
       ],
       "category": "Code base exploration",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 2,
+      "gaClicks": 2,
       "icon": "FolderSearch",
-      "tags": [
-        "explore",
-        "understand",
-        "repository"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -33,15 +28,10 @@
         "Vibe Coders"
       ],
       "category": "Development",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 2,
+      "gaClicks": 2,
       "icon": "Code",
-      "tags": [
-        "complete",
-        "feature",
-        "scratch"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -56,13 +46,10 @@
         "Data analysts"
       ],
       "category": "Data Analytics",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 2,
+      "gaClicks": 2,
       "icon": "BarChart3",
-      "tags": [
-        "analyze"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -76,14 +63,10 @@
         "Developers"
       ],
       "category": "DevOps",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "Settings",
-      "tags": [
-        "development",
-        "environment"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -98,14 +81,10 @@
         "Vibe Coders"
       ],
       "category": "Code optimization",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "Zap",
-      "tags": [
-        "clean",
-        "unused"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -119,16 +98,10 @@
         "Developers"
       ],
       "category": "Code base exploration",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "FolderSearch",
-      "tags": [
-        "understand",
-        "react",
-        "component",
-        "architecture"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -143,15 +116,10 @@
         "Professionals"
       ],
       "category": "Data Analytics",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "BarChart3",
-      "tags": [
-        "processing",
-        "pipeline",
-        "automation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -169,15 +137,10 @@
         "Developers"
       ],
       "category": "File Management",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 2,
+      "gaClicks": 2,
       "icon": "FolderOpen",
-      "tags": [
-        "organise",
-        "downloads",
-        "folder"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -191,15 +154,10 @@
         "Vibe Coders"
       ],
       "category": "Development",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 2,
+      "gaClicks": 2,
       "icon": "Code",
-      "tags": [
-        "personal",
-        "finance",
-        "tracker"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -213,16 +171,10 @@
         "Content makers"
       ],
       "category": "Content",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 2,
+      "gaClicks": 2,
       "icon": "FileText",
-      "tags": [
-        "automated",
-        "email",
-        "newsletter",
-        "automation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -237,16 +189,10 @@
         "Professionals"
       ],
       "category": "Automation",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 2,
+      "gaClicks": 2,
       "icon": "PlayCircle",
-      "tags": [
-        "automated",
-        "competitor",
-        "research",
-        "automation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -263,12 +209,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderSearch",
-      "tags": [
-        "learn",
-        "codebase",
-        "patterns"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -282,15 +223,10 @@
         "Developers"
       ],
       "category": "Code optimization",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "Zap",
-      "tags": [
-        "identify",
-        "refactoring",
-        "opportunities"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -307,13 +243,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderSearch",
-      "tags": [
-        "analyze",
-        "error",
-        "handling",
-        "strategy"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -331,12 +261,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "Code",
-      "tags": [
-        "implement",
-        "github",
-        "issue"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -353,11 +278,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "Code",
-      "tags": [
-        "project",
-        "structure"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -375,14 +296,10 @@
         "Professionals"
       ],
       "category": "File Management",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "FolderOpen",
-      "tags": [
-        "knowledge",
-        "folder"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -399,11 +316,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "BookOpen",
-      "tags": [
-        "auto-generate",
-        "documentation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -420,13 +333,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "Zap",
-      "tags": [
-        "technical",
-        "assessment",
-        "roadmap",
-        "analysis"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -443,12 +350,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "Layers",
-      "tags": [
-        "visualize",
-        "microservices",
-        "communication"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -464,14 +366,10 @@
         "Developers"
       ],
       "category": "Documentation",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "BookOpen",
-      "tags": [
-        "onboarding",
-        "documentation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -485,15 +383,10 @@
         "Developers"
       ],
       "category": "Code optimization",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "Zap",
-      "tags": [
-        "optimize",
-        "docker",
-        "setup"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -510,12 +403,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderSearch",
-      "tags": [
-        "document",
-        "system",
-        "architecture"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -532,12 +420,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderSearch",
-      "tags": [
-        "audit",
-        "security",
-        "mechanisms"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -554,12 +437,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "BookOpen",
-      "tags": [
-        "generate",
-        "onboarding",
-        "guide"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -576,13 +454,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "Zap",
-      "tags": [
-        "assess",
-        "scalability",
-        "challenges",
-        "debugging"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -599,12 +471,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "BookOpen",
-      "tags": [
-        "generate",
-        "module",
-        "documentation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -621,12 +488,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderSearch",
-      "tags": [
-        "document",
-        "dependencies",
-        "tools"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -643,11 +505,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "Code",
-      "tags": [
-        "migration",
-        "strategy"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -664,11 +522,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "BookOpen",
-      "tags": [
-        "history",
-        "presentation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -682,15 +536,10 @@
         "Developers"
       ],
       "category": "Development",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "Code",
-      "tags": [
-        "github",
-        "issues",
-        "dashboard"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -707,12 +556,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderOpen",
-      "tags": [
-        "smart",
-        "backups",
-        "automation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -729,12 +573,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderSearch",
-      "tags": [
-        "error",
-        "patterns",
-        "analysis"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -748,16 +587,10 @@
         "Developers"
       ],
       "category": "Code base exploration",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "FolderSearch",
-      "tags": [
-        "compare",
-        "config",
-        "files",
-        "baseline"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -775,14 +608,10 @@
         "Data analysts"
       ],
       "category": "File Management",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "FolderOpen",
-      "tags": [
-        "update",
-        "cv/resume"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -798,16 +627,10 @@
         "Professionals"
       ],
       "category": "File Management",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "FolderOpen",
-      "tags": [
-        "remove",
-        "background",
-        "profile",
-        "picture"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -825,10 +648,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderOpen",
-      "tags": [
-        "merge"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -847,10 +667,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderOpen",
-      "tags": [
-        "convert"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -868,13 +685,10 @@
         "Professionals"
       ],
       "category": "File Management",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "FolderOpen",
-      "tags": [
-        "convert"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -890,15 +704,10 @@
         "Vibe Coders"
       ],
       "category": "Automation",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "PlayCircle",
-      "tags": [
-        "folder",
-        "images",
-        "automation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -919,13 +728,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderOpen",
-      "tags": [
-        "batch",
-        "convert",
-        "rename",
-        "images"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -944,12 +747,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderOpen",
-      "tags": [
-        "organize",
-        "invoices",
-        "automation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -965,13 +763,10 @@
         "Content makers"
       ],
       "category": "Data Analytics",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "BarChart3",
-      "tags": [
-        "extract"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -987,15 +782,10 @@
         "Content makers"
       ],
       "category": "File Management",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "FolderOpen",
-      "tags": [
-        "rename",
-        "statements",
-        "account"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -1011,15 +801,10 @@
         "Content makers"
       ],
       "category": "Data Analytics",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "BarChart3",
-      "tags": [
-        "large",
-        "receipts",
-        "vendor"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -1033,15 +818,10 @@
         "Data analysts"
       ],
       "category": "Data Analytics",
-      "votes": 0,
-      "gaClicks": 0,
+      "votes": 1,
+      "gaClicks": 1,
       "icon": "BarChart3",
-      "tags": [
-        "consolidate",
-        "files",
-        "analysis"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -1058,14 +838,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "BarChart3",
-      "tags": [
-        "remove",
-        "duplicate",
-        "contacts",
-        "spreadsheet",
-        "automation"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -1082,10 +855,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "FolderSearch",
-      "tags": [
-        "comments"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -1102,13 +872,7 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "Code",
-      "tags": [
-        "generate",
-        "tests",
-        "missing",
-        "coverage"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     },
@@ -1125,18 +889,14 @@
       "votes": 0,
       "gaClicks": 0,
       "icon": "Zap",
-      "tags": [
-        "analyze",
-        "complexity"
-      ],
-      "author": "Internal",
+      "author": "DC team",
       "dateAdded": "2024-11-15",
       "verified": false
     }
   ],
   "metadata": {
-    "lastUpdated": "2025-08-13 13:19:50",
-    "totalPrompts": 50,
+    "lastUpdated": "2025-08-14 11:39:43",
+    "totalUseCases": 50,
     "totalIds": 50,
     "deletedIds": [],
     "version": "2.0.0",
