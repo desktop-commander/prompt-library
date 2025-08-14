@@ -5,7 +5,7 @@ export interface UseCase {
   title: string;
   description: string;
   prompt: string;
-  difficulty: 'Simple' | 'Medium' | 'Complex';
+  difficulty: 'Easy' | 'Intermediate' | 'Advanced';
   targetRoles: string[];
   category: string;
   votes: number;
@@ -24,4 +24,4 @@ export const categories = Array.from(new Set(useCases.map(uc => uc.category))).s
 // Extract unique roles from prompts
 export const roles = Array.from(new Set(useCases.flatMap(uc => uc.targetRoles))).sort();
 
-export const difficulties = ['Simple', 'Medium', 'Complex'];
+export const difficulties = ['Easy', 'Intermediate', 'Advanced'];

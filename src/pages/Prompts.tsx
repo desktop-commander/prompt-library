@@ -83,7 +83,7 @@ export default function Prompts() {
         case 'alphabetical':
           return a.title.localeCompare(b.title);
         case 'difficulty':
-          const difficultyOrder = { 'Simple': 1, 'Medium': 2, 'Complex': 3 };
+          const difficultyOrder = { 'Easy': 1, 'Intermediate': 2, 'Advanced': 3 };
           return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
         case 'recent':
           return new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime();

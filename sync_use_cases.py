@@ -116,7 +116,7 @@ def sync_excel_to_json():
             "title": title,
             "description": row['Description'].strip() if pd.notna(row['Description']) else '',
             "prompt": row['Prompt'].strip() if pd.notna(row['Prompt']) else '',
-            "difficulty": row['Difficulty'] if pd.notna(row['Difficulty']) else 'Medium',
+            "difficulty": row['Difficulty'] if pd.notna(row['Difficulty']) else 'Intermediate',
             "targetRoles": target_roles if target_roles else ['Professionals'],
             "category": category,
             "votes": votes,

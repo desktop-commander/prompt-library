@@ -5,7 +5,7 @@
       "title": "Explore and Understand New Repository",
       "description": "Read a repository and understand the codebase.",
       "prompt": "I need to understand this codebase: [repo path]. Give me an overview of the project structure, main components, and how they interact. Identify the entry points and key files I should focus on first.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -22,7 +22,7 @@
       "title": "Build Complete Feature from Scratch",
       "description": "Build a new feature for your app based on your existing codebase.",
       "prompt": "I need to build [feature description] in my project at [project path]. Create all necessary files, implement the feature, and integrate it with existing code. Show me what you're building as you go.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers",
         "Vibe Coders"
@@ -40,7 +40,7 @@
       "title": "Analyze My Data File",
       "description": "Make sense of a data file that you have.",
       "prompt": "Look for the file called 'filename' in my [folder]. Analyze this file and tell me: what data it contains, key patterns or insights, and create a simple summary report.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Professionals",
         "Data analysts"
@@ -58,7 +58,7 @@
       "title": "Set Up Development Environment",
       "description": "Set up your development environment, install dependencies and configure required tools.",
       "prompt": "Set up a complete development environment for [technology stack] on my machine. Install dependencies, configure tools, and create a sample project to verify everything works.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -75,7 +75,7 @@
       "title": "Clean Up Unused Code",
       "description": "Scan your codebase to find unused imports, dead functions, and redundant code that can be safely removed.",
       "prompt": "Analyze this project directory: [project root path]. Identify unused imports and dead code in this codebase.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers",
         "Vibe Coders"
@@ -93,7 +93,7 @@
       "title": "Understand React Component Architecture",
       "description": "Get a clear breakdown of how your React component works, including props flow, state management, and dependencies.",
       "prompt": "Find this React component: [component name/path]. Analyze this React component and explain its data flow and dependencies",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -110,7 +110,7 @@
       "title": "Build Data Processing Pipeline",
       "description": "Creates automated systems that continuously collect and process data (like tracking competitor prices daily).",
       "prompt": "Create an automated system to [collect/process] data from [source]. Set up the pipeline to run regularly and save results to organized files on my computer.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Data analysts",
         "Professionals"
@@ -128,7 +128,7 @@
       "title": "Organise my Downloads folder",
       "description": "Organise messy downloads folder into relevant subfolders.",
       "prompt": "Analyze my Downloads folder and organize all files into subfolders by type (Documents, Images, Videos, Archives, etc.). Show me what you're doing and create a summary of what was organized. Open the new folder when you are done.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Vibe Coders",
         "Content makers",
@@ -149,7 +149,7 @@
       "title": "Build Personal Finance Tracker",
       "description": "Create a complete web application from scratch and launch it locally in your browser.",
       "prompt": "Build me a personal finance tracker web app that lets me [add expenses, categorize spending, see monthly summaries]. Create all the necessary HTML, CSS, and JavaScript files. Set up a local server and open the app in my browser when it's ready. Make it look professional and fully functional. Open it in browser when ready.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Vibe Coders"
       ],
@@ -166,7 +166,7 @@
       "title": "Create Automated Email Newsletter",
       "description": "Create an automated content for email newsletters.",
       "prompt": "Create an automated system that compiles content from [these sources] and generates a weekly newsletter. Set it up to create HTML email templates and organize them in folders on my computer.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Content makers"
       ],
@@ -183,7 +183,7 @@
       "title": "Automated Competitor Research",
       "description": "Automate weekly competitive research and store your notes in one place.",
       "prompt": "I want to create an automated competitor tracking system. Help me set up:\nSystem Setup:\n\nA folder structure for competitor research on my Desktop\nTemplate files for competitor profiles\nA weekly research workflow \n\nMy main competitors are: [list your competitors]\nAutomation Goal: I want to simply write \"Weekly competitor research\" in a Claude chat, and have Claude automatically:\n\nSearch all my competitors for news/updates from the past 7 days\nUse deep research\nAnalyze findings strategically\nProvide specific action items\nCreate a new weekly report file and save it to the competitor folder on my computer\n\nAfter setup, provide:\n\nStep-by-step instructions for the weekly workflow\nThe exact prompt/command I should use each week\nHow to ensure the files are automatically organized in the right folders\n\nKey Requirements:\n\nEverything organized in one place on my computer\nMinimal manual work each week\nStrategic analysis, not just raw data\nActionable insights I can act on immediately\nClear guidance on when to use weekly vs deep research",
-      "difficulty": "Complex",
+      "difficulty": "Advanced",
       "targetRoles": [
         "Content makers",
         "Professionals"
@@ -201,7 +201,7 @@
       "title": "Learn from Codebase Patterns",
       "description": "Discover interesting coding patterns and techniques you can learn from existing projects.",
       "prompt": "Summarize this codebase at [project path] and highlight the most interesting patterns or techniques I could learn from.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -218,7 +218,7 @@
       "title": "Identify Refactoring Opportunities",
       "description": "Find areas in your codebase that need improvement or refactoring.",
       "prompt": "Identify potential areas for improvement or refactoring in this codebase at [project path], highlighting parts that appear fragile, complex, or hard to maintain.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -235,7 +235,7 @@
       "title": "Analyze Error Handling Strategy",
       "description": "Understand and document the error handling and logging approaches used in your project.",
       "prompt": "What kind of error handling and logging strategies does the project at [project path] use? Document the patterns and suggest improvements.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -252,7 +252,7 @@
       "title": "Implement GitHub Issue",
       "description": "Create a working implementation for a specific GitHub issue or feature request.",
       "prompt": "Implement a first draft for GitHub issue #[number] in project at [project path]. Read the issue requirements and create the necessary code changes.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers",
         "Vibe Coders"
@@ -270,7 +270,7 @@
       "title": "Set Up New Project Structure",
       "description": "Create complete project setup with standard structure and configs.",
       "prompt": "Set up a new [language] project with standard structure, configs, and development tools ready to go.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -287,7 +287,7 @@
       "title": "Create Knowledge Base Folder",
       "description": "Create a strucutre for your local knowledge base.",
       "prompt": "I want to create a personal knowledge base by organizing copies of my existing files on this computer. Please help me:\n\n-Check my current file structure using Desktop Commander to understand what types of files and content I have\n\n-Ask targeted follow-up questions about my goals and preferences before proposing an organizational system\n\n-Create a well-structured knowledge base folder on my Desktop with appropriate subfolders\n\n-Copy (never move or delete) relevant files into this new organizational structure.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Content makers",
         "Vibe Coders",
@@ -308,7 +308,7 @@
       "title": "Auto-Generate API Documentation",
       "description": "Transform your API endpoints into comprehensive documentation with all parameters, responses, and examples.",
       "prompt": "Find this API file: [file name/path]. Generate documentation for this API endpoint including all parameters and responses.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -325,7 +325,7 @@
       "title": "Technical Debt Assessment & Roadmap.",
       "description": "Get a comprehensive analysis of technical debt with prioritized remediation plan and effort estimates.",
       "prompt": "Analyze this entire project: [project root path]. Analyze technical debt across the project and create a remediation roadmap.",
-      "difficulty": "Complex",
+      "difficulty": "Advanced",
       "targetRoles": [
         "Developers"
       ],
@@ -342,7 +342,7 @@
       "title": "Visualize Microservices Communication",
       "description": "Create visual diagrams showing how your microservices interact, data flows, and potential bottlenecks.",
       "prompt": "Analyze all files in this directory: [project/services directory path]. Create a visual map of how these microservices communicate with each other.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -359,7 +359,7 @@
       "title": "Create Team Onboarding Documentation",
       "description": "Generate comprehensive onboarding guide for new developers including setup, architecture overview, and contribution guidelines.",
       "prompt": "Analyze this entire project: [project root path]. Create onboarding guide for new developers joining this project.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Professionals",
         "Data analysts",
@@ -378,7 +378,7 @@
       "title": "Optimize Docker Setup",
       "description": "Generate production-ready Docker configuration tailored to your application's specific requirements and dependencies.",
       "prompt": "Analyze this project: [project root path]. Generate Docker configuration optimized for this application's requirements.",
-      "difficulty": "Complex",
+      "difficulty": "Advanced",
       "targetRoles": [
         "Developers"
       ],
@@ -395,7 +395,7 @@
       "title": "Document System Architecture",
       "description": "Get a comprehensive overview of your system's architecture and design patterns.",
       "prompt": "Describe the main pieces of this system's architecture at [project path]. Explain how components interact and highlight the key design patterns used.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -412,7 +412,7 @@
       "title": "Audit Security Mechanisms",
       "description": "Identify and document all security measures implemented in your codebase.",
       "prompt": "What security mechanisms are in place in this project at [project path]? Analyze authentication, authorization, data protection, and potential vulnerabilities.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -429,7 +429,7 @@
       "title": "Generate Dev Onboarding Guide",
       "description": "Create step-by-step documentation for new developers joining your project.",
       "prompt": "Provide a step-by-step dev onboarding doc for developers new to the codebase at [project path]. Include setup, key concepts, and first tasks.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -446,7 +446,7 @@
       "title": "Assess Scalability Challenges",
       "description": "Identify potential scaling and debugging bottlenecks in your system.",
       "prompt": "Which parts of this codebase at [project path] might be challenging to scale or debug? Identify potential bottlenecks and maintenance issues.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -463,7 +463,7 @@
       "title": "Generate Module Documentation",
       "description": "Create comprehensive README documentation for specific modules or components.",
       "prompt": "Generate a README section for the [module name] module at [file path] explaining what it does and how to use it.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -480,7 +480,7 @@
       "title": "Document Dependencies and Tools",
       "description": "Get a comprehensive overview of all tools and libraries used in your project.",
       "prompt": "Which tools, libraries, and dependencies are used in this project at [project path]? Create a summary with versions and purposes.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -497,7 +497,7 @@
       "title": "Plan Migration Strategy",
       "description": "Create a comprehensive plan for migrating your codebase to newer technologies.",
       "prompt": "Help me migrate this codebase at [project path] to the latest version of [technology]. Start with a detailed migration plan and identify potential issues.",
-      "difficulty": "Complex",
+      "difficulty": "Advanced",
       "targetRoles": [
         "Developers"
       ],
@@ -514,7 +514,7 @@
       "title": "Create Git History Presentation",
       "description": "Generate visual presentations of your team's recent development activity.",
       "prompt": "Make me a slide deck showing the git history from the last 7 days at [project path], grouped by feature and team member.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -531,7 +531,7 @@
       "title": "Build GitHub Issues Dashboard",
       "description": "Create a real-time dashboard for tracking and displaying GitHub issues.",
       "prompt": "Make a full-screen web app for a wall display to show our most interacted-with GitHub issues from [repository]. Include real-time updates and visual indicators.",
-      "difficulty": "Complex",
+      "difficulty": "Advanced",
       "targetRoles": [
         "Developers"
       ],
@@ -548,7 +548,7 @@
       "title": "Set Up Smart Backups",
       "description": "Create automated backup system for your important files with simple conversation.",
       "prompt": "Help me set up a smart backup system for my work:\n\nScan my Desktop and Documents folders to identify my active projects\nCreate a 'Backups' folder structure with dated subfolders\nSet up a backup script that:\n\nCreates daily backups with clear date labels\nMaintains a full history (no automatic deletion)\nOrganizes backups by date: Year/Month/Day structure\nTracks storage usage in the log file\nExcludes temp files and node_modules\n\n\nShow me how to run this with a simple 'backup now' command\nCreate a backup log file that tracks what was backed up and when\n\nStart by analyzing my current folder structure and suggest what should be included in regular backups",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -565,7 +565,7 @@
       "title": "Find Error Patterns in Logs",
       "description": "Analyze log files to identify and summarize system issues.",
       "prompt": "Find all log files with errors in the last 24 hours at [log directory] and summarize the patterns.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -582,7 +582,7 @@
       "title": "Compare Config Files to Baseline",
       "description": "Detect configuration drift by comparing current configs to standards.",
       "prompt": "Compare all config files in [directory] against baseline and report any differences that might cause issues.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -599,7 +599,7 @@
       "title": "Update My CV/Resume",
       "description": "Quickly update your resume with new experience/skills.",
       "prompt": "Find my resume file in [folder], update my work experience section with [new job details], and save both the original and updated versions. Open the new file when you are done.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Professionals",
         "Developers",
@@ -620,7 +620,7 @@
       "title": "Remove Background from Profile Picture",
       "description": "Get headshot without background for Linkedin or any other use.",
       "prompt": "Find my profile picture [file name] at [file location]. Remove the background from this picture and save it as a PNG with transparent background. Open the new picture when you are done.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Content makers",
         "Vibe Coders",
@@ -639,7 +639,7 @@
       "title": "Merge Two PDFs",
       "description": "Combine multiple PDF documents into one file.",
       "prompt": "Find files named [filenames] in my [folder]. Merge these two PDF files into a single document. Keep the original files and create a new merged version. Open the new file when you are done.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Professionals",
         "Content makers"
@@ -657,7 +657,7 @@
       "title": "Convert HEIC to PNG",
       "description": "Convert iPhone standard photo file type into universal PNG format.",
       "prompt": "Look for the file called 'filename' in my [folder]. Convert its HEIC format to PNG format. Keep the original file and create converted version. Open the folder with photos when you are done.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Professionals",
         "Data analysts",
@@ -676,7 +676,7 @@
       "title": "Convert EDOC to DOC",
       "description": "Convert electronically signed documents on your computer.",
       "prompt": "Find this file: [file name and/or location]. Convert this EDOC file to a standard DOC format that I can edit in Microsoft Word. Open the file when you are done.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers",
         "Vibe Coders",
@@ -697,7 +697,7 @@
       "title": "Create folder with images",
       "description": "Teach how to use Claude to create files and automate simple workflows.",
       "prompt": "Create a new folder on my Desktop and put there 2 cat images. Open the folder when you are done.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Professionals",
         "Content makers",
@@ -716,7 +716,7 @@
       "title": "Batch Convert and Rename Images",
       "description": "Process multiple images with format conversion and intelligent renaming.",
       "prompt": "Convert all the images in this directory [folder path] to PNG format, and rename them to use dates from the EXIF data.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers",
         "Vibe Coders",
@@ -737,7 +737,7 @@
       "title": "Organize PDF Invoices by Date",
       "description": "Automatically sort and organize PDF documents by dates extracted from their content.",
       "prompt": "Organize my PDF invoices in [folder path] by month of expenditure. Read the invoice dates and create monthly folders.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Professionals",
         "Data analysts",
@@ -756,7 +756,7 @@
       "title": "Extract Data from PDFs",
       "description": "Pull key information from PDF documents into structured format.",
       "prompt": "Extract all data from these PDFs in [folder path]. Get the numbers, dates, and key information into a spreadsheet format.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Professionals",
         "Data analysts",
@@ -775,7 +775,7 @@
       "title": "Rename Bank Statements by Account",
       "description": "Fix messy financial document naming with intelligent renaming.",
       "prompt": "Rename all bank statements in [folder] to include account type and date range instead of random attachment names.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Professionals",
         "Data analysts",
@@ -794,7 +794,7 @@
       "title": "Find Large Receipts by Vendor",
       "description": "Locate and organize high-value receipts for expense tracking.",
       "prompt": "Find all receipts over $500 in [folder] and organize them by vendor for tax preparation.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Professionals",
         "Data analysts",
@@ -813,7 +813,7 @@
       "title": "Consolidate Data Files into One",
       "description": "Extract and standardize data for analysis.",
       "prompt": "Combine all Excel/CSV files in [folder] that have [customer data] and merge them into one standardized spreadsheet.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Data analysts"
       ],
@@ -830,7 +830,7 @@
       "title": "Remove Duplicate Contacts from Spreadsheet",
       "description": "Clean up your contact lists by automatically identifying and removing duplicate entries.",
       "prompt": "Remove all duplicate contacts from my spreadsheet at [file path]. Keep the most complete record when duplicates are found.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Data analysts"
       ],
@@ -847,7 +847,7 @@
       "title": "Find All TODO Comments",
       "description": "Locate and report all TODO items across your entire codebase.",
       "prompt": "Find all TODO comments across all projects in [directory] and create a prioritized report of technical debt.",
-      "difficulty": "Simple",
+      "difficulty": "Easy",
       "targetRoles": [
         "Developers"
       ],
@@ -864,7 +864,7 @@
       "title": "Generate Tests for Missing Coverage",
       "description": "Create test files for modules that lack proper testing.",
       "prompt": "Create test files for every module in [project path] that's missing test coverage.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],
@@ -881,7 +881,7 @@
       "title": "Analyze Code Complexity",
       "description": "Identify overly complex code that needs refactoring.",
       "prompt": "Analyze code complexity across all [language] files in [project path] and highlight areas that need simplification.",
-      "difficulty": "Medium",
+      "difficulty": "Intermediate",
       "targetRoles": [
         "Developers"
       ],

@@ -58,14 +58,14 @@ export function PromptCard({ useCase, onVote: _onVote, onOpen }: PromptCardProps
 
   const getDifficultyClass = (difficulty: string) => {
     switch (difficulty) {
-      case 'Simple':
-        return 'difficulty-simple';
-      case 'Medium':
-        return 'difficulty-medium';
-      case 'Complex':
-        return 'difficulty-complex';
+      case 'Easy':
+        return 'difficulty-easy';
+      case 'Intermediate':
+        return 'difficulty-intermediate';
+      case 'Advanced':
+        return 'difficulty-advanced';
       default:
-        return 'difficulty-simple';
+        return 'difficulty-easy';
     }
   };
 
