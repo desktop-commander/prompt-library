@@ -10,13 +10,20 @@ import { PromptDetailModal } from '@/components/PromptDetailModal';
 import { SiteHeader } from '@/components/SiteHeader';
 
 export default function Prompts() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  // Get initial role filter from URL parameter
+  const initialRoleFilter = useMemo(() => {
+    const roleParam = searchParams.get('role');
+    return roleParam ? [roleParam] : [];
+  }, [searchParams]);
+  
   const [useCases, setUseCases] = useState<UseCase[]>(initialUseCases);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
+  const [selectedRoles, setSelectedRoles] = useState<string[]>(initialRoleFilter);
   const [selectedDifficulties, setSelectedDifficulties] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState('popularity');
-  const [searchParams, setSearchParams] = useSearchParams();
   
   const initialSelected = (() => {
     const id = searchParams.get('i') || new URLSearchParams(window.location.search).get('i');

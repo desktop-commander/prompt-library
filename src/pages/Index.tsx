@@ -11,6 +11,7 @@ import { SubmitPromptButton } from '@/components/SubmitPromptButton';
 import TestimonialsRow from '@/components/TestimonialsRow';
 import { SiteHeader } from '@/components/SiteHeader';
 import { EngagementMeter } from '@/components/EngagementMeter';
+import { RoleFilter } from '@/components/RoleFilter';
 
 
 const Index = () => {
@@ -18,6 +19,7 @@ const Index = () => {
   const [selectedUseCase, setSelectedUseCase] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [useCaseVotes, setUseCaseVotes] = useState({});
+  const [selectedRole, setSelectedRole] = useState('For all');
   
   // Check if there's a prompt ID in the URL on mount
   useEffect(() => {
@@ -49,8 +51,8 @@ const Index = () => {
     { label: 'Active Users', value: '500+', icon: Users }
   ];
 
-  // Featured prompts: specific curated list
-  const featuredUseCases = useMemo(() => {
+  // Default featured prompts: specific curated list
+  const defaultFeaturedUseCases = useMemo(() => {
     const featuredTitles = [
       'Explore and Understand New Repository',  // 1st with fire
       'Organise my Downloads folder',            // 2nd with fire
@@ -78,17 +80,76 @@ const Index = () => {
     
     // If we don't find all 9, log a warning
     if (featured.length < 9) {
-      console.warn(`Only found ${featured.length} of 9 featured prompts`);
+      console.warn(`Only found ${featured.length} of 9 default featured prompts`);
     }
     
     return featured;
   }, []);
-  
-  // Set fire emoji for first two prompts
-  const hotIds = new Set(featuredUseCases.slice(0, 2).map((u) => u.id));
-  
-  // Always display featured prompts on home page
-  const displayedUseCases = featuredUseCases;
+
+  // Get available target roles from the entire library
+  const availableRoles = useMemo(() => {
+    const roles = new Set();
+    useCases.forEach(uc => {
+      uc.targetRoles.forEach(role => roles.add(role));
+    });
+    return ['For all', ...Array.from(roles).sort()];
+  }, []);
+
+  // Filter prompts by selected role
+  const filteredByRole = useMemo(() => {
+    if (selectedRole === 'For all') {
+      return defaultFeaturedUseCases;
+    }
+    
+    // Filter entire library by selected role, sort by usage, limit to 9
+    const filtered = useCases
+      .filter(uc => uc.targetRoles.includes(selectedRole))
+      .sort((a, b) => {
+        // Primary sort: usage count (gaClicks) descending
+        if (b.gaClicks !== a.gaClicks) {
+          return b.gaClicks - a.gaClicks;
+        }
+        // Tie-breaker: alphabetical by title
+        return a.title.localeCompare(b.title);
+      })
+      .slice(0, 9);
+    
+    return filtered;
+  }, [selectedRole, defaultFeaturedUseCases]);
+
+  // Set fire emoji for first two prompts (only for default featured)
+  const hotIds = new Set(
+    selectedRole === 'For all' 
+      ? defaultFeaturedUseCases.slice(0, 2).map((u) => u.id)
+      : [] // No fire emojis for filtered results
+  );
+
+  // Dynamic section title based on selected role
+  const sectionTitle = useMemo(() => {
+    if (selectedRole === 'For all') {
+      return 'Featured Prompts';
+    }
+    return `Featured Prompts for ${selectedRole}`;
+  }, [selectedRole]);
+
+  // Dynamic Browse All button text and URL
+  const browseAllText = useMemo(() => {
+    if (selectedRole === 'For all') {
+      return 'Browse All Prompts';
+    }
+    return `Browse All ${selectedRole} Prompts`;
+  }, [selectedRole]);
+
+  const browseAllUrl = useMemo(() => {
+    if (selectedRole === 'For all') {
+      return '/prompts';
+    }
+    // Pass the selected role as a URL parameter for pre-filtering
+    return `/prompts?role=${encodeURIComponent(selectedRole)}`;
+  }, [selectedRole]);
+
+  // Always display the filtered prompts
+  const displayedUseCases = filteredByRole;
 
   const handleUseCaseClick = (useCase) => {
     setSelectedUseCase(useCase);
@@ -109,6 +170,10 @@ const Index = () => {
       ...prev,
       [id]: (prev[id] || 0) + 1
     }));
+  };
+
+  const handleRoleChange = (role: string) => {
+    setSelectedRole(role);
   };
 
   return (
@@ -137,9 +202,16 @@ const Index = () => {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="mb-6 text-center">
             <h2 className="text-2xl font-bold text-foreground">
-              Featured Prompts
+              {sectionTitle}
             </h2>
           </div>
+          
+          {/* Role Filter */}
+          <RoleFilter 
+            roles={availableRoles}
+            selectedRole={selectedRole}
+            onRoleChange={handleRoleChange}
+          />
           
           {displayedUseCases.length > 0 && (
             <>
@@ -215,8 +287,8 @@ const Index = () => {
             </h2>
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <Button asChild size="lg" className="dc-button-primary">
-                <Link to="/prompts" className="flex items-center gap-2">
-                  Browse All Prompts
+                <Link to={browseAllUrl} className="flex items-center gap-2">
+                  {browseAllText}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
