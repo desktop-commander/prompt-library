@@ -31,10 +31,10 @@ export function MainSiteHeader() {
 
   return (
     <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 bg-black text-white shadow-lg h-20">
-      <div className="container mx-auto px-4 h-full">
-        <div className="flex items-center justify-between h-full">
+      <div className="container mx-auto px-4 h-full max-w-7xl">
+        <div className="flex items-center justify-between h-full gap-4">
           {/* Logo */}
-          <a href="https://desktopcommander.app" className="flex items-center">
+          <a href="https://desktopcommander.app" className="flex items-center flex-shrink-0">
             <img 
               src="https://desktopcommander.app/optimized_images/logo.webp" 
               alt="DesktopCommander Logo" 
@@ -42,11 +42,11 @@ export function MainSiteHeader() {
               height="35" 
               className="mr-2"
             />
-            <span className="text-white font-light">DesktopCommander</span>
+            <span className="text-white font-light text-sm sm:text-base">DesktopCommander</span>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8 flex-1 justify-center">
             {/* Prompts Link */}
             <a href="/" className="hover:text-blue-400 transition-colors font-light">
               Prompts
@@ -93,18 +93,35 @@ export function MainSiteHeader() {
           </nav>
 
           {/* CTA Button and Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 flex-shrink-0">
+            {/* Desktop CTA Button */}
             <a 
               href="https://desktopcommander.app#installation" 
-              className="hidden md:inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-light transition-colors"
+              className="hidden xl:inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-light transition-colors whitespace-nowrap"
             >
               Install Desktop Commander
+            </a>
+            
+            {/* Large Tablet CTA Button - Medium text */}
+            <a 
+              href="https://desktopcommander.app#installation" 
+              className="hidden lg:inline-block xl:hidden bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-light transition-colors whitespace-nowrap"
+            >
+              Install DC
+            </a>
+            
+            {/* Small Tablet CTA Button - Short text */}
+            <a 
+              href="https://desktopcommander.app#installation" 
+              className="hidden md:inline-block lg:hidden bg-blue-600 hover:bg-blue-700 text-white px-2 py-2 rounded-md text-xs font-light transition-colors whitespace-nowrap"
+            >
+              Install
             </a>
             
             {/* Mobile Menu Button */}
             <button 
               onClick={toggleMobileMenu}
-              className="md:hidden p-2"
+              className="md:hidden p-2 ml-2"
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -116,17 +133,27 @@ export function MainSiteHeader() {
         {isMobileMenuOpen && (
           <nav className="md:hidden bg-black border-t border-gray-800 py-4">
             <div className="flex flex-col space-y-4">
-              <a href="/" className="block hover:text-blue-400 transition-colors font-light">Prompts</a>
-              <a href="https://desktopcommander.app#installation" className="block hover:text-blue-400 transition-colors font-light">Installation</a>
-              <a href="https://desktopcommander.app#testimonials" className="block hover:text-blue-400 transition-colors font-light">Testimonials</a>
-              <a href="https://discord.gg/kQ27sNnZr7" target="_blank" rel="noopener" className="block hover:text-blue-400 transition-colors font-light">Join Discord</a>
-              <a href="https://desktopcommander.app#sponsors" className="flex items-center hover:text-blue-400 transition-colors font-light">
-                <Heart className="mr-2 h-4 w-4" />
-                Sponsor
+              {/* Mobile CTA Button - First in menu */}
+              <a 
+                href="https://desktopcommander.app#installation" 
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-md text-center font-medium transition-colors"
+              >
+                Install Desktop Commander
               </a>
-              <a href="https://github.com/wonderwhy-er/DesktopCommanderMCP" target="_blank" rel="noopener" className="block hover:text-blue-400 transition-colors font-light">GITHUB</a>
-              <a href="https://desktopcommander.app#media" className="block hover:text-blue-400 transition-colors font-light">Media</a>
-              <a href="https://desktopcommander.app#faq" className="block hover:text-blue-400 transition-colors font-light">FAQ</a>
+              
+              <div className="border-t border-gray-700 pt-4">
+                <a href="/" className="block hover:text-blue-400 transition-colors font-light py-2">Prompts</a>
+                <a href="https://desktopcommander.app#installation" className="block hover:text-blue-400 transition-colors font-light py-2">Installation</a>
+                <a href="https://desktopcommander.app#testimonials" className="block hover:text-blue-400 transition-colors font-light py-2">Testimonials</a>
+                <a href="https://discord.gg/kQ27sNnZr7" target="_blank" rel="noopener" className="block hover:text-blue-400 transition-colors font-light py-2">Join Discord</a>
+                <a href="https://desktopcommander.app#sponsors" className="flex items-center hover:text-blue-400 transition-colors font-light py-2">
+                  <Heart className="mr-2 h-4 w-4" />
+                  Sponsor
+                </a>
+                <a href="https://github.com/wonderwhy-er/DesktopCommanderMCP" target="_blank" rel="noopener" className="block hover:text-blue-400 transition-colors font-light py-2">GITHUB</a>
+                <a href="https://desktopcommander.app#media" className="block hover:text-blue-400 transition-colors font-light py-2">Media</a>
+                <a href="https://desktopcommander.app#faq" className="block hover:text-blue-400 transition-colors font-light py-2">FAQ</a>
+              </div>
             </div>
           </nav>
         )}
