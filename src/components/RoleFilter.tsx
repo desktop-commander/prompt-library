@@ -8,7 +8,7 @@ interface RoleFilterProps {
 
 export const RoleFilter = ({ roles, selectedRole, onRoleChange }: RoleFilterProps) => {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2 mb-6 px-4">
+    <div className="flex flex-wrap items-center justify-center gap-2 mb-0 px-4">
       {roles.map((role) => (
         <Button
           key={role}

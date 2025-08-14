@@ -130,17 +130,6 @@ export default function Prompts() {
             </div>
             <div className="flex items-center gap-3">
               <SubmitPromptButton />
-              <Button variant="outline" asChild>
-                <a
-                  href="https://desktopcommander.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  Visit Desktop Commander
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </Button>
             </div>
           </div>
         </div>

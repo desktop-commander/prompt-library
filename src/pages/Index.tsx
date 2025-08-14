@@ -124,14 +124,6 @@ const Index = () => {
       : [] // No fire emojis for filtered results
   );
 
-  // Dynamic section title based on selected role
-  const sectionTitle = useMemo(() => {
-    if (selectedRole === 'For all') {
-      return 'Featured Prompts';
-    }
-    return `Featured Prompts for ${selectedRole}`;
-  }, [selectedRole]);
-
   // Dynamic Browse All button text and URL
   const browseAllText = useMemo(() => {
     if (selectedRole === 'For all') {
@@ -189,29 +181,23 @@ const Index = () => {
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
               Prompt Library
             </h1>
-            <p className="text-xl text-muted-foreground mb-4 leading-relaxed">
+            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               Discover powerful AI workflows and automation prompts for Desktop Commander
             </p>
-
+            
+            {/* Role Filter moved to hero */}
+            <RoleFilter 
+              roles={availableRoles}
+              selectedRole={selectedRole}
+              onRoleChange={handleRoleChange}
+            />
           </div>
         </div>
       </div>
 
-      {/* Featured Prompts */}
-      <div className="pb-16">
+      {/* Featured Prompts - No separate heading */}
+      <div className="pb-20">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="mb-6 text-center">
-            <h2 className="text-2xl font-bold text-foreground">
-              {sectionTitle}
-            </h2>
-          </div>
-          
-          {/* Role Filter */}
-          <RoleFilter 
-            roles={availableRoles}
-            selectedRole={selectedRole}
-            onRoleChange={handleRoleChange}
-          />
           
           {displayedUseCases.length > 0 && (
             <>
@@ -279,13 +265,10 @@ const Index = () => {
       </div>
 
       {/* Browse All Prompts Section */}
-      <div className="pb-16">
+      <div className="pb-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              Explore our complete library of 50+ prompts
-            </h2>
-            <div className="flex items-center justify-center gap-4 flex-wrap">
+            <div className="flex items-center justify-center gap-6 flex-wrap mb-6">
               <Button asChild size="lg" className="dc-button-primary">
                 <Link to={browseAllUrl} className="flex items-center gap-2">
                   {browseAllText}
@@ -299,6 +282,9 @@ const Index = () => {
                 showIcon={true}
               />
             </div>
+            <p className="text-muted-foreground mt-2">
+              Explore our complete library of 50+ prompts
+            </p>
           </div>
         </div>
       </div>
@@ -325,20 +311,12 @@ const Index = () => {
               Join thousands of developers who are using Desktop Commander to automate their daily tasks
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap">
-              <Button asChild size="lg" className="dc-button-primary">
-                <Link to="/use-cases">
-                  Explore Prompts
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild>
-                <a
-                  href="https://desktopcommander.app/#installation"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Install Desktop Commander
-                </a>
-              </Button>
+              <SubmitPromptButton 
+                variant="default" 
+                size="lg"
+                text="Submit Your Prompt"
+                showIcon={true}
+              />
             </div>
           </div>
         </div>
