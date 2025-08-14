@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PromptDetailModal } from '@/components/PromptDetailModal';
-import { SiteHeader } from '@/components/SiteHeader';
+import { MainSiteHeader } from '@/components/MainSiteHeader';
+import { PromptsPageFooter } from '@/components/PromptsPageFooter';
 
 export default function Prompts() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -118,8 +119,8 @@ export default function Prompts() {
 
   return (
     <>
-      <SiteHeader />
-      <div className="container mx-auto px-4 py-8">
+      <MainSiteHeader />
+      <div className="container mx-auto px-4 py-8 mt-20">
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -176,6 +177,8 @@ export default function Prompts() {
           Showing {filteredAndSortedUseCases.length} of {useCases.length} prompts
         </div>
       </div>
+
+      <PromptsPageFooter />
 
       <PromptDetailModal
         useCase={selectedUseCase}
