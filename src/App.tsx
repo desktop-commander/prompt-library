@@ -7,25 +7,28 @@ import Index from "./pages/Index";
 import Prompts from "./pages/Prompts";
 import NotFound from "./pages/NotFound";
 import { AnalyticsDashboard } from "@/components/AnalyticsDashboard";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/prompts" element={<Prompts />} />
-          <Route path="/use-cases" element={<Navigate to="/prompts" replace />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-      <AnalyticsDashboard />
-    </TooltipProvider>
+    <PostHogProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/prompts" element={<Prompts />} />
+            <Route path="/use-cases" element={<Navigate to="/prompts" replace />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+        <AnalyticsDashboard />
+      </TooltipProvider>
+    </PostHogProvider>
   </QueryClientProvider>
 );
 

@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Plus, ExternalLink } from 'lucide-react';
+import { usePostHog } from '@/components/PostHogProvider';
 
 interface SubmitPromptButtonProps {
   variant?: 'default' | 'outline';
@@ -16,7 +17,17 @@ export function SubmitPromptButton({
   showIcon = true,
   text = 'Submit Your Prompt'
 }: SubmitPromptButtonProps) {
+  const posthog = usePostHog();
+  
   const handleClick = () => {
+    // Track prompt submission intent
+    posthog.capture('submit_prompt_clicked', {
+      button_variant: variant,
+      button_size: size,
+      button_text: text,
+      source_page: window.location.pathname
+    });
+    
     window.open('https://tally.so/r/m6BbEN', '_blank', 'noopener,noreferrer');
   };
 

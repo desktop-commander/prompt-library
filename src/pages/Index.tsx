@@ -12,6 +12,8 @@ import { MainSiteHeader } from '@/components/MainSiteHeader';
 import { PromptsPageFooter } from '@/components/PromptsPageFooter';
 import { EngagementMeter } from '@/components/EngagementMeter';
 import { RoleFilter } from '@/components/RoleFilter';
+import { usePostHog } from '@/components/PostHogProvider';
+import { usePageTracking } from '@/hooks/usePageTracking';
 
 const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,6 +21,10 @@ const Index = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [useCaseVotes, setUseCaseVotes] = useState({});
   const [selectedRole, setSelectedRole] = useState('For all');
+  const posthog = usePostHog();
+  
+  // Track page views
+  usePageTracking();
   
   // Check if there's a prompt ID in the URL on mount
   useEffect(() => {
@@ -143,6 +149,17 @@ const Index = () => {
   const displayedUseCases = filteredByRole;
 
   const handleUseCaseClick = (useCase) => {
+    // Track prompt click
+    posthog.capture('prompt_clicked', {
+      prompt_id: useCase.id,
+      prompt_title: useCase.title,
+      prompt_category: useCase.category,
+      prompt_difficulty: useCase.difficulty,
+      prompt_author: useCase.author,
+      target_roles: useCase.targetRoles,
+      source_page: 'homepage'
+    });
+    
     setSelectedUseCase(useCase);
     setIsModalOpen(true);
     // Update URL with prompt ID
@@ -157,6 +174,16 @@ const Index = () => {
   };
 
   const handleVote = (id) => {
+    const useCase = useCases.find(uc => uc.id === id);
+    
+    // Track vote
+    posthog.capture('prompt_voted', {
+      prompt_id: id,
+      prompt_title: useCase?.title,
+      prompt_category: useCase?.category,
+      source_page: 'homepage'
+    });
+    
     setUseCaseVotes(prev => ({
       ...prev,
       [id]: (prev[id] || 0) + 1
@@ -164,6 +191,13 @@ const Index = () => {
   };
 
   const handleRoleChange = (role: string) => {
+    // Track role filter change
+    posthog.capture('role_filter_changed', {
+      previous_role: selectedRole,
+      new_role: role,
+      source_page: 'homepage'
+    });
+    
     setSelectedRole(role);
   };
 
