@@ -25,7 +25,10 @@ This project features **enterprise-grade analytics** with comprehensive user beh
 - **User engagement depth** with time-based analytics
 - **Copy behavior analysis** (manual vs wizard usage)
 
-For detailed analytics documentation, see: `docs/initiatives/posthog-analytics-overview.md`
+For detailed analytics documentation, see: **Desktop Commander/Initiatives/** folder:
+- `PostHog_Analytics_Overview_StyleScoutDC.md` - Complete system overview
+- `PostHog_Dashboard_Setup_StyleScoutDC.md` - Dashboard setup guide  
+- `StyleScoutDC_Analytics_Implementation_Summary.md` - Implementation summary
 
 ## Project Description
 
