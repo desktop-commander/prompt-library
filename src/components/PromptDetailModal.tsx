@@ -35,6 +35,7 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/comp
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { EngagementMeter } from '@/components/EngagementMeter';
 import { UsePromptWizard } from '@/components/UsePromptWizard';
+import { usePostHog } from '@/components/PostHogProvider';
 
 interface PromptDetailModalProps {
   useCase: UseCase | null;
@@ -67,6 +68,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
   const [copiedLink, setCopiedLink] = useState(false);
   const { toast } = useToast();
   const [exactUses, setExactUses] = useState(0);
+  const posthog = usePostHog();
 
   useEffect(() => {
     if (!useCase) return;
@@ -134,6 +136,19 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
       (/(Mobi|Android|iPhone|iPad|iPod)/i.test(navigator.userAgent) ||
         (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: coarse)').matches));
 
+    // Track share button click
+    posthog.capture('share_button_clicked', {
+      prompt_id: useCase.id,
+      prompt_title: useCase.title,
+      prompt_category: useCase.category,
+      prompt_difficulty: useCase.difficulty,
+      prompt_author: useCase.author,
+      target_roles: useCase.targetRoles,
+      device_type: isMobile ? 'mobile' : 'desktop',
+      share_url: shareUrl,
+      source_page: 'prompt_modal'
+    });
+
     try {
       // Mobile: use native share sheet when available
       if (isMobile && navigator.share) {
@@ -142,6 +157,15 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
           text: 'Check out this Desktop Commander prompt',
           url: shareUrl,
         });
+        
+        // Track successful native share
+        posthog.capture('share_native_completed', {
+          prompt_id: useCase.id,
+          prompt_title: useCase.title,
+          device_type: 'mobile',
+          share_method: 'native_share'
+        });
+        
         return;
       }
 
@@ -149,6 +173,15 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
       await navigator.clipboard.writeText(shareUrl);
       setCopiedLink(true);
       setTimeout(() => setCopiedLink(false), 1500);
+      
+      // Track successful clipboard copy
+      posthog.capture('share_link_copied', {
+        prompt_id: useCase.id,
+        prompt_title: useCase.title,
+        device_type: isMobile ? 'mobile' : 'desktop',
+        share_method: 'clipboard_copy'
+      });
+      
       toast({
         title: 'Link copied',
         description: 'Share it with your team.',
@@ -173,6 +206,14 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
           ),
         });
       } catch {
+        // Track share failure
+        posthog.capture('share_failed', {
+          prompt_id: useCase.id,
+          prompt_title: useCase.title,
+          device_type: isMobile ? 'mobile' : 'desktop',
+          error_type: 'clipboard_fallback_failed'
+        });
+        
         toast({
           title: 'Share failed',
           description: 'Could not share or copy the link.',
