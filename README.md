@@ -1,8 +1,31 @@
 # Desktop Commander Prompt Library
 
-## Project info
+## Project Overview
 
 **URL**: https://lovable.dev/projects/d59bd04d-86e8-41d7-bbba-f71c8d704429
+
+A comprehensive prompt library for Desktop Commander users, featuring community-created prompts for development, data analysis, DevOps, file management, and more. Users can browse, search, filter, and contribute their own prompts to help others maximize their productivity with Desktop Commander.
+
+## 📊 Analytics & Tracking
+
+This project features **enterprise-grade analytics** with comprehensive user behavior tracking powered by PostHog:
+
+### 🎯 **Analytics Capabilities:**
+- **Complete user journey tracking** - From page view to prompt copy
+- **Viral growth analytics** - Share link attribution and conversion tracking  
+- **Return visitor insights** - User segmentation and retention analysis
+- **Desktop Commander integration** - Installation and platform usage tracking
+- **Manual copy detection** - Complete attribution including bypass behavior
+- **Conversion funnel analysis** - Drop-off identification and optimization
+
+### 📈 **Key Metrics Tracked:**
+- **15+ event types** covering all user interactions
+- **Viral coefficient measurement** with share-to-conversion tracking
+- **Platform preference insights** (Claude Desktop, VS Code, Cursor, etc.)
+- **User engagement depth** with time-based analytics
+- **Copy behavior analysis** (manual vs wizard usage)
+
+For detailed analytics documentation, see: `docs/initiatives/posthog-analytics-overview.md`
 
 ## Project Description
 
