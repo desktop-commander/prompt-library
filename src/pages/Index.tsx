@@ -13,7 +13,6 @@ import { PromptsPageFooter } from '@/components/PromptsPageFooter';
 import { EngagementMeter } from '@/components/EngagementMeter';
 import { RoleFilter } from '@/components/RoleFilter';
 import { usePostHog } from '@/components/PostHogProvider';
-import { usePageTracking } from '@/hooks/usePageTracking';
 
 const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,9 +21,6 @@ const Index = () => {
   const [useCaseVotes, setUseCaseVotes] = useState({});
   const [selectedRole, setSelectedRole] = useState('For all');
   const posthog = usePostHog();
-  
-  // Track page views
-  usePageTracking();
   
   // Check if there's a prompt ID in the URL on mount
   useEffect(() => {

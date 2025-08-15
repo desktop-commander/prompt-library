@@ -9,15 +9,11 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { PromptDetailModal } from '@/components/PromptDetailModal';
 import { MainSiteHeader } from '@/components/MainSiteHeader';
 import { PromptsPageFooter } from '@/components/PromptsPageFooter';
-import { usePageTracking } from '@/hooks/usePageTracking';
 import { usePostHog } from '@/components/PostHogProvider';
 
 export default function Prompts() {
   const [searchParams, setSearchParams] = useSearchParams();
   const posthog = usePostHog();
-  
-  // Track page views
-  usePageTracking();
   
   // Get initial role filter from URL parameter
   const initialRoleFilter = useMemo(() => {
