@@ -502,37 +502,41 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-[92vw] sm:max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-y-auto mx-auto">
         <DialogHeader>
-          <div className="flex items-start gap-4 pr-12">
-            <div className="p-3 bg-dc-surface-elevated rounded-lg">
-              <IconComponent className="h-6 w-6 text-primary" />
+          <div className="flex items-start gap-3 sm:gap-4 pr-8 sm:pr-12">
+            <div className="p-2 sm:p-3 bg-dc-surface-elevated rounded-lg flex-shrink-0">
+              <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
             </div>
-            <div className="flex-1">
-              <DialogTitle className="text-2xl leading-tight mb-3">{useCase.title}</DialogTitle>
+            <div className="flex-1 min-w-0">
+              <DialogTitle className="text-lg sm:text-2xl leading-tight mb-2 sm:mb-3 break-words">{useCase.title}</DialogTitle>
               <DialogDescription className="sr-only">Detailed information and actions for this prompt.</DialogDescription>
-              <div className="flex items-center gap-3 flex-wrap">
+              <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                 {useCase.verified && (
                   <span className="inline-flex items-center gap-1 text-xs rounded-full border border-primary/20 bg-primary/10 text-primary px-2 py-0.5">
                     <BadgeCheck className="h-3 w-3" />
                     Verified by DC team
                   </span>
                 )}
-                <Badge className={`difficulty-badge ${getDifficultyClass(useCase.difficulty)}`}>
+                <Badge className={`difficulty-badge ${getDifficultyClass(useCase.difficulty)} text-xs`}>
                   {useCase.difficulty}
                 </Badge>
-                <Badge variant="outline">{useCase.category}</Badge>
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                  <User className="h-4 w-4" />
-                  {useCase.author}
+                <Badge variant="outline" className="text-xs">{useCase.category}</Badge>
+                <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
+                  <User className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="truncate">{useCase.author}</span>
                 </div>
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                <div className="hidden sm:flex items-center gap-1 text-sm text-muted-foreground">
                   <Calendar className="h-4 w-4" />
                   <span>Added {new Date(useCase.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                 </div>
+                <div className="sm:hidden flex items-center gap-1 text-xs text-muted-foreground">
+                  <Calendar className="h-3 w-3" />
+                  <span>{new Date(useCase.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                </div>
               </div>
             </div>
-            <div className="shrink-0 flex items-center gap-2" aria-label="All-time engagement">
+            <div className="shrink-0 hidden sm:flex items-center gap-2" aria-label="All-time engagement">
               <EngagementMeter count={useCase.votes + (hasVoted ? 1 : 0)} />
               <Popover>
                 <PopoverTrigger asChild>
@@ -552,17 +556,17 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
           </div>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-2">Description</h3>
-            <p className="text-muted-foreground leading-relaxed">{useCase.description}</p>
+            <h3 className="text-base sm:text-lg font-semibold mb-1.5 sm:mb-2">Description</h3>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{useCase.description}</p>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Target Roles</h3>
-            <div className="flex flex-wrap gap-2">
+            <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3">Target Roles</h3>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {useCase.targetRoles.map((role) => (
-                <Badge key={role} variant="secondary" className="role-tag">
+                <Badge key={role} variant="secondary" className="role-tag text-xs">
                   {role}
                 </Badge>
               ))}
@@ -574,23 +578,23 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
           <Separator />
 
           <div>
-            <div className="mb-4">
-              <h3 className="text-lg font-semibold">Complete Prompt</h3>
+            <div className="mb-3 sm:mb-4">
+              <h3 className="text-base sm:text-lg font-semibold">Complete Prompt</h3>
             </div>
             <div 
-              className="p-4 bg-dc-surface-elevated rounded-lg border"
+              className="p-3 sm:p-4 bg-dc-surface-elevated rounded-lg border max-h-[40vh] sm:max-h-none overflow-y-auto"
               onMouseUp={handleTextSelection}
               onKeyUp={handleTextSelection}
               onContextMenu={handleContextMenu}
             >
-              <pre className="text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed select-text">
+              <pre className="text-xs sm:text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed select-text break-words overflow-wrap-anywhere">
                 {useCase.prompt}
               </pre>
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4">
-            <Button variant="outline" onClick={handleModalClose}>
+          <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-3 sm:pt-4">
+            <Button variant="outline" onClick={handleModalClose} className="order-3 sm:order-1">
               Close
             </Button>
 
@@ -600,7 +604,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
                   variant="outline"
                   onClick={handleShare}
                   aria-label="Share this prompt"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 order-2"
                 >
                   <Share2 className="h-4 w-4" />
                   {copiedLink ? 'Copied' : 'Share'}
@@ -610,7 +614,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
             </Tooltip>
 
             <Button 
-              className="dc-button-primary flex items-center gap-2"
+              className="dc-button-primary flex items-center gap-2 order-1 sm:order-3"
               onClick={handleUsePrompt}
             >
               <Rocket className="h-4 w-4" />
