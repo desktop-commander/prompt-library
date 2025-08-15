@@ -11,8 +11,8 @@ export function PostHogProvider({ children }: PostHogProviderProps) {
   useEffect(() => {
     // Initialize PostHog only once when component mounts
     if (typeof window !== 'undefined' && !posthog.__loaded) {
-      const apiKey = import.meta.env.VITE_PUBLIC_POSTHOG_KEY || 'phc_o3XE6MCo4vR8cnlszJv7kpP5iYwS7vx52wqR2ucsm80';
-      const apiHost = import.meta.env.VITE_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com';
+      const apiKey = import.meta.env.VITE_PUBLIC_POSTHOG_KEY || 'phc_o3XE6MCo4vR8cnlszJy7kpPSiYwS7vx52wgR2ucsm8O';
+      const apiHost = import.meta.env.VITE_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com';
       
       console.log('PostHog Init - API Key:', apiKey ? `${apiKey.substring(0, 10)}...` : 'MISSING');
       console.log('PostHog Init - API Host:', apiHost);
