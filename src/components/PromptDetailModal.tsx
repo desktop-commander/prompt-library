@@ -374,7 +374,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
   };
 
   const getShareUrl = (shareSource = 'share_button') => {
-    const url = new URL('/prompts', window.location.origin); // Changed from /use-cases to /prompts
+    const url = new URL('/', window.location.origin); // Fixed: Use root path instead of /prompts
     url.searchParams.set('i', useCase.id);
     
     // Phase 3: Add share tracking parameters
