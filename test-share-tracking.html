@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Tracking Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: #22c55e; }
+        .info { color: #3b82f6; }
+        .warning { color: #f59e0b; }
+        .url-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #3b82f6;
+            font-family: monospace;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔗 Share Tracking Test - Enhanced</h1>
+    
+    <div class="test-section">
+        <h2>🎯 New Share URL Format</h2>
+        <p>When users click the share button, they now get URLs with complete tracking:</p>
+        
+        <h3>📱 Mobile Native Share:</h3>
+        <div class="url-box">
+            http://localhost:8087/use-cases?i=copywriting-voice&utm_source=style_scout&utm_medium=native_share&utm_campaign=prompt_sharing&utm_content=copywriting-voice&shared_at=1755243425789
+        </div>
+        
+        <h3>💻 Desktop Clipboard Copy:</h3>
+        <div class="url-box">
+            http://localhost:8087/use-cases?i=copywriting-voice&utm_source=style_scout&utm_medium=clipboard_copy&utm_campaign=prompt_sharing&utm_content=copywriting-voice&shared_at=1755243425789
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 UTM Parameter Breakdown</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td><code>i</code></td>
+                <td>copywriting-voice</td>
+                <td>Prompt ID (existing)</td>
+            </tr>
+            <tr>
+                <td><code>utm_source</code></td>
+                <td>style_scout</td>
+                <td>Identifies traffic from your app</td>
+            </tr>
+            <tr>
+                <td><code>utm_medium</code></td>
+                <td>native_share / clipboard_copy</td>
+                <td>HOW it was shared</td>
+            </tr>
+            <tr>
+                <td><code>utm_campaign</code></td>
+                <td>prompt_sharing</td>
+                <td>Type of sharing campaign</td>
+            </tr>
+            <tr>
+                <td><code>utm_content</code></td>
+                <td>copywriting-voice</td>
+                <td>Which specific prompt</td>
+            </tr>
+            <tr>
+                <td><code>shared_at</code></td>
+                <td>1755243425789</td>
+                <td>Timestamp when shared</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-section">
+        <h2>🎬 What PostHog Will Now Show</h2>
+        
+        <div class="success">
+            <h3>Enhanced viral_link_visit Event:</h3>
+            <pre>{
+  "event": "viral_link_visit",
+  "prompt_id": "copywriting-voice",
+  "utm_source": "style_scout",
+  "utm_medium": "clipboard_copy",
+  "utm_campaign": "prompt_sharing",
+  "share_source_type": "clipboard_copy",
+  "shared_at": "1755243425789",
+  "share_age_seconds": 45,
+  "is_official_share": true,
+  "referrer": "https://example.com"
+}</pre>
+        </div>
+
+        <div class="info">
+            <h3>Enhanced share_button_clicked Event:</h3>
+            <pre>{
+  "event": "share_button_clicked",
+  "prompt_id": "copywriting-voice",
+  "share_method": "clipboard_copy",
+  "share_url": "...with UTM parameters...",
+  "viral_chain_length": 1,
+  "is_viral_session": true
+}</pre>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Share Source Analysis</h2>
+        <p>You can now distinguish between:</p>
+        
+        <table>
+            <tr>
+                <th>Share Type</th>
+                <th>utm_medium</th>
+                <th>Use Case</th>
+            </tr>
+            <tr>
+                <td>📱 Mobile Native Share</td>
+                <td>native_share</td>
+                <td>User used phone's share sheet</td>
+            </tr>
+            <tr>
+                <td>💻 Desktop Copy Link</td>
+                <td>clipboard_copy</td>
+                <td>User copied link to clipboard</td>
+            </tr>
+            <tr>
+                <td>🌐 External Share</td>
+                <td>external</td>
+                <td>Shared via social media, etc.</td>
+            </tr>
+            <tr>
+                <td>📧 Email Share</td>
+                <td>email</td>
+                <td>Shared via email</td>
+            </tr>
+            <tr>
+                <td>💬 Manual Share</td>
+                <td>manual</td>
+                <td>User manually copied URL</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Test Instructions</h2>
+        <ol>
+            <li><strong>Visit app:</strong> <code>http://localhost:8087/</code></li>
+            <li><strong>Click a prompt</strong> to open modal</li>
+            <li><strong>Click Share button</strong> to generate tracked URL</li>
+            <li><strong>Use that URL</strong> in new browser tab/incognito</li>
+            <li><strong>Check PostHog</strong> for enhanced viral_link_visit event</li>
+        </ol>
+        
+        <button onclick="openApp()">🚀 Open App</button>
+        <button onclick="openPostHog()">📊 Open PostHog</button>
+    </div>
+
+    <script>
+        function openApp() {
+            window.open('http://localhost:8087/', '_blank');
+        }
+        
+        function openPostHog() {
+            window.open('https://eu.i.posthog.com/project/43/activity', '_blank');
+        }
+    </script>
+</body>
+</html>

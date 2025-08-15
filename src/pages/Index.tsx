@@ -22,6 +22,11 @@ const Index = () => {
   const [selectedRole, setSelectedRole] = useState('For all');
   const posthog = usePostHog();
   
+  // Phase 3: Track page load time for performance monitoring
+  useEffect(() => {
+    window.pageLoadTime = new Date().getTime();
+  }, []);
+  
   // Check if there's a prompt ID in the URL on mount
   useEffect(() => {
     const id = searchParams.get('i');
@@ -145,7 +150,11 @@ const Index = () => {
   const displayedUseCases = filteredByRole;
 
   const handleUseCaseClick = (useCase) => {
-    // Track prompt click
+    // Get viral session info if available
+    const viralSession = localStorage.getItem('style_scout_viral_session');
+    const viralInfo = viralSession ? JSON.parse(viralSession) : null;
+    
+    // Track prompt click with enhanced metadata
     posthog.capture('prompt_clicked', {
       prompt_id: useCase.id,
       prompt_title: useCase.title,
@@ -153,7 +162,13 @@ const Index = () => {
       prompt_difficulty: useCase.difficulty,
       prompt_author: useCase.author,
       target_roles: useCase.targetRoles,
-      source_page: 'homepage'
+      source_page: 'homepage',
+      // Phase 3: Viral tracking data
+      is_viral_session: !!viralInfo,
+      viral_entry_prompt: viralInfo?.prompt_id,
+      viral_referrer: viralInfo?.referrer,
+      time_since_viral_entry: viralInfo ? 
+        Math.round((new Date().getTime() - new Date(viralInfo.entry_time).getTime()) / 1000) : null
     });
     
     setSelectedUseCase(useCase);
@@ -187,11 +202,22 @@ const Index = () => {
   };
 
   const handleRoleChange = (role: string) => {
-    // Track role filter change
+    // Get visitor info for enhanced tracking
+    const visitCount = parseInt(localStorage.getItem('style_scout_visit_count') || '0');
+    const viralSession = localStorage.getItem('style_scout_viral_session');
+    const viralInfo = viralSession ? JSON.parse(viralSession) : null;
+    
+    // Track role filter change with enhanced metadata
     posthog.capture('role_filter_changed', {
       previous_role: selectedRole,
       new_role: role,
-      source_page: 'homepage'
+      source_page: 'homepage',
+      // Phase 3: Enhanced tracking
+      visit_count: visitCount,
+      is_returning_user: visitCount > 1,
+      is_viral_session: !!viralInfo,
+      session_duration_seconds: viralInfo ? 
+        Math.round((new Date().getTime() - new Date(viralInfo.entry_time).getTime()) / 1000) : null
     });
     
     setSelectedRole(role);

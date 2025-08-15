@@ -15,6 +15,11 @@ export default function Prompts() {
   const [searchParams, setSearchParams] = useSearchParams();
   const posthog = usePostHog();
   
+  // Phase 3: Track page load time for performance monitoring
+  useEffect(() => {
+    window.pageLoadTime = new Date().getTime();
+  }, []);
+  
   // Get initial role filter from URL parameter
   const initialRoleFilter = useMemo(() => {
     const roleParam = searchParams.get('role');
@@ -34,6 +39,54 @@ export default function Prompts() {
   })();
   const [selectedUseCase, setSelectedUseCase] = useState<UseCase | null>(initialSelected);
   const [isModalOpen, setIsModalOpen] = useState(!!initialSelected);
+  
+  // Phase 3: Viral tracking detection - check if user came from shared link
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const promptId = urlParams.get('i');
+    
+    if (promptId) {
+      // Check for UTM parameters indicating this is from a share
+      const utmSource = urlParams.get('utm_source');
+      const utmMedium = urlParams.get('utm_medium');
+      const utmCampaign = urlParams.get('utm_campaign');
+      
+      if (utmSource === 'style_scout' && utmCampaign === 'prompt_sharing') {
+        // This is from our share system - trigger viral tracking
+        const referrer = document.referrer;
+        const sharedAt = urlParams.get('shared_at');
+        
+        posthog.capture('viral_link_visit', {
+          prompt_id: promptId,
+          referrer: referrer,
+          is_direct_link: !referrer || referrer === '',
+          source_domain: referrer ? new URL(referrer).hostname : 'direct',
+          timestamp: new Date().toISOString(),
+          utm_source: utmSource,
+          utm_medium: utmMedium,
+          utm_campaign: utmCampaign,
+          utm_content: urlParams.get('utm_content'),
+          share_source_type: utmMedium,
+          shared_at: sharedAt,
+          share_age_seconds: sharedAt ? Math.round((Date.now() - parseInt(sharedAt)) / 1000) : null,
+          is_official_share: true,
+          page: 'prompts'
+        });
+        
+        // Store viral session info
+        localStorage.setItem('style_scout_viral_session', JSON.stringify({
+          prompt_id: promptId,
+          entry_time: new Date().toISOString(),
+          referrer: referrer,
+          share_source_type: utmMedium,
+          utm_source: utmSource,
+          utm_medium: utmMedium,
+          shared_at: sharedAt,
+          is_official_share: true
+        }));
+      }
+    }
+  }, [searchParams, posthog]);
   
   const handleVote = (id: string) => {
     setUseCases(prev => 

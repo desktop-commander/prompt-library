@@ -7,7 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Copy, Check, ExternalLink, ChevronRight, Terminal, MessageSquare, Download, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
-import { analytics, trackInstallationStatus, trackClientSelection, trackPromptCopied, trackWizardCompletion } from '@/lib/analytics';
+import { usePostHog } from '@/components/PostHogProvider';
 
 interface UsePromptWizardProps {
   isOpen: boolean;
@@ -66,44 +66,127 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
   const [hasInstalled, setHasInstalled] = useState<boolean | null>(null);
   const [selectedClient, setSelectedClient] = useState<ClientType | null>(null);
   const [copied, setCopied] = useState(false);
+  const posthog = usePostHog();
+
+  // Phase 4: Enhanced close handler for wizard abandonment tracking
+  const handleWizardClose = () => {
+    if (window.wizardOpenTime) {
+      const timeInWizard = Math.round((new Date().getTime() - window.wizardOpenTime) / 1000);
+      const visitCount = parseInt(localStorage.getItem('style_scout_visit_count') || '0');
+      const viralSession = localStorage.getItem('style_scout_viral_session');
+      const viralInfo = viralSession ? JSON.parse(viralSession) : null;
+      
+      // Only track abandonment if not completed (not copied)
+      if (!copied) {
+        posthog.capture('use_prompt_wizard_abandoned', {
+          prompt_title: promptTitle,
+          abandoned_at_step: step,
+          time_before_abandon_seconds: timeInWizard,
+          has_dc_installed: hasInstalled,
+          selected_client: selectedClient,
+          abandon_reason: step === 1 ? 'before_installation_check' :
+                         step === 2 ? 'before_client_selection' :
+                         step === 3 ? 'before_copy' : 'unknown',
+          // Phase 3: Enhanced context
+          visit_count: visitCount,
+          is_returning_user: visitCount > 1,
+          is_viral_session: !!viralInfo,
+          conversion_funnel_step: 'wizard_abandoned'
+        });
+      }
+    }
+    
+    onClose();
+  };
 
   // Check cookies on mount
   useEffect(() => {
     if (isOpen) {
+      // Store wizard open time for engagement tracking
+      window.wizardOpenTime = new Date().getTime();
+      
       const installed = getCookie('dc_installed');
       const client = getCookie('dc_client') as ClientType | null;
+      
+      // Get visitor and viral context
+      const visitCount = parseInt(localStorage.getItem('style_scout_visit_count') || '0');
+      const viralSession = localStorage.getItem('style_scout_viral_session');
+      const viralInfo = viralSession ? JSON.parse(viralSession) : null;
 
+      let initialStep = 1;
       if (installed === 'true') {
         setHasInstalled(true);
         if (client) {
           setSelectedClient(client);
           setStep(3); // Skip to final step
+          initialStep = 3;
         } else {
           setStep(2); // Go to client selection
+          initialStep = 2;
         }
       } else {
         setStep(1); // Start from beginning
+        initialStep = 1;
       }
 
-      // Track wizard opened
-      analytics.track('use_prompt_wizard_opened', { 
-        prompt: promptTitle,
-        initial_step: step 
+      // Phase 4: Track wizard opened with enhanced context
+      posthog.capture('use_prompt_wizard_opened', { 
+        prompt_title: promptTitle,
+        initial_step: initialStep,
+        has_dc_installed: installed === 'true',
+        known_client: client,
+        user_type: installed === 'true' ? 'returning_dc_user' : 'new_dc_user',
+        // Phase 3: Enhanced context
+        visit_count: visitCount,
+        is_returning_user: visitCount > 1,
+        is_viral_session: !!viralInfo,
+        viral_entry_prompt: viralInfo?.prompt_id,
+        wizard_entry_source: 'prompt_modal'
       });
     }
-  }, [isOpen, promptTitle]);
+  }, [isOpen, promptTitle, posthog]);
 
   const handleInstallationResponse = (installed: boolean) => {
     setHasInstalled(installed);
     
+    // Get context for tracking
+    const visitCount = parseInt(localStorage.getItem('style_scout_visit_count') || '0');
+    const viralSession = localStorage.getItem('style_scout_viral_session');
+    const viralInfo = viralSession ? JSON.parse(viralSession) : null;
+    const timeInWizard = window.wizardOpenTime ? 
+      Math.round((new Date().getTime() - window.wizardOpenTime) / 1000) : 0;
+    
     if (installed) {
       setCookie('dc_installed', 'true', 365);
       setStep(2);
-      trackInstallationStatus(true);
-      analytics.track('wizard_step_completed', { step: 1, action: 'has_dc' });
+      
+      // Phase 4: Track DC installation confirmation
+      posthog.capture('dc_installation_confirmed', {
+        prompt_title: promptTitle,
+        wizard_step: 1,
+        time_to_confirm_seconds: timeInWizard,
+        user_action: 'has_dc_installed',
+        // Phase 3: Enhanced context
+        visit_count: visitCount,
+        is_returning_user: visitCount > 1,
+        is_viral_session: !!viralInfo,
+        conversion_funnel_step: 'installation_confirmed'
+      });
     } else {
-      trackInstallationStatus(false);
-      analytics.track('wizard_step_completed', { step: 1, action: 'needs_install' });
+      // Phase 4: Track DC installation needed
+      posthog.capture('dc_installation_needed', {
+        prompt_title: promptTitle,
+        wizard_step: 1,
+        time_to_redirect_seconds: timeInWizard,
+        user_action: 'needs_dc_install',
+        redirect_url: 'https://desktopcommander.app/#installation',
+        // Phase 3: Enhanced context
+        visit_count: visitCount,
+        is_returning_user: visitCount > 1,
+        is_viral_session: !!viralInfo,
+        conversion_funnel_step: 'installation_redirect'
+      });
+      
       // Redirect to installation page
       window.open('https://desktopcommander.app/#installation', '_blank');
       onClose();
@@ -114,8 +197,28 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
     if (selectedClient) {
       setCookie('dc_client', selectedClient, 365);
       setStep(3);
-      trackClientSelection(selectedClient);
-      analytics.track('wizard_step_completed', { step: 2, client: selectedClient });
+      
+      // Get context for tracking
+      const visitCount = parseInt(localStorage.getItem('style_scout_visit_count') || '0');
+      const viralSession = localStorage.getItem('style_scout_viral_session');
+      const viralInfo = viralSession ? JSON.parse(viralSession) : null;
+      const timeInWizard = window.wizardOpenTime ? 
+        Math.round((new Date().getTime() - window.wizardOpenTime) / 1000) : 0;
+      
+      // Phase 4: Track platform/client selection
+      posthog.capture('dc_platform_selected', {
+        prompt_title: promptTitle,
+        wizard_step: 2,
+        selected_client: selectedClient,
+        time_to_select_seconds: timeInWizard,
+        platform_category: selectedClient === 'claude-desktop' ? 'claude' : 
+                          selectedClient === 'other' ? 'other' : 'ide',
+        // Phase 3: Enhanced context
+        visit_count: visitCount,
+        is_returning_user: visitCount > 1,
+        is_viral_session: !!viralInfo,
+        conversion_funnel_step: 'platform_selected'
+      });
     }
   };
 
@@ -124,12 +227,41 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
       await navigator.clipboard.writeText(prompt);
       setCopied(true);
       
-      // Track completion with proper analytics
-      trackPromptCopied(promptTitle, promptTitle, selectedClient || 'unknown');
-      trackWizardCompletion(promptTitle, false);
-      analytics.track('wizard_step_completed', { 
-        step: 3, 
-        client: selectedClient
+      // Get context for tracking
+      const visitCount = parseInt(localStorage.getItem('style_scout_visit_count') || '0');
+      const viralSession = localStorage.getItem('style_scout_viral_session');
+      const viralInfo = viralSession ? JSON.parse(viralSession) : null;
+      const timeInWizard = window.wizardOpenTime ? 
+        Math.round((new Date().getTime() - window.wizardOpenTime) / 1000) : 0;
+      
+      // Phase 4: Track prompt copy completion
+      posthog.capture('prompt_copied_to_clipboard', {
+        prompt_title: promptTitle,
+        wizard_step: 3,
+        selected_client: selectedClient || 'unknown',
+        time_to_copy_seconds: timeInWizard,
+        prompt_length_chars: prompt.length,
+        platform_category: selectedClient === 'claude-desktop' ? 'claude' : 
+                          selectedClient === 'other' ? 'other' : 'ide',
+        // Phase 3: Enhanced context
+        visit_count: visitCount,
+        is_returning_user: visitCount > 1,
+        is_viral_session: !!viralInfo,
+        conversion_funnel_step: 'prompt_copied'
+      });
+      
+      // Track wizard completion
+      posthog.capture('use_prompt_wizard_completed', {
+        prompt_title: promptTitle,
+        completion_type: 'copy_to_clipboard',
+        total_time_seconds: timeInWizard,
+        final_client: selectedClient || 'unknown',
+        steps_completed: 3,
+        // Phase 3: Enhanced context
+        visit_count: visitCount,
+        is_returning_user: visitCount > 1,
+        is_viral_session: !!viralInfo,
+        conversion_funnel_step: 'wizard_completed'
       });
       
       toast.success('Prompt copied to clipboard!');
@@ -152,7 +284,7 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleWizardClose}>
       <DialogContent className="sm:max-w-md">
         {/* Progress Bar - More subtle and with padding to avoid close button */}
         <div className="space-y-1 pr-8">

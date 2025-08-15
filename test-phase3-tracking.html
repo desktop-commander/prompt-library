@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 3 Advanced Tracking Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: #22c55e; }
+        .info { color: #3b82f6; }
+        .warning { color: #f59e0b; }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Phase 3 Advanced Tracking Test</h1>
+    
+    <div class="test-section">
+        <h2>🎯 Testing Features</h2>
+        <ul>
+            <li><strong>Session Recordings:</strong> Enabled in PostHog config</li>
+            <li><strong>Viral Tracking:</strong> Detects users from shared links</li>
+            <li><strong>Return Visitor Tracking:</strong> Cookie-based user identification</li>
+            <li><strong>Enhanced Event Metadata:</strong> Enriched with viral/visitor context</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Local Storage Debug</h2>
+        <button onclick="showLocalStorage()">Check Local Storage</button>
+        <button onclick="simulateViralEntry()">Simulate Viral Entry</button>
+        <button onclick="simulateReturnVisitor()">Simulate Return Visitor</button>
+        <button onclick="clearTestData()">Clear Test Data</button>
+        <pre id="localStorage-output">Click "Check Local Storage" to see data...</pre>
+    </div>
+
+    <div class="test-section">
+        <h2>🚀 Test URLs</h2>
+        <p>Test these URLs to verify viral tracking:</p>
+        <ul>
+            <li><strong>Viral Link:</strong> <code>http://localhost:5173/?i=copywriting-voice</code></li>
+            <li><strong>UTM Link:</strong> <code>http://localhost:5173/?i=copywriting-voice&utm_source=test&utm_medium=manual</code></li>
+            <li><strong>Referrer Test:</strong> Navigate from external site</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Expected PostHog Events</h2>
+        <div class="info">
+            <h3>New Events in Phase 3:</h3>
+            <ul>
+                <li><code>viral_link_visit</code> - When user arrives via shared link</li>
+                <li><code>visitor_session_start</code> - Enhanced session tracking</li>
+                <li><code>prompt_modal_opened</code> - Modal interaction tracking</li>
+            </ul>
+        </div>
+        
+        <div class="success">
+            <h3>Enhanced Events:</h3>
+            <ul>
+                <li><code>prompt_clicked</code> - Now includes viral context</li>
+                <li><code>role_filter_changed</code> - Now includes visitor metrics</li>
+                <li><code>share_button_clicked</code> - Now includes viral chain data</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showLocalStorage() {
+            const output = document.getElementById('localStorage-output');
+            const data = {
+                visit_count: localStorage.getItem('style_scout_visit_count'),
+                last_visit: localStorage.getItem('style_scout_last_visit'),
+                first_visit: localStorage.getItem('style_scout_first_visit'),
+                user_id: localStorage.getItem('style_scout_user_id'),
+                viral_session: localStorage.getItem('style_scout_viral_session')
+            };
+            
+            output.textContent = JSON.stringify(data, null, 2);
+        }
+
+        function simulateViralEntry() {
+            localStorage.setItem('style_scout_viral_session', JSON.stringify({
+                prompt_id: 'copywriting-voice',
+                entry_time: new Date().toISOString(),
+                referrer: 'https://example.com/blog'
+            }));
+            showLocalStorage();
+            alert('✅ Viral session simulated! Check localStorage.');
+        }
+
+        function simulateReturnVisitor() {
+            const visitCount = parseInt(localStorage.getItem('style_scout_visit_count') || '0');
+            localStorage.setItem('style_scout_visit_count', (visitCount + 1).toString());
+            localStorage.setItem('style_scout_last_visit', new Date(Date.now() - 86400000).toISOString()); // Yesterday
+            showLocalStorage();
+            alert('✅ Return visitor simulated! Visit count increased.');
+        }
+
+        function clearTestData() {
+            localStorage.removeItem('style_scout_visit_count');
+            localStorage.removeItem('style_scout_last_visit');
+            localStorage.removeItem('style_scout_first_visit');
+            localStorage.removeItem('style_scout_user_id');
+            localStorage.removeItem('style_scout_viral_session');
+            showLocalStorage();
+            alert('🧹 Test data cleared!');
+        }
+
+        // Auto-load data on page load
+        document.addEventListener('DOMContentLoaded', showLocalStorage);
+    </script>
+</body>
+</html>

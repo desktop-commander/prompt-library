@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 4.5: Manual Copy Detection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: #22c55e; }
+        .info { color: #3b82f6; }
+        .warning { color: #f59e0b; }
+        .event-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #3b82f6;
+            font-family: monospace;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        .test-step {
+            background: #e8f5e8;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 4px solid #22c55e;
+        }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .compare-table th, .compare-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .compare-table th {
+            background-color: #f2f2f2;
+        }
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🕵️ Phase 4.5: Manual Copy Detection</h1>
+    
+    <div class="test-section">
+        <h2>🎯 What We Just Added</h2>
+        
+        <div class="success">
+            <h3>✅ Complete Manual Copy Tracking:</h3>
+            <ul>
+                <li><strong>Text Selection Detection</strong> - When users highlight prompt text</li>
+                <li><strong>Keyboard Copy Detection</strong> - Ctrl+C / Cmd+C tracking</li>
+                <li><strong>Right-Click Detection</strong> - Context menu interactions</li>
+                <li><strong>Copy Intent Analysis</strong> - Full vs partial selection</li>
+                <li><strong>Selection Abandonment</strong> - Users who select but don't copy</li>
+            </ul>
+        </div>
+
+        <div class="highlight">
+            <strong>🚀 Business Impact:</strong> Now you can track ALL prompt copying, not just the wizard flow! 
+            This eliminates the "dark funnel" where users copy manually without attribution.
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 New Events in Phase 4.5</h2>
+
+        <h3>Selection Events:</h3>
+        <div class="event-box">prompt_text_selected
+- selection_length: number of characters
+- selection_percentage: % of full prompt
+- is_full_prompt_selected: true/false
+- time_before_selection_seconds</div>
+
+        <div class="event-box">prompt_text_deselected
+- previous_selection_length
+- was_full_prompt_selected
+- selection_duration_seconds
+- abandoned_copy_intent: true</div>
+
+        <h3>Copy Detection Events:</h3>
+        <div class="event-box">prompt_manual_copy_attempt
+- copy_method: "keyboard" | "context_menu"
+- had_text_selected: true/false
+- selected_length: characters selected
+- is_full_prompt_selected: true/false
+- bypass_wizard: true</div>
+
+        <div class="event-box">prompt_right_click_detected
+- had_text_selected: true/false
+- selected_length: characters
+- is_full_prompt_selected: true/false
+- copy_intent: "context_menu"</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Manual Copy Testing Guide</h2>
+        
+        <div class="test-step">
+            <strong>Test 1: Text Selection</strong><br>
+            1. Open a prompt modal<br>
+            2. Highlight some of the prompt text<br>
+            3. Check PostHog for <code>prompt_text_selected</code>
+        </div>
+        
+        <div class="test-step">
+            <strong>Test 2: Keyboard Copy</strong><br>
+            1. Select prompt text<br>
+            2. Press Ctrl+C (or Cmd+C on Mac)<br>
+            3. Check PostHog for <code>prompt_manual_copy_attempt</code> with method="keyboard"
+        </div>
+        
+        <div class="test-step">
+            <strong>Test 3: Right-Click Copy</strong><br>
+            1. Select prompt text<br>
+            2. Right-click to open context menu<br>
+            3. Click "Copy" from menu<br>
+            4. Check PostHog for <code>prompt_right_click_detected</code> + <code>prompt_manual_copy_attempt</code>
+        </div>
+        
+        <div class="test-step">
+            <strong>Test 4: Selection Abandonment</strong><br>
+            1. Select prompt text<br>
+            2. Click elsewhere to deselect (without copying)<br>
+            3. Check PostHog for <code>prompt_text_deselected</code> with abandoned_copy_intent=true
+        </div>
+        
+        <div class="test-step">
+            <strong>Test 5: Full vs Partial Selection</strong><br>
+            1. Select just a few words<br>
+            2. Select the entire prompt<br>
+            3. Compare is_full_prompt_selected values in PostHog
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📈 Analytics Insights Gained</h2>
+
+        <table class="compare-table">
+            <tr>
+                <th>Metric</th>
+                <th>Before Phase 4.5</th>
+                <th>After Phase 4.5</th>
+            </tr>
+            <tr>
+                <td>Copy Tracking</td>
+                <td>Only wizard copies</td>
+                <td>ALL copying (wizard + manual)</td>
+            </tr>
+            <tr>
+                <td>Copy Intent</td>
+                <td>Unknown</td>
+                <td>Text selection indicates interest</td>
+            </tr>
+            <tr>
+                <td>User Behavior</td>
+                <td>Black box after modal open</td>
+                <td>Complete interaction tracking</td>
+            </tr>
+            <tr>
+                <td>Conversion Leakage</td>
+                <td>Untracked manual copies</td>
+                <td>Full attribution and recovery</td>
+            </tr>
+            <tr>
+                <td>UX Friction</td>
+                <td>Unknown why users avoid wizard</td>
+                <td>Clear bypass behavior patterns</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 Business Questions You Can Now Answer</h2>
+
+        <div class="info">
+            <h3>📊 Copy Behavior Analysis:</h3>
+            <ul>
+                <li><strong>What's the total copy rate?</strong> (Manual + Wizard)</li>
+                <li><strong>How many users bypass the wizard?</strong> (Manual vs Official)</li>
+                <li><strong>Do users prefer full or partial copies?</strong> (Selection analysis)</li>
+                <li><strong>What's the copy abandonment rate?</strong> (Select but don't copy)</li>
+            </ul>
+        </div>
+
+        <div class="success">
+            <h3>🚀 Optimization Opportunities:</h3>
+            <ul>
+                <li><strong>Recover manual copiers</strong> - Guide them to wizard</li>
+                <li><strong>Improve wizard UX</strong> - Reduce bypass behavior</li>
+                <li><strong>Reduce friction</strong> - Understand why users avoid official flow</li>
+                <li><strong>Complete attribution</strong> - Track all prompt usage accurately</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🚀 Testing Actions</h2>
+        <button onclick="openApp()">🎯 Test Manual Copy Detection</button>
+        <button onclick="openPostHog()">📊 Monitor Events in PostHog</button>
+        <button onclick="showTestInstructions()">📋 Show Detailed Test Steps</button>
+    </div>
+
+    <div class="test-section">
+        <h2>✅ Success Metrics for Phase 4.5</h2>
+        <div class="success">
+            <h3>Phase 4.5 Complete When You See:</h3>
+            <ul>
+                <li>✅ <strong>Text selection events</strong> firing when highlighting</li>
+                <li>✅ <strong>Keyboard copy detection</strong> working with Ctrl+C</li>
+                <li>✅ <strong>Right-click detection</strong> tracking context menu</li>
+                <li>✅ <strong>Selection abandonment</strong> tracking deselection</li>
+                <li>✅ <strong>Full vs partial</strong> selection classification</li>
+                <li>✅ <strong>Complete copy attribution</strong> (manual + wizard)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function openApp() {
+            window.open('http://localhost:8087/', '_blank');
+        }
+        
+        function openPostHog() {
+            window.open('https://eu.i.posthog.com/project/43/activity', '_blank');
+        }
+        
+        function showTestInstructions() {
+            alert(`
+🕵️ Manual Copy Detection Test:
+
+1. 🎯 Open app and click any prompt
+2. 📝 Highlight some text in the prompt
+3. 📊 Check PostHog for "prompt_text_selected"
+4. ⌨️ Press Ctrl+C while text selected
+5. 📊 Check PostHog for "prompt_manual_copy_attempt"
+6. 🖱️ Try right-click → Copy
+7. 📊 Check PostHog for "prompt_right_click_detected"
+8. 🚫 Select text then click elsewhere (abandon)
+9. 📊 Check PostHog for "prompt_text_deselected"
+
+Expected: 4+ new event types tracking all manual copy behavior!
+            `);
+        }
+    </script>
+</body>
+</html>
