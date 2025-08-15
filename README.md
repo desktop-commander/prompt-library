@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**URL**: https://lovable.dev/projects/d59bd04d-86e8-41d7-bbba-f71c8d704429
+**URL**: https://library.desktopcommander.app/
 
 A comprehensive prompt library for Desktop Commander users, featuring community-created prompts for development, data analysis, DevOps, file management, and more. Users can browse, search, filter, and contribute their own prompts to help others maximize their productivity with Desktop Commander.
 
@@ -36,17 +36,9 @@ A comprehensive prompt library for Desktop Commander users, featuring community-
 
 ## How can I edit this code?
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/d59bd04d-86e8-41d7-bbba-f71c8d704429) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+You can work locally using your preferred IDE. Simply clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -92,12 +84,6 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/d59bd04d-86e8-41d7-bbba-f71c8d704429) and click on Share -> Publish.
+This project is deployed to https://library.desktopcommander.app/ and is integrated with the main Desktop Commander website.
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+For deployment, standard Node.js deployment practices apply - build the project and serve the static files.

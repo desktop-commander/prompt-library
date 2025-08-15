@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
-// Using the uploaded logo directly to avoid asset import issues
-const logoSrc = "/lovable-uploads/34ab283d-cdc2-40f8-9036-23471f2503c9.png";
+// Using the Desktop Commander logo
+const logoSrc = "/logo.png";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -20,12 +20,12 @@ export const SiteHeader = () => {
         <Link to="/" className="flex items-center gap-3">
           <img
             src={logoSrc}
-            alt="DesktopCommander logo"
+            alt="Desktop Commander logo"
             className="h-8 w-8 rounded-sm"
             loading="lazy"
           />
           <span className="text-lg font-semibold tracking-tight text-foreground">
-            DesktopCommander
+            Desktop Commander
           </span>
         </Link>
 

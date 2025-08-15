@@ -13,6 +13,7 @@ import { PromptsPageFooter } from '@/components/PromptsPageFooter';
 import { EngagementMeter } from '@/components/EngagementMeter';
 import { RoleFilter } from '@/components/RoleFilter';
 import { usePostHog } from '@/components/PostHogProvider';
+import { DynamicMetaTags } from '@/components/DynamicMetaTags';
 
 const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -376,6 +377,11 @@ const Index = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onVote={handleVote}
+      />
+      
+      <DynamicMetaTags 
+        useCase={selectedUseCase} 
+        isPromptPage={isModalOpen && !!selectedUseCase} 
       />
     </>
   );
