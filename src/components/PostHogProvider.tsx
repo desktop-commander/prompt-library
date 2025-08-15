@@ -3,16 +3,30 @@ import posthog from 'posthog-js';
 
 // Initialize PostHog
 if (typeof window !== 'undefined') {
+  const apiKey = import.meta.env.VITE_PUBLIC_POSTHOG_KEY;
+  const apiHost = import.meta.env.VITE_PUBLIC_POSTHOG_HOST;
+  
+  if (import.meta.env.DEV) {
+    console.log('PostHog Init - API Key:', apiKey ? `${apiKey.substring(0, 10)}...` : 'MISSING');
+    console.log('PostHog Init - API Host:', apiHost);
+  }
+  
   const options = {
-    api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-    defaults: '2025-05-24',
-    person_profiles: 'identified_only',
+    api_host: apiHost,
+    debug: import.meta.env.DEV,
     loaded: (posthog) => {
-      if (import.meta.env.DEV) console.log('PostHog loaded');
+      if (import.meta.env.DEV) {
+        console.log('PostHog loaded successfully!');
+      }
+      
+      // Track app initialization
+      posthog.capture('app_loaded', {
+        environment: import.meta.env.DEV ? 'development' : 'production'
+      });
     }
   };
   
-  posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, options);
+  posthog.init(apiKey, options);
 }
 
 const PostHogContext = createContext(posthog);
