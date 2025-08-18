@@ -352,10 +352,10 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-3xl font-bold text-foreground mb-6">
-                Ready to Supercharge Your AI Workflow?
+                Found Something That Works? Share It!
               </h2>
               <p className="text-xl text-muted-foreground mb-8">
-                Join thousands of developers who are using Desktop Commander to automate their daily tasks
+                Join thousands of developers contributing to the Desktop Commander community
               </p>
               <div className="flex items-center justify-center gap-4 flex-wrap">
                 <SubmitPromptButton 

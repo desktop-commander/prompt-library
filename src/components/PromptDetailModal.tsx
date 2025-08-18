@@ -502,16 +502,16 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="w-[92vw] sm:max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-y-auto mx-auto">
+      <DialogContent className="w-[95vw] sm:max-w-2xl lg:max-w-4xl max-h-[90vh] mx-auto">
         <DialogHeader>
-          <div className="flex items-start gap-3 sm:gap-4 pr-8 sm:pr-12">
+          <div className="flex items-start gap-3 sm:gap-4 pr-8 sm:pr-12 min-w-0">
             <div className="p-2 sm:p-3 bg-dc-surface-elevated rounded-lg flex-shrink-0">
               <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
             </div>
             <div className="flex-1 min-w-0">
               <DialogTitle className="text-lg sm:text-2xl leading-tight mb-2 sm:mb-3 break-words">{useCase.title}</DialogTitle>
               <DialogDescription className="sr-only">Detailed information and actions for this prompt.</DialogDescription>
-              <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+              <div className="flex items-center gap-2 sm:gap-3 flex-wrap min-w-0">
                 {useCase.verified && (
                   <span className="inline-flex items-center gap-1 text-xs rounded-full border border-primary/20 bg-primary/10 text-primary px-2 py-0.5">
                     <BadgeCheck className="h-3 w-3" />
@@ -556,15 +556,15 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
           </div>
         </DialogHeader>
 
-        <div className="space-y-4 sm:space-y-6">
+        <div className="space-y-4 sm:space-y-6 overflow-y-auto min-h-0">
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-1.5 sm:mb-2">Description</h3>
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{useCase.description}</p>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed break-words">{useCase.description}</p>
           </div>
 
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3">Target Roles</h3>
-            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 min-w-0">
               {useCase.targetRoles.map((role) => (
                 <Badge key={role} variant="secondary" className="role-tag text-xs">
                   {role}
@@ -582,20 +582,20 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
               <h3 className="text-base sm:text-lg font-semibold">Complete Prompt</h3>
             </div>
             <div 
-              className="p-3 sm:p-4 bg-dc-surface-elevated rounded-lg border max-h-[40vh] sm:max-h-none overflow-y-auto"
+              className="p-3 sm:p-4 bg-dc-surface-elevated rounded-lg border max-h-[40vh] sm:max-h-none overflow-y-auto min-w-0"
               onMouseUp={handleTextSelection}
               onKeyUp={handleTextSelection}
               onContextMenu={handleContextMenu}
             >
-              <pre className="text-xs sm:text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed select-text break-words overflow-wrap-anywhere">
+              <pre className="text-xs sm:text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed select-text break-words overflow-wrap-anywhere min-w-0">
                 {useCase.prompt}
               </pre>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-3 sm:pt-4">
-            <Button variant="outline" onClick={handleModalClose} className="order-3 sm:order-1">
-              Close
+          <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-3 sm:pt-4 min-w-0">
+            <Button variant="outline" onClick={handleModalClose} className="order-3 sm:order-1 min-w-0">
+              <span className="truncate">Close</span>
             </Button>
 
             <Tooltip>
@@ -604,21 +604,21 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
                   variant="outline"
                   onClick={handleShare}
                   aria-label="Share this prompt"
-                  className="flex items-center gap-2 order-2"
+                  className="flex items-center gap-2 order-2 min-w-0"
                 >
-                  <Share2 className="h-4 w-4" />
-                  {copiedLink ? 'Copied' : 'Share'}
+                  <Share2 className="h-4 w-4 flex-shrink-0" />
+                  <span className="truncate">{copiedLink ? 'Copied' : 'Share'}</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent>Copy link to share</TooltipContent>
             </Tooltip>
 
             <Button 
-              className="dc-button-primary flex items-center gap-2 order-1 sm:order-3"
+              className="dc-button-primary flex items-center gap-2 order-1 sm:order-3 min-w-0"
               onClick={handleUsePrompt}
             >
-              <Rocket className="h-4 w-4" />
-              Use Prompt
+              <Rocket className="h-4 w-4 flex-shrink-0" />
+              <span className="truncate">Use Prompt</span>
             </Button>
           </div>
         </div>

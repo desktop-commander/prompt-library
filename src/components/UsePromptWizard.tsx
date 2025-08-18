@@ -285,18 +285,18 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
 
   return (
     <Dialog open={isOpen} onOpenChange={handleWizardClose}>
-      <DialogContent className="w-[92vw] max-w-md mx-auto max-h-[85vh] overflow-y-auto flex flex-col">
+      <DialogContent className="w-[95vw] max-w-md mx-auto max-h-[85vh] flex flex-col">
         {/* Progress Bar - More subtle and with padding to avoid close button */}
-        <div className="space-y-1 pr-10 sm:pr-8 flex-shrink-0">
-          <Progress value={getProgressValue()} className="h-1" />
-          <div className="flex justify-between text-[9px] sm:text-xs text-muted-foreground/60">
-            <span className={step >= 1 ? 'text-muted-foreground' : ''}>
+        <div className="space-y-1 pr-10 sm:pr-8 flex-shrink-0 min-w-0">
+          <Progress value={getProgressValue()} className="h-1 w-full" />
+          <div className="flex justify-between text-[9px] sm:text-xs text-muted-foreground/60 min-w-0">
+            <span className={`truncate ${step >= 1 ? 'text-muted-foreground' : ''}`}>
               1. Install
             </span>
-            <span className={step >= 2 ? 'text-muted-foreground' : ''}>
+            <span className={`truncate ${step >= 2 ? 'text-muted-foreground' : ''}`}>
               2. Client
             </span>
-            <span className={step >= 3 ? 'text-muted-foreground' : ''}>
+            <span className={`truncate ${step >= 3 ? 'text-muted-foreground' : ''}`}>
               3. Copy
             </span>
           </div>
@@ -304,32 +304,32 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
 
         {/* Step 1: Installation Check */}
         {step === 1 && (
-          <div className="space-y-3 mt-3 sm:mt-4 flex-1 overflow-y-auto">
+          <div className="space-y-3 mt-3 sm:mt-4 flex-1 min-h-0 min-w-0">
             <div className="text-center space-y-1.5">
               <h3 className="text-base sm:text-lg font-semibold leading-tight">
                 Have you installed Desktop Commander?
               </h3>
-              <p className="text-xs sm:text-sm text-muted-foreground px-1">
+              <p className="text-xs sm:text-sm text-muted-foreground px-1 break-words">
                 To use this prompt, you'll need Desktop Commander installed.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2.5 mt-4">
+            <div className="flex flex-col sm:flex-row gap-2.5 mt-4 min-w-0">
               <Button 
                 onClick={() => handleInstallationResponse(true)}
-                className="flex-1 w-full h-11"
+                className="flex-1 w-full h-11 min-w-0"
                 size="lg"
               >
-                Yes, I have it
+                <span className="truncate">Yes, I have it</span>
               </Button>
               <Button 
                 onClick={() => handleInstallationResponse(false)}
                 variant="outline"
-                className="flex-1 w-full h-11"
+                className="flex-1 w-full h-11 min-w-0"
                 size="lg"
               >
-                <span className="hidden sm:inline">No, take me to install</span>
-                <span className="sm:hidden">Install Desktop Commander</span>
-                <ExternalLink className="ml-2 h-4 w-4" />
+                <span className="hidden sm:inline truncate">No, take me to install</span>
+                <span className="sm:hidden truncate">Install Desktop Commander</span>
+                <ExternalLink className="ml-2 h-4 w-4 flex-shrink-0" />
               </Button>
             </div>
           </div>
@@ -337,7 +337,7 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
 
         {/* Step 2: Client Selection */}
         {step === 2 && (
-          <div className="space-y-3 mt-3 sm:mt-4 flex-1 overflow-y-auto">
+          <div className="space-y-3 mt-3 sm:mt-4 flex-1 min-h-0 min-w-0 overflow-y-auto">
             <div className="text-center space-y-1.5">
               <h3 className="text-base sm:text-lg font-semibold leading-tight">
                 Which client are you using?
@@ -350,12 +350,12 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
                   <Label
                     key={option.value}
                     htmlFor={option.value}
-                    className="flex items-center space-x-3 p-3 sm:p-3 rounded-lg hover:bg-accent transition-colors cursor-pointer border border-transparent hover:border-border min-h-[48px] sm:min-h-auto"
+                    className="flex items-center space-x-3 p-3 sm:p-3 rounded-lg hover:bg-accent transition-colors cursor-pointer border border-transparent hover:border-border min-h-[48px] sm:min-h-auto min-w-0"
                   >
-                    <RadioGroupItem value={option.value} id={option.value} className="mt-0.5" />
-                    <div className="flex items-center gap-2 flex-1">
-                      <Icon className="h-4 w-4" />
-                      <span className="text-sm sm:text-base">{option.label}</span>
+                    <RadioGroupItem value={option.value} id={option.value} className="mt-0.5 flex-shrink-0" />
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                      <Icon className="h-4 w-4 flex-shrink-0" />
+                      <span className="text-sm sm:text-base truncate">{option.label}</span>
                     </div>
                   </Label>
                 );
@@ -364,22 +364,22 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
             <Button 
               onClick={handleClientSelection}
               disabled={!selectedClient}
-              className="w-full h-11 mt-3"
+              className="w-full h-11 mt-3 min-w-0"
               size="lg"
             >
-              Continue
+              <span className="truncate">Continue</span>
             </Button>
           </div>
         )}
 
         {/* Step 3: Copy Prompt */}
         {step === 3 && (
-          <div className="space-y-3 mt-3 sm:mt-4 flex-1 overflow-y-auto">
+          <div className="space-y-3 mt-3 sm:mt-4 flex-1 min-h-0 min-w-0">
             <div className="text-center space-y-1.5">
               <h3 className="text-base sm:text-lg font-semibold leading-tight">
                 Ready to use your prompt!
               </h3>
-              <p className="text-xs sm:text-sm text-muted-foreground px-1">
+              <p className="text-xs sm:text-sm text-muted-foreground px-1 break-words">
                 {selectedClient && getClientInstructions(selectedClient)}
               </p>
             </div>
@@ -387,19 +387,19 @@ export function UsePromptWizard({ isOpen, onClose, prompt, promptTitle }: UsePro
             {/* Copy Button */}
             <Button 
               onClick={handleCopyPrompt}
-              className="w-full h-11 mt-4"
+              className="w-full h-11 mt-4 min-w-0"
               size="lg"
               disabled={copied}
             >
               {copied ? (
                 <>
-                  <Check className="mr-2 h-4 w-4" />
-                  Copied! Closing...
+                  <Check className="mr-2 h-4 w-4 flex-shrink-0" />
+                  <span className="truncate">Copied! Closing...</span>
                 </>
               ) : (
                 <>
-                  <Copy className="mr-2 h-4 w-4" />
-                  Copy Prompt & Use
+                  <Copy className="mr-2 h-4 w-4 flex-shrink-0" />
+                  <span className="truncate">Copy Prompt & Use</span>
                 </>
               )}
             </Button>

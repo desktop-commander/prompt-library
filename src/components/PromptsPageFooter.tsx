@@ -76,10 +76,7 @@ export function PromptsPageFooter() {
             <div>
               <h3 className="text-lg font-light mb-4">Prompt Library</h3>
               <ul className="space-y-2">
-                <li><a href="/" className="text-gray-300 hover:text-blue-400 transition-colors font-light">Browse All Prompts</a></li>
-                <li><a href="/prompts" className="text-gray-300 hover:text-blue-400 transition-colors font-light">Categories</a></li>
-                <li><a href="https://desktopcommander.app" className="text-gray-300 hover:text-blue-400 transition-colors font-light">Main Website</a></li>
-                <li><a href="https://desktopcommander.app#installation" className="text-gray-300 hover:text-blue-400 transition-colors font-light">Install Desktop Commander</a></li>
+                <li><a href="/prompts" className="text-gray-300 hover:text-blue-400 transition-colors font-light">Browse All Prompts</a></li>
               </ul>
             </div>
 
