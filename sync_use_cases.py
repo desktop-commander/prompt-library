@@ -14,8 +14,8 @@ from datetime import datetime
 
 # File paths
 EXCEL_PATH = '/Users/ricardskrizanovskis/Desktop Commander/DC Context - General/Use case library.xlsx'
-JSON_PATH = '/Users/ricardskrizanovskis/style-scout-dc/src/data/useCases.json'
-ID_MAP_PATH = '/Users/ricardskrizanovskis/style-scout-dc/src/data/id_mapping.json'
+JSON_PATH = '/Users/ricardskrizanovskis/prompt-library/src/data/useCases.json'
+ID_MAP_PATH = '/Users/ricardskrizanovskis/prompt-library/src/data/id_mapping.json'
 
 # Icon mapping based on category
 ICON_MAP = {

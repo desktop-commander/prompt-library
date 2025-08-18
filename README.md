@@ -25,10 +25,12 @@ This project features **enterprise-grade analytics** with comprehensive user beh
 - **User engagement depth** with time-based analytics
 - **Copy behavior analysis** (manual vs wizard usage)
 
-For detailed analytics documentation, see: **Desktop Commander/Initiatives/** folder:
-- `PostHog_Analytics_Overview_StyleScoutDC.md` - Complete system overview
-- `PostHog_Dashboard_Setup_StyleScoutDC.md` - Dashboard setup guide  
-- `StyleScoutDC_Analytics_Implementation_Summary.md` - Implementation summary
+For detailed analytics implementation, see the following files in this repository:
+- `PHASE_3_COMPLETE.md` - Advanced tracking implementation (viral, return visitors, session recordings)
+- `PHASE_4_COMPLETE.md` - Modal & DC integration tracking 
+- `SHARE_TRACKING_COMPLETE.md` - Share button and viral growth analytics
+- `src/components/PostHogProvider.tsx` - Analytics implementation
+- `src/lib/analytics.ts` - Event tracking utilities
 
 ## Project Description
 
@@ -46,10 +48,10 @@ Follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone https://github.com/desktop-commander/prompt-library.git
 
 # Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+cd prompt-library
 
 # Step 3: Install the necessary dependencies.
 npm i

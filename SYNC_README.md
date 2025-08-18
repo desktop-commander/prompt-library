@@ -19,7 +19,7 @@ This sync system allows you to manage all prompts in Excel and automatically upd
 
 2. **Run Sync Script**
    ```bash
-   cd /Users/ricardskrizanovskis/style-scout-dc
+   cd /Users/ricardskrizanovskis/prompt-library
    ./sync.sh
    ```
    Or directly:
