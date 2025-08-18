@@ -1,4 +1,5 @@
 import { Github, MessageCircle, Package, Layers, Twitter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function PromptsPageFooter() {
   console.log('PromptsPageFooter is rendering - NO CTA BANNER');
@@ -76,7 +77,7 @@ export function PromptsPageFooter() {
             <div>
               <h3 className="text-lg font-light mb-4">Prompt Library</h3>
               <ul className="space-y-2">
-                <li><a href="/prompts" className="text-gray-300 hover:text-blue-400 transition-colors font-light">Browse All Prompts</a></li>
+                <li><Link to="/prompts" className="text-gray-300 hover:text-blue-400 transition-colors font-light">Browse All Prompts</Link></li>
               </ul>
             </div>
 
