@@ -502,8 +502,8 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="w-[95vw] sm:max-w-2xl lg:max-w-4xl max-h-[90vh] mx-auto">
-        <DialogHeader>
+      <DialogContent className="w-[95vw] sm:max-w-2xl lg:max-w-4xl max-h-[90vh] mx-auto flex flex-col">
+        <DialogHeader className="flex-shrink-0">
           <div className="flex items-start gap-3 sm:gap-4 pr-8 sm:pr-12 min-w-0">
             <div className="p-2 sm:p-3 bg-dc-surface-elevated rounded-lg flex-shrink-0">
               <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
@@ -556,7 +556,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
           </div>
         </DialogHeader>
 
-        <div className="space-y-4 sm:space-y-6 overflow-y-auto min-h-0">
+        <div className="space-y-4 sm:space-y-6 overflow-y-auto min-h-0 flex-1 pr-2">
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-1.5 sm:mb-2">Description</h3>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed break-words">{useCase.description}</p>
@@ -573,8 +573,6 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
             </div>
           </div>
 
-
-
           <Separator />
 
           <div>
@@ -582,7 +580,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
               <h3 className="text-base sm:text-lg font-semibold">Complete Prompt</h3>
             </div>
             <div 
-              className="p-3 sm:p-4 bg-dc-surface-elevated rounded-lg border max-h-[40vh] sm:max-h-none overflow-y-auto min-w-0"
+              className="p-3 sm:p-4 bg-dc-surface-elevated rounded-lg border max-h-[40vh] overflow-y-auto min-w-0"
               onMouseUp={handleTextSelection}
               onKeyUp={handleTextSelection}
               onContextMenu={handleContextMenu}
@@ -592,8 +590,11 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
               </pre>
             </div>
           </div>
+        </div>
 
-          <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-3 sm:pt-4 min-w-0">
+        {/* Fixed footer with buttons */}
+        <div className="flex-shrink-0 border-t pt-4 mt-4">
+          <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 min-w-0">
             <Button variant="outline" onClick={handleModalClose} className="order-3 sm:order-1 min-w-0">
               <span className="truncate">Close</span>
             </Button>
