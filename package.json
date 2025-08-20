@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "npx vite",
-    "build": "npm run generate:sitemap && npx vite build",
-    "build:dev": "npm run generate:sitemap && npx vite build --mode development",
+    "build": "npm run generate:sitemap && npx vite build && node setup-spa-routing.js",
+    "build:dev": "npm run generate:sitemap && npx vite build --mode development && node setup-spa-routing.js",
     "generate:sitemap": "node generate-sitemap.js",
     "lint": "eslint .",
     "preview": "npx vite preview"
