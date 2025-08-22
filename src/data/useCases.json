@@ -10,7 +10,7 @@
         "Developers"
       ],
       "category": "Code base exploration",
-      "votes": 2,
+      "votes": 37,
       "gaClicks": 2,
       "icon": "FolderSearch",
       "author": "DC team",
@@ -28,7 +28,7 @@
         "Vibe Coders"
       ],
       "category": "Development",
-      "votes": 2,
+      "votes": 19,
       "gaClicks": 2,
       "icon": "Code",
       "author": "DC team",
@@ -46,7 +46,7 @@
         "Data analysts"
       ],
       "category": "Data Analytics",
-      "votes": 2,
+      "votes": 7,
       "gaClicks": 2,
       "icon": "BarChart3",
       "author": "DC team",
@@ -63,7 +63,7 @@
         "Developers"
       ],
       "category": "DevOps",
-      "votes": 1,
+      "votes": 11,
       "gaClicks": 1,
       "icon": "Settings",
       "author": "DC team",
@@ -81,7 +81,7 @@
         "Vibe Coders"
       ],
       "category": "Code optimization",
-      "votes": 1,
+      "votes": 16,
       "gaClicks": 1,
       "icon": "Zap",
       "author": "DC team",
@@ -98,7 +98,7 @@
         "Developers"
       ],
       "category": "Code base exploration",
-      "votes": 1,
+      "votes": 9,
       "gaClicks": 1,
       "icon": "FolderSearch",
       "author": "DC team",
@@ -137,7 +137,7 @@
         "Developers"
       ],
       "category": "File Management",
-      "votes": 2,
+      "votes": 37,
       "gaClicks": 2,
       "icon": "FolderOpen",
       "author": "DC team",
@@ -154,7 +154,7 @@
         "Vibe Coders"
       ],
       "category": "Development",
-      "votes": 2,
+      "votes": 13,
       "gaClicks": 2,
       "icon": "Code",
       "author": "DC team",
@@ -189,7 +189,7 @@
         "Professionals"
       ],
       "category": "Automation",
-      "votes": 2,
+      "votes": 12,
       "gaClicks": 2,
       "icon": "PlayCircle",
       "author": "DC team",
@@ -296,7 +296,7 @@
         "Professionals"
       ],
       "category": "File Management",
-      "votes": 1,
+      "votes": 15,
       "gaClicks": 1,
       "icon": "FolderOpen",
       "author": "DC team",
@@ -366,7 +366,7 @@
         "Developers"
       ],
       "category": "Documentation",
-      "votes": 1,
+      "votes": 3,
       "gaClicks": 1,
       "icon": "BookOpen",
       "author": "DC team",
@@ -763,7 +763,7 @@
         "Content makers"
       ],
       "category": "Data Analytics",
-      "votes": 1,
+      "votes": 3,
       "gaClicks": 1,
       "icon": "BarChart3",
       "author": "DC team",
@@ -891,6 +891,26 @@
       "icon": "Zap",
       "author": "DC team",
       "dateAdded": "2024-11-15",
+      "verified": false
+    },
+    {
+      "id": "51",
+      "title": "Get my IP address",
+      "description": "Allows you to quickly get your IP address.",
+      "prompt": "Use DesktopCommnder to get my IP v4 and IP v6 addresses. Don't speak too much, just show me IP addresses.",
+      "difficulty": "Easy",
+      "targetRoles": [
+        "Developers",
+        "Vibe Coders",
+        "Content makers",
+        "Data analysts",
+        "Professionals"
+      ],
+      "category": "DevOps",
+      "votes": 1,
+      "icon": "Network",
+      "author": "@serg33v",
+      "dateAdded": "2025-08-22",
       "verified": false
     }
   ],
