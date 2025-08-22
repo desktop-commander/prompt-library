@@ -542,14 +542,14 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
                 <PopoverTrigger asChild>
                   <button
                     type="button"
-                    aria-label={`Exact uses: ${exactUses} (all-time)`}
+                    aria-label={`Exact uses: ${useCase.votes} (all-time)`}
                     className="inline-flex items-center justify-center text-muted-foreground hover:text-foreground"
                   >
                     <Info className="h-4 w-4" />
                   </button>
                 </PopoverTrigger>
                 <PopoverContent align="end" side="bottom">
-                  Exact uses: {exactUses} (all-time)
+                  Exact uses: {useCase.votes} (all-time)
                 </PopoverContent>
               </Popover>
             </div>
