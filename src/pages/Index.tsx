@@ -190,15 +190,19 @@ const Index = () => {
     
     setSelectedUseCase(useCase);
     setIsModalOpen(true);
-    // Update URL with prompt ID
-    setSearchParams({ i: useCase.id });
+    // Update URL with prompt ID while preserving role filter
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('i', useCase.id);
+    setSearchParams(newSearchParams);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedUseCase(null);
-    // Clear URL params when closing
-    setSearchParams({});
+    // Remove only the prompt ID while preserving role filter
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete('i');
+    setSearchParams(newSearchParams);
   };
 
   const handleVote = (id) => {
