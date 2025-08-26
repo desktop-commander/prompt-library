@@ -733,6 +733,9 @@ To begin, please answer the 4 questions in the Initial Setup section above. I'll
 
 I help you build structured knowledge repositories that capture project specifications, architecture decisions, and code intent in formats optimized for AI collaboration. Think of this as creating "memory" for AI interactions that makes every conversation more effective and project-aware.
 
+## Implementation with Desktop Commander
+This context engineering system is designed to work with Desktop Commander (DC), which provides the file system capabilities needed to systematically analyze codebases and generate documentation.
+
 ## Getting Started
 
 First, let's set up your project context:
@@ -773,6 +776,7 @@ Context engineering goes beyond simple documentation—it's about systematically
 - AI-Optimized Structure: Format information for maximum AI comprehension
 - Living Documentation: Keep context current with code changes
 - Progressive Disclosure: Show relevant information based on current task
+- Concise, Technical Focus: All documentation is task-focused and technical, avoiding business value discussions or adjacent topics
 
 ## What We'll Build Together
 
