@@ -20,7 +20,14 @@ const Index = () => {
   const [selectedUseCase, setSelectedUseCase] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [useCaseVotes, setUseCaseVotes] = useState({});
-  const [selectedRole, setSelectedRole] = useState('For all');
+  
+  // Get initial role from URL parameter, default to 'For all'
+  const initialRole = useMemo(() => {
+    const roleParam = searchParams.get('role');
+    return roleParam || 'For all';
+  }, [searchParams]);
+  
+  const [selectedRole, setSelectedRole] = useState(initialRole);
   const posthog = usePostHog();
   
   // Phase 3: Track page load time for performance monitoring
@@ -37,6 +44,15 @@ const Index = () => {
         setSelectedUseCase(useCase);
         setIsModalOpen(true);
       }
+    }
+  }, [searchParams]);
+  
+  // Sync role state with URL parameter changes (for back/forward navigation and direct links)
+  useEffect(() => {
+    const roleParam = searchParams.get('role');
+    const urlRole = roleParam || 'For all';
+    if (urlRole !== selectedRole) {
+      setSelectedRole(urlRole);
     }
   }, [searchParams]);
   
@@ -222,6 +238,25 @@ const Index = () => {
     });
     
     setSelectedRole(role);
+    
+    // Update URL to reflect selected role (without page navigation)
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (role === 'For all') {
+      // Remove role parameter for default state
+      newSearchParams.delete('role');
+    } else {
+      // Set role parameter
+      newSearchParams.set('role', role);
+    }
+    
+    // Preserve any existing modal parameters (like 'i' for prompt modals)
+    const currentPromptId = searchParams.get('i');
+    if (currentPromptId) {
+      newSearchParams.set('i', currentPromptId);
+    }
+    
+    // Update URL without navigation
+    setSearchParams(newSearchParams, { replace: true });
   };
 
   return (

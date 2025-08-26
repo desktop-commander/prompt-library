@@ -1,5 +1,5 @@
 {
-  "next_id": 51,
+  "next_id": 55,
   "title_to_id": {
     "Explore and Understand New Repository": 1,
     "Build Complete Feature from Scratch": 2,
@@ -50,8 +50,14 @@
     "Remove Duplicate Contacts from Spreadsheet": 47,
     "Find All TODO Comments": 48,
     "Generate Tests for Missing Coverage": 49,
-    "Analyze Code Complexity": 50
+    "Analyze Code Complexity": 50,
+    "Understand Any Codebase": 51,
+    "Get my IP address": 52,
+    "Set Up Cloud Infrastructure": 53,
+    "Create Project Context": 54
   },
-  "deleted_ids": [],
+  "deleted_ids": [
+    50
+  ],
   "notes": "This file maintains stable IDs for use cases. DO NOT edit manually unless necessary."
 }

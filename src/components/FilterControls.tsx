@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, X } from 'lucide-react';
 import { MultiSelect } from '@/components/MultiSelect';
-import { categories, roles, difficulties } from '@/data/useCases';
+import { categories, roles, difficulties, RoleOption } from '@/data/useCases';
 
 interface FilterControlsProps {
   searchTerm: string;

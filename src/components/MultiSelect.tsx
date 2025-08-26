@@ -4,8 +4,15 @@ import { Badge } from '@/components/ui/badge';
 import { ChevronDown, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+interface MultiSelectOption {
+  value: string;
+  label?: string;
+  tag?: string;
+  tagColor?: string;
+}
+
 interface MultiSelectProps {
-  options: string[];
+  options: string[] | MultiSelectOption[];
   selected: string[];
   onChange: (selected: string[]) => void;
   placeholder?: string;
@@ -33,17 +40,17 @@ export function MultiSelect({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const toggleOption = (option: string) => {
-    if (selected.includes(option)) {
-      onChange(selected.filter(item => item !== option));
+  const toggleOption = (value: string) => {
+    if (selected.includes(value)) {
+      onChange(selected.filter(item => item !== value));
     } else {
-      onChange([...selected, option]);
+      onChange([...selected, value]);
     }
   };
 
-  const removeOption = (option: string, e: React.MouseEvent) => {
+  const removeOption = (value: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    onChange(selected.filter(item => item !== option));
+    onChange(selected.filter(item => item !== value));
   };
 
   const displayValue = selected.length === 0 
@@ -63,18 +70,27 @@ export function MultiSelect({
 
   return (
     <div ref={containerRef} className={cn("relative", className)}>
-      <Button
-        variant="outline"
-        onClick={() => setIsOpen(!isOpen)}
-        onKeyDown={handleKeyDown}
-        className="w-full justify-between h-9 font-normal"
-      >
-        <span className="truncate">{displayValue}</span>
-        <ChevronDown className={cn(
-          "ml-2 h-4 w-4 shrink-0 transition-transform",
-          isOpen && "rotate-180"
-        )} />
-      </Button>
+      <div className="relative">
+        <Button
+          variant="outline"
+          onClick={() => setIsOpen(!isOpen)}
+          onKeyDown={handleKeyDown}
+          className="w-full justify-between h-9 font-normal"
+        >
+          <span className="truncate">{displayValue}</span>
+          <ChevronDown className={cn(
+            "ml-2 h-4 w-4 shrink-0 transition-transform",
+            isOpen && "rotate-180"
+          )} />
+        </Button>
+        
+        {/* Show "New" badge on main button when DevOps is selected */}
+        {selected.includes('DevOps') && (
+          <Badge className="absolute -top-2 -right-2 bg-primary hover:bg-primary text-primary-foreground text-xs px-1.5 py-0.5 h-5 min-w-[2rem] rounded-full border-2 border-background pointer-events-none">
+            New
+          </Badge>
+        )}
+      </div>
 
       {isOpen && (
         <div className="absolute z-50 mt-1 w-full min-w-[200px] rounded-md border bg-popover text-popover-foreground shadow-md outline-none">
@@ -98,22 +114,33 @@ export function MultiSelect({
             {/* Then list all other options */}
             <div className="max-h-[300px] overflow-y-auto overflow-x-hidden custom-scrollbar">
               {options.map((option) => {
-                const isSelected = selected.includes(option);
+                const optionObj = typeof option === 'string' ? { value: option } : option;
+                const isSelected = selected.includes(optionObj.value);
                 
                 return (
-                  <button
-                    key={option}
-                    onClick={() => toggleOption(option)}
-                    className={cn(
-                      "flex w-full items-center rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground mx-1 w-[calc(100%-8px)]",
-                      isSelected && "bg-accent/50"
+                  <div key={optionObj.value} className="relative mx-1 w-[calc(100%-8px)]">
+                    <button
+                      onClick={() => toggleOption(optionObj.value)}
+                      className={cn(
+                        "flex w-full items-center rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground",
+                        isSelected && "bg-accent/50"
+                      )}
+                    >
+                      <span className="flex-1 text-left truncate">
+                        {optionObj.label || optionObj.value}
+                      </span>
+                      {isSelected && (
+                        <span className="ml-2 text-xs shrink-0">✓</span>
+                      )}
+                    </button>
+                    {optionObj.tag && optionObj.tagColor === 'new' && (
+                      <Badge 
+                        className="absolute -top-2 -right-2 bg-primary hover:bg-primary text-primary-foreground text-xs px-1.5 py-0.5 h-5 min-w-[2rem] rounded-full border-2 border-background pointer-events-none"
+                      >
+                        {optionObj.tag}
+                      </Badge>
                     )}
-                  >
-                    <span className="flex-1 text-left truncate">{option}</span>
-                    {isSelected && (
-                      <span className="ml-2 text-xs shrink-0">✓</span>
-                    )}
-                  </button>
+                  </div>
                 );
               })}
             </div>
@@ -123,21 +150,28 @@ export function MultiSelect({
 
       {selected.length > 0 && (
         <div className="flex flex-wrap gap-1 mt-2">
-          {selected.map(option => (
-            <Badge
-              key={option}
-              variant="secondary"
-              className="text-xs"
-            >
-              {option}
-              <button
-                onClick={(e) => removeOption(option, e)}
-                className="ml-1 hover:text-destructive"
+          {selected.map(value => {
+            const optionObj = options.find(opt => 
+              typeof opt === 'string' ? opt === value : opt.value === value
+            );
+            const displayName = typeof optionObj === 'string' ? optionObj : optionObj?.label || optionObj?.value || value;
+            
+            return (
+              <Badge
+                key={value}
+                variant="secondary"
+                className="text-xs"
               >
-                <X className="h-3 w-3" />
-              </button>
-            </Badge>
-          ))}
+                {displayName}
+                <button
+                  onClick={(e) => removeOption(value, e)}
+                  className="ml-1 hover:text-destructive"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </Badge>
+            );
+          })}
         </div>
       )}
     </div>
