@@ -432,8 +432,7 @@
         "DevOps"
       ],
       "categories": [
-        "Optimize code",
-        "Deploy"
+        "Optimize code"
       ],
       "votes": 1,
       "gaClicks": 1,
@@ -1243,6 +1242,7 @@
         "DevOps"
       ],
       "categories": [
+        "Deploy",
         "Deploy",
         "Design systems"
       ],

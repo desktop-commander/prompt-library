@@ -170,7 +170,7 @@ const Index = () => {
     return sorted;
   }, [selectedRole, selectedCategory, defaultFeaturedUseCases]);
 
-  // Set fire emoji for specific featured prompts (only when showing default featured prompts)
+  // Set fire emoji for specific featured prompts
   const hotIds = new Set(
     (selectedRole === 'For all' && selectedCategory === 'All Categories') 
       ? [
@@ -179,7 +179,13 @@ const Index = () => {
           defaultFeaturedUseCases[7], // Set Up Local Development Environment
           defaultFeaturedUseCases[8]  // Extract Data from PDFs
         ].filter(Boolean).map((u) => u.id)
-      : [] // No fire emojis for filtered results
+      : (selectedCategory === 'Deploy')
+      ? [
+          defaultFeaturedUseCases[3], // Set Up WordPress Environment
+          defaultFeaturedUseCases[4], // Set Up Cloud Infrastructure
+          defaultFeaturedUseCases[6]  // Generate Docker Configuration (Optimize Docker Setup)
+        ].filter(Boolean).map((u) => u.id)
+      : [] // No fire emojis for other filtered results
   );
 
   // Dynamic Browse All button text and URL
