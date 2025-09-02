@@ -185,6 +185,29 @@ const Index = () => {
           defaultFeaturedUseCases[4], // Set Up Cloud Infrastructure
           defaultFeaturedUseCases[6]  // Generate Docker Configuration (Optimize Docker Setup)
         ].filter(Boolean).map((u) => u.id)
+      : (selectedCategory === 'Explore codebase')
+      ? [
+          useCases.find(uc => uc.title === 'Explain Codebase or Repository'),
+          useCases.find(uc => uc.title === 'Explain React Component Architecture'),
+          useCases.find(uc => uc.title === 'Compare Config Files to Baseline')
+        ].filter(Boolean).map((u) => u.id)
+      : (selectedCategory === 'Write documentation')
+      ? [
+          useCases.find(uc => uc.title === 'Create Project Documentation'),
+          useCases.find(uc => uc.title === 'Create Database Schema Diagram')
+        ].filter(Boolean).map((u) => u.id)
+      : (selectedCategory === 'Automate tasks')
+      ? [
+          useCases.find(uc => uc.title === 'Extract Data from PDFs'),
+          useCases.find(uc => uc.title === 'Convert HEIC to PNG'),
+          useCases.find(uc => uc.title === 'Automate Competitor Research')
+        ].filter(Boolean).map((u) => u.id)
+      : (selectedCategory === 'Optimize workflow')
+      ? [
+          useCases.find(uc => uc.title === 'Create folder with images'),
+          useCases.find(uc => uc.title === 'Create Knowledge Base Folder'),
+          useCases.find(uc => uc.title === 'Convert EDOC to DOC')
+        ].filter(Boolean).map((u) => u.id)
       : [] // No fire emojis for other filtered results
   );
 
