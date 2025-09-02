@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UseCase } from '@/data/useCases';
+import { UseCase, sessionTypeExplanations } from '@/data/useCases';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -21,7 +21,7 @@ import {
   ArrowRightLeft,
   Activity,
   Search,
-  User
+  Zap
 } from 'lucide-react';
 import { EngagementMeter } from '@/components/EngagementMeter';
 
@@ -56,16 +56,27 @@ export function PromptCard({ useCase, onVote: _onVote, onOpen }: PromptCardProps
 
 
 
-  const getDifficultyClass = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Easy':
-        return 'difficulty-easy';
-      case 'Intermediate':
-        return 'difficulty-intermediate';
-      case 'Advanced':
-        return 'difficulty-advanced';
+  const getSessionTypeClass = (sessionType: string) => {
+    switch (sessionType) {
+      case 'Instant output':
+        return 'session-instant-output';
+      case 'Step-by-step flow':
+        return 'session-step-by-step-flow';
       default:
-        return 'difficulty-easy';
+        return 'session-instant-output';
+    }
+  };
+
+  const getCardSessionTypeDisplay = (sessionType: string) => {
+    // ⚠️ IMPORTANT: If you change this logic, also update it in src/pages/Index.tsx
+    // The homepage has its own inline card rendering with duplicate logic
+    switch (sessionType) {
+      case 'Instant output':
+        return { text: 'Instant', icon: Zap };
+      case 'Step-by-step flow':
+        return { text: 'Step-by-Step', icon: null };
+      default:
+        return { text: sessionType, icon: null };
     }
   };
 
@@ -91,10 +102,19 @@ export function PromptCard({ useCase, onVote: _onVote, onOpen }: PromptCardProps
             <div className="flex-1">
               <CardTitle className="text-lg leading-snug mb-2 min-h-[3rem] flex items-start">{useCase.title}</CardTitle>
               <div className="flex items-center gap-2">
-                <Badge variant="outline" className="text-foreground/70 border-foreground/20 bg-transparent font-normal">
-                  {useCase.difficulty}
+                <Badge variant="outline" className={`text-foreground/70 border-foreground/20 bg-transparent font-normal ${getSessionTypeClass(useCase.sessionType)} whitespace-nowrap`}>
+                  <div className="flex items-center gap-1">
+                    {(() => {
+                      const display = getCardSessionTypeDisplay(useCase.sessionType);
+                      return (
+                        <>
+                          {display.icon && <display.icon className="h-3 w-3" />}
+                          <span>{display.text}</span>
+                        </>
+                      );
+                    })()}
+                  </div>
                 </Badge>
-                <span className="text-sm text-muted-foreground">{useCase.category}</span>
               </div>
             </div>
           </div>
@@ -105,22 +125,9 @@ export function PromptCard({ useCase, onVote: _onVote, onOpen }: PromptCardProps
       </CardHeader>
 
       <CardContent className="flex-1 flex flex-col">
-        <div className="flex items-center gap-1 text-xs text-muted-foreground mb-2">
-          <User className="h-3 w-3" />
-          <span>{useCase.author}</span>
-        </div>
         <CardDescription className="text-sm leading-relaxed mb-4">
           {useCase.description}
         </CardDescription>
-
-        <div className="flex flex-wrap gap-1 mb-4">
-          {useCase.targetRoles.map((role) => (
-            <Badge key={role} variant="secondary" className="role-tag text-xs">
-              {role}
-            </Badge>
-          ))}
-        </div>
-
       </CardContent>
     </Card>
   );

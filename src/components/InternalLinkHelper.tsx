@@ -9,7 +9,7 @@ interface InternalLinkHelperProps {
 export const InternalLinkHelper = ({ className = '' }: InternalLinkHelperProps) => {
   // Get random prompts for "Related Prompts" section
   const getRelatedPrompts = (currentPrompt?: UseCase, count: number = 3): UseCase[] => {
-    // This would be implemented based on category, difficulty, or tags
+    // This would be implemented based on category, session type, or tags
     // For now, return empty array as placeholder
     return [];
   };
@@ -136,7 +136,7 @@ export const RelatedPrompts = ({ currentPrompt, className = '' }: RelatedPrompts
             className="block p-3 rounded-lg border border-border hover:border-border/60 transition-colors"
           >
             <div className="font-medium text-sm text-foreground">{prompt.title}</div>
-            <div className="text-xs text-muted-foreground mt-1">{prompt.category}</div>
+            <div className="text-xs text-muted-foreground mt-1">{prompt.categories.join(', ')}</div>
           </Link>
         ))}
       </div>

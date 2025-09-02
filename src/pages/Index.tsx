@@ -2,16 +2,16 @@ import { useState, useMemo, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Code, Users, Search, Heart, User } from 'lucide-react';
+import { ArrowRight, Code, Users, Search, Heart, Zap } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { useCases } from '@/data/useCases';
+import { useCases, sessionTypeExplanations, categories } from '@/data/useCases';
 import { PromptDetailModal } from '@/components/PromptDetailModal';
 import { SubmitPromptButton } from '@/components/SubmitPromptButton';
 import TestimonialsRow from '@/components/TestimonialsRow';
 import { MainSiteHeader } from '@/components/MainSiteHeader';
 import { PromptsPageFooter } from '@/components/PromptsPageFooter';
 import { EngagementMeter } from '@/components/EngagementMeter';
-import { RoleFilter } from '@/components/RoleFilter';
+import { CategoryFilter } from '@/components/CategoryFilter';
 import { usePostHog } from '@/components/PostHogProvider';
 import { DynamicMetaTags } from '@/components/DynamicMetaTags';
 
@@ -21,6 +21,20 @@ const Index = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [useCaseVotes, setUseCaseVotes] = useState({});
   
+  // Session type display logic for cards (same as PromptCard component)
+  // ⚠️ IMPORTANT: If you change this logic, also update it in src/components/PromptCard.tsx
+  // This homepage uses INLINE card rendering, NOT the PromptCard component
+  const getCardSessionTypeDisplay = (sessionType: string) => {
+    switch (sessionType) {
+      case 'Instant output':
+        return { text: 'Instant', icon: Zap };
+      case 'Step-by-step flow':
+        return { text: 'Step-by-Step', icon: null };
+      default:
+        return { text: sessionType, icon: null };
+    }
+  };
+  
   // Get initial role from URL parameter, default to 'For all'
   const initialRole = useMemo(() => {
     const roleParam = searchParams.get('role');
@@ -28,6 +42,7 @@ const Index = () => {
   }, [searchParams]);
   
   const [selectedRole, setSelectedRole] = useState(initialRole);
+  const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const posthog = usePostHog();
   
   // Phase 3: Track page load time for performance monitoring
@@ -68,24 +83,24 @@ const Index = () => {
   }, [isModalOpen]);
 
   const stats = [
-    { label: 'Prompts', value: '15+', icon: Code },
+    { label: 'Prompts', value: '53+', icon: Code },
     { label: 'Community Votes', value: '2,000+', icon: Heart },
-    { label: 'Categories', value: '12', icon: Search },
+    { label: 'Categories', value: '10', icon: Search },
     { label: 'Active Users', value: '500+', icon: Users }
   ];
 
   // Default featured prompts: specific curated list
   const defaultFeaturedUseCases = useMemo(() => {
     const featuredTitles = [
-      'Explore and Understand New Repository',  // 1st with fire
-      'Organise my Downloads folder',            // 2nd with fire
-      'Build Complete Feature from Scratch',
-      'Analyze My Data File',
-      'Set Up Development Environment',
-      'Understand React Component Architecture',
-      'Clean Up Unused Code',
-      'Build Personal Finance Tracker',
-      'Automated Competitor Research'
+      'Organise my Downloads folder',
+      'Explain Codebase or Repository',  
+      'Build A Feature from Scratch',
+      'Set Up WordPress Environment',
+      'Set Up Cloud Infrastructure',
+      'Build and Deploy Landing Page',
+      'Generate Docker Configuration',
+      'Set Up Local Development Environment',
+      'Extract Data from PDFs'
     ];
     
     // Find these specific prompts (with flexible matching for whitespace)
@@ -109,6 +124,9 @@ const Index = () => {
     return featured;
   }, []);
 
+  // Featured categories for homepage
+  const featuredCategories = ['All Categories', 'Explore codebase', 'Deploy', 'Write documentation', 'Automate tasks', 'Optimize workflow'];
+
   // Get available target roles from the entire library
   const availableRoles = useMemo(() => {
     const roles = new Set();
@@ -118,15 +136,27 @@ const Index = () => {
     return ['For all', ...Array.from(roles).sort()];
   }, []);
 
-  // Filter prompts by selected role
+  // Filter prompts by selected role and category
   const filteredByRole = useMemo(() => {
-    if (selectedRole === 'For all') {
+    let filtered = useCases;
+    
+    // Filter by role first
+    if (selectedRole !== 'For all') {
+      filtered = filtered.filter(uc => uc.targetRoles.includes(selectedRole));
+    }
+    
+    // Then filter by category
+    if (selectedCategory !== 'All Categories') {
+      filtered = filtered.filter(uc => uc.categories && uc.categories.includes(selectedCategory));
+    }
+    
+    // If both filters are default, show curated featured prompts
+    if (selectedRole === 'For all' && selectedCategory === 'All Categories') {
       return defaultFeaturedUseCases;
     }
     
-    // Filter entire library by selected role, sort by usage, limit to 9
-    const filtered = useCases
-      .filter(uc => uc.targetRoles.includes(selectedRole))
+    // Otherwise sort by usage and limit to 9
+    const sorted = filtered
       .sort((a, b) => {
         // Primary sort: usage count (gaClicks) descending
         if (b.gaClicks !== a.gaClicks) {
@@ -137,31 +167,48 @@ const Index = () => {
       })
       .slice(0, 9);
     
-    return filtered;
-  }, [selectedRole, defaultFeaturedUseCases]);
+    return sorted;
+  }, [selectedRole, selectedCategory, defaultFeaturedUseCases]);
 
-  // Set fire emoji for first two prompts (only for default featured)
+  // Set fire emoji for specific featured prompts (only when showing default featured prompts)
   const hotIds = new Set(
-    selectedRole === 'For all' 
-      ? defaultFeaturedUseCases.slice(0, 2).map((u) => u.id)
+    (selectedRole === 'For all' && selectedCategory === 'All Categories') 
+      ? [
+          defaultFeaturedUseCases[0], // Organise my Downloads folder
+          defaultFeaturedUseCases[3], // Set Up WordPress Environment
+          defaultFeaturedUseCases[7], // Set Up Local Development Environment
+          defaultFeaturedUseCases[8]  // Extract Data from PDFs
+        ].filter(Boolean).map((u) => u.id)
       : [] // No fire emojis for filtered results
   );
 
   // Dynamic Browse All button text and URL
   const browseAllText = useMemo(() => {
-    if (selectedRole === 'For all') {
+    if (selectedRole === 'For all' && selectedCategory === 'All Categories') {
       return 'Browse All Prompts';
+    } else if (selectedRole !== 'For all' && selectedCategory !== 'All Categories') {
+      return `Browse All ${selectedRole} ${selectedCategory} Prompts`;
+    } else if (selectedRole !== 'For all') {
+      return `Browse All ${selectedRole} Prompts`;
+    } else {
+      return `Browse All ${selectedCategory} Prompts`;
     }
-    return `Browse All ${selectedRole} Prompts`;
-  }, [selectedRole]);
+  }, [selectedRole, selectedCategory]);
 
   const browseAllUrl = useMemo(() => {
-    if (selectedRole === 'For all') {
+    if (selectedRole === 'For all' && selectedCategory === 'All Categories') {
       return '/prompts';
     }
-    // Pass the selected role as a URL parameter for pre-filtering
-    return `/prompts?role=${encodeURIComponent(selectedRole)}`;
-  }, [selectedRole]);
+    
+    // Build URL with filters
+    const params = new URLSearchParams();
+    if (selectedRole !== 'For all') {
+      params.set('role', selectedRole);
+    }
+    // Note: We'll need to implement category filtering in the prompts page if needed
+    
+    return `/prompts?${params.toString()}`;
+  }, [selectedRole, selectedCategory]);
 
   // Always display the filtered prompts
   const displayedUseCases = filteredByRole;
@@ -175,8 +222,8 @@ const Index = () => {
     posthog.capture('prompt_clicked', {
       prompt_id: useCase.id,
       prompt_title: useCase.title,
-      prompt_category: useCase.category,
-      prompt_difficulty: useCase.difficulty,
+      prompt_categories: useCase.categories,
+      prompt_session_type: useCase.sessionType,
       prompt_author: useCase.author,
       target_roles: useCase.targetRoles,
       source_page: 'homepage',
@@ -212,7 +259,7 @@ const Index = () => {
     posthog.capture('prompt_voted', {
       prompt_id: id,
       prompt_title: useCase?.title,
-      prompt_category: useCase?.category,
+      prompt_categories: useCase?.categories,
       source_page: 'homepage'
     });
     
@@ -232,6 +279,7 @@ const Index = () => {
     posthog.capture('role_filter_changed', {
       previous_role: selectedRole,
       new_role: role,
+      current_category: selectedCategory,
       source_page: 'homepage',
       // Phase 3: Enhanced tracking
       visit_count: visitCount,
@@ -263,6 +311,28 @@ const Index = () => {
     setSearchParams(newSearchParams, { replace: true });
   };
 
+  const handleCategoryChange = (category: string) => {
+    // Get visitor info for enhanced tracking
+    const visitCount = parseInt(localStorage.getItem('style_scout_visit_count') || '0');
+    const viralSession = localStorage.getItem('style_scout_viral_session');
+    const viralInfo = viralSession ? JSON.parse(viralSession) : null;
+    
+    // Track category filter change
+    posthog.capture('category_filter_changed', {
+      previous_category: selectedCategory,
+      new_category: category,
+      current_role: selectedRole,
+      source_page: 'homepage',
+      visit_count: visitCount,
+      is_returning_user: visitCount > 1,
+      is_viral_session: !!viralInfo,
+      session_duration_seconds: viralInfo ? 
+        Math.round((new Date().getTime() - new Date(viralInfo.entry_time).getTime()) / 1000) : null
+    });
+    
+    setSelectedCategory(category);
+  };
+
   return (
     <>
       <MainSiteHeader />
@@ -279,12 +349,33 @@ const Index = () => {
                 Discover powerful AI workflows and automation prompts for Desktop Commander
               </p>
               
-              {/* Role Filter moved to hero */}
-              <RoleFilter 
-                roles={availableRoles}
-                selectedRole={selectedRole}
-                onRoleChange={handleRoleChange}
+              {/* Primary Filter: Category buttons (prominent) */}
+              <CategoryFilter 
+                categories={featuredCategories}
+                selectedCategory={selectedCategory}
+                onCategoryChange={handleCategoryChange}
               />
+              
+              {/* Secondary Filter: Role links (subtle) */}
+              <div className="mt-6">
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  {availableRoles.map((role) => (
+                    <button
+                      key={role}
+                      onClick={() => handleRoleChange(role)}
+                      className={`
+                        text-sm transition-colors duration-200 hover:text-foreground
+                        ${selectedRole === role 
+                          ? "text-foreground font-medium underline underline-offset-2" 
+                          : "text-muted-foreground hover:text-foreground"
+                        }
+                      `}
+                    >
+                      {role}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -314,10 +405,20 @@ const Index = () => {
                           <div className="flex-1 min-w-0">
                             <CardTitle className="text-base leading-snug mb-2 min-h-[2.5rem] flex items-start">{useCase.title}</CardTitle>
                             <div className="flex items-center gap-2">
-                              <Badge variant="outline" className="text-foreground/70 border-foreground/20 bg-transparent font-normal">
-                                {useCase.difficulty}
+                              <Badge variant="outline" className="text-foreground/70 border-foreground/20 bg-transparent font-normal whitespace-nowrap">
+                                <div className="flex items-center gap-1">
+                                  {(() => {
+                                    const display = getCardSessionTypeDisplay(useCase.sessionType);
+                                    return (
+                                      <>
+                                        {display.icon && <display.icon className="h-3 w-3" />}
+                                        <span>{display.text}</span>
+                                      </>
+                                    );
+                                  })()}
+                                </div>
                               </Badge>
-                              <span className="text-xs text-muted-foreground">{useCase.category}</span>
+
                             </div>
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
@@ -327,27 +428,13 @@ const Index = () => {
                             )}
                           </div>
                         </div>
-                        <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">
-                          <User className="h-3 w-3" />
-                          <span>{useCase.author}</span>
-                        </div>
+
                       </CardHeader>
                       <CardContent>
                         <CardDescription className="leading-relaxed text-sm">
                           {useCase.description}
                         </CardDescription>
-                        <div className="flex flex-wrap gap-1 mt-3">
-                          {useCase.targetRoles.slice(0, 2).map((role) => (
-                            <Badge key={role} variant="secondary" className="role-tag text-xs">
-                              {role}
-                            </Badge>
-                          ))}
-                          {useCase.targetRoles.length > 2 && (
-                            <Badge variant="secondary" className="role-tag text-xs">
-                              +{useCase.targetRoles.length - 2}
-                            </Badge>
-                          )}
-                        </div>
+
                       </CardContent>
                     </Card>
                   ))}

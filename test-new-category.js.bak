@@ -1,0 +1,19 @@
+import { readFileSync } from 'fs';
+
+// Test the new "Optimize workflow" category
+const useCasesData = JSON.parse(readFileSync('./src/data/useCases.json', 'utf8'));
+const useCases = useCasesData.useCases;
+
+const featuredCategories = ['Explore codebase', 'Deploy', 'Write documentation', 'Automate tasks', 'Optimize workflow'];
+
+console.log('🎯 Updated Featured Categories Test\n');
+
+console.log('Featured Categories:');
+featuredCategories.forEach((category, index) => {
+  const count = useCases.filter(uc => uc.categories && uc.categories.includes(category)).length;
+  const status = count > 0 ? '✅' : '⚪';
+  console.log(`${status} ${index + 1}. ${category} (${count} prompts)`);
+});
+
+console.log('\n📝 "Optimize workflow" category created - ready for new prompts!');
+console.log('\n🚫 Removed "Or filter by role:" text from homepage');

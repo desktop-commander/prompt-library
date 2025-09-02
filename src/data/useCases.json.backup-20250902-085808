@@ -1,0 +1,1124 @@
+{
+  "useCases": [
+    {
+      "id": "1",
+      "title": "Explore and Understand New Repository",
+      "description": "Read a repository and understand the codebase.",
+      "prompt": "I need to understand this codebase: [repo path]. Give me an overview of the project structure, main components, and how they interact. Identify the entry points and key files I should focus on first.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 37,
+      "gaClicks": 37,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Environment Setup",
+      "sessionType": "Instant Output",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Build Complete Feature from Scratch",
+      "description": "Build a new feature for your app based on your existing codebase.",
+      "prompt": "I need to build [feature description] in my project at [project path]. Create all necessary files, implement the feature, and integrate it with existing code. Show me what you're building as you go.",
+      "targetRoles": [
+        "Developers",
+        "Vibe Coders"
+      ],
+      "votes": 19,
+      "gaClicks": 19,
+      "icon": "Code",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Build features and products"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Analyze My Data File",
+      "description": "Make sense of a data file that you have.",
+      "prompt": "Look for the file called 'filename' in my [folder]. Analyze this file and tell me: what data it contains, key patterns or insights, and create a simple summary report.",
+      "targetRoles": [
+        "Professionals",
+        "Data analysts"
+      ],
+      "votes": 7,
+      "gaClicks": 7,
+      "icon": "BarChart3",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Database Management",
+      "sessionType": "Instant Output",
+      "categories": [
+        "Analyze data"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Set Up Development Environment",
+      "description": "Set up your development environment, install dependencies and configure required tools.",
+      "prompt": "Set up a complete development environment for [technology stack] on my machine. Install dependencies, configure tools, and create a sample project to verify everything works.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 11,
+      "gaClicks": 11,
+      "icon": "Settings",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Environment Setup",
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Deploy"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Clean Up Unused Code",
+      "description": "Scan your codebase to find unused imports, dead functions, and redundant code that can be safely removed.",
+      "prompt": "Analyze this project directory: [project root path]. Identify unused imports and dead code in this codebase.",
+      "targetRoles": [
+        "Developers",
+        "Vibe Coders"
+      ],
+      "votes": 16,
+      "gaClicks": 16,
+      "icon": "Zap",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Optimize code"
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Understand React Component Architecture",
+      "description": "Get a clear breakdown of how your React component works, including props flow, state management, and dependencies.",
+      "prompt": "Find this React component: [component name/path]. Analyze this React component and explain its data flow and dependencies",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 9,
+      "gaClicks": 9,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "7",
+      "title": "Build Data Processing Pipeline",
+      "description": "Creates automated systems that continuously collect and process data (like tracking competitor prices daily).",
+      "prompt": "Create an automated system to [collect/process] data from [source]. Set up the pipeline to run regularly and save results to organized files on my computer.",
+      "targetRoles": [
+        "Data analysts",
+        "Professionals"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "BarChart3",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Analyze data"
+      ]
+    },
+    {
+      "id": "8",
+      "title": "Organise my Downloads folder",
+      "description": "Organise messy downloads folder into relevant subfolders.",
+      "prompt": "Analyze my Downloads folder and organize all files into subfolders by type (Documents, Images, Videos, Archives, etc.). Show me what you're doing and create a summary of what was organized. Open the new folder when you are done.",
+      "targetRoles": [
+        "Vibe Coders",
+        "Content makers",
+        "Data analysts",
+        "Professionals",
+        "Developers"
+      ],
+      "votes": 37,
+      "gaClicks": 37,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "9",
+      "title": "Build Personal Finance Tracker",
+      "description": "Create a complete web application from scratch and launch it locally in your browser.",
+      "prompt": "Build me a personal finance tracker web app that lets me [add expenses, categorize spending, see monthly summaries]. Create all the necessary HTML, CSS, and JavaScript files. Set up a local server and open the app in my browser when it's ready. Make it look professional and fully functional. Open it in browser when ready.",
+      "targetRoles": [
+        "Vibe Coders"
+      ],
+      "votes": 13,
+      "gaClicks": 13,
+      "icon": "Code",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Deploy Applications",
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Build features and products"
+      ]
+    },
+    {
+      "id": "10",
+      "title": "Create Automated Email Newsletter",
+      "description": "Create an automated content for email newsletters.",
+      "prompt": "Create an automated system that compiles content from [these sources] and generates a weekly newsletter. Set it up to create HTML email templates and organize them in folders on my computer.",
+      "targetRoles": [
+        "Content makers"
+      ],
+      "votes": 2,
+      "gaClicks": 2,
+      "icon": "FileText",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Create content"
+      ]
+    },
+    {
+      "id": "11",
+      "title": "Automated Competitor Research",
+      "description": "Automate weekly competitive research and store your notes in one place.",
+      "prompt": "I want to create an automated competitor tracking system. Help me set up:\nSystem Setup:\n\nA folder structure for competitor research on my Desktop\nTemplate files for competitor profiles\nA weekly research workflow \n\nMy main competitors are: [list your competitors]\nAutomation Goal: I want to simply write \"Weekly competitor research\" in a Claude chat, and have Claude automatically:\n\nSearch all my competitors for news/updates from the past 7 days\nUse deep research\nAnalyze findings strategically\nProvide specific action items\nCreate a new weekly report file and save it to the competitor folder on my computer\n\nAfter setup, provide:\n\nStep-by-step instructions for the weekly workflow\nThe exact prompt/command I should use each week\nHow to ensure the files are automatically organized in the right folders\n\nKey Requirements:\n\nEverything organized in one place on my computer\nMinimal manual work each week\nStrategic analysis, not just raw data\nActionable insights I can act on immediately\nClear guidance on when to use weekly vs deep research",
+      "targetRoles": [
+        "Content makers",
+        "Professionals"
+      ],
+      "votes": 12,
+      "gaClicks": 12,
+      "icon": "PlayCircle",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Monitor Systems",
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Automate tasks"
+      ]
+    },
+    {
+      "id": "12",
+      "title": "Learn from Codebase Patterns",
+      "description": "Discover interesting coding patterns and techniques you can learn from existing projects.",
+      "prompt": "Summarize this codebase at [project path] and highlight the most interesting patterns or techniques I could learn from.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "13",
+      "title": "Identify Refactoring Opportunities",
+      "description": "Find areas in your codebase that need improvement or refactoring.",
+      "prompt": "Identify potential areas for improvement or refactoring in this codebase at [project path], highlighting parts that appear fragile, complex, or hard to maintain.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "Zap",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Optimize code"
+      ]
+    },
+    {
+      "id": "14",
+      "title": "Analyze Error Handling Strategy",
+      "description": "Understand and document the error handling and logging approaches used in your project.",
+      "prompt": "What kind of error handling and logging strategies does the project at [project path] use? Document the patterns and suggest improvements.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "15",
+      "title": "Implement GitHub Issue",
+      "description": "Create a working implementation for a specific GitHub issue or feature request.",
+      "prompt": "Implement a first draft for GitHub issue #[number] in project at [project path]. Read the issue requirements and create the necessary code changes.",
+      "targetRoles": [
+        "Developers",
+        "Vibe Coders"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "Code",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Build features and products"
+      ]
+    },
+    {
+      "id": "16",
+      "title": "Set Up New Project Structure",
+      "description": "Create complete project setup with standard structure and configs.",
+      "prompt": "Set up a new [language] project with standard structure, configs, and development tools ready to go.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "Code",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Environment Setup",
+      "sessionType": "Instant Output",
+      "categories": [
+        "Build features and products"
+      ]
+    },
+    {
+      "id": "17",
+      "title": "Create Knowledge Base Folder",
+      "description": "Create a strucutre for your local knowledge base.",
+      "prompt": "I want to create a personal knowledge base by organizing copies of my existing files on this computer. Please help me:\n\n-Check my current file structure using Desktop Commander to understand what types of files and content I have\n\n-Ask targeted follow-up questions about my goals and preferences before proposing an organizational system\n\n-Create a well-structured knowledge base folder on my Desktop with appropriate subfolders\n\n-Copy (never move or delete) relevant files into this new organizational structure.",
+      "targetRoles": [
+        "Content makers",
+        "Vibe Coders",
+        "Developers",
+        "Data analysts",
+        "Professionals"
+      ],
+      "votes": 15,
+      "gaClicks": 15,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "18",
+      "title": "Auto-Generate API Documentation",
+      "description": "Transform your API endpoints into comprehensive documentation with all parameters, responses, and examples.",
+      "prompt": "Find this API file: [file name/path]. Generate documentation for this API endpoint including all parameters and responses.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "BookOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Write documentation"
+      ]
+    },
+    {
+      "id": "19",
+      "title": "Technical Debt Assessment & Roadmap.",
+      "description": "Get a comprehensive analysis of technical debt with prioritized remediation plan and effort estimates.",
+      "prompt": "Analyze this entire project: [project root path]. Analyze technical debt across the project and create a remediation roadmap.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "Zap",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Optimize code"
+      ]
+    },
+    {
+      "id": "20",
+      "title": "Visualize Microservices Communication",
+      "description": "Create visual diagrams showing how your microservices interact, data flows, and potential bottlenecks.",
+      "prompt": "Analyze all files in this directory: [project/services directory path]. Create a visual map of how these microservices communicate with each other.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "Layers",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Design systems"
+      ]
+    },
+    {
+      "id": "21",
+      "title": "Create Team Onboarding Documentation",
+      "description": "Generate comprehensive onboarding guide for new developers including setup, architecture overview, and contribution guidelines.",
+      "prompt": "Analyze this entire project: [project root path]. Create onboarding guide for new developers joining this project.",
+      "targetRoles": [
+        "Professionals",
+        "Data analysts",
+        "Developers"
+      ],
+      "votes": 3,
+      "gaClicks": 3,
+      "icon": "BookOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Environment Setup",
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Write documentation"
+      ]
+    },
+    {
+      "id": "22",
+      "title": "Optimize Docker Setup",
+      "description": "Generate production-ready Docker configuration tailored to your application's specific requirements and dependencies.",
+      "prompt": "Analyze this project: [project root path]. Generate Docker configuration optimized for this application's requirements.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "Zap",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Optimize code"
+      ]
+    },
+    {
+      "id": "23",
+      "title": "Document System Architecture",
+      "description": "Get a comprehensive overview of your system's architecture and design patterns.",
+      "prompt": "Describe the main pieces of this system's architecture at [project path]. Explain how components interact and highlight the key design patterns used.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "24",
+      "title": "Audit Security Mechanisms",
+      "description": "Identify and document all security measures implemented in your codebase.",
+      "prompt": "What security mechanisms are in place in this project at [project path]? Analyze authentication, authorization, data protection, and potential vulnerabilities.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "25",
+      "title": "Generate Dev Onboarding Guide",
+      "description": "Create step-by-step documentation for new developers joining your project.",
+      "prompt": "Provide a step-by-step dev onboarding doc for developers new to the codebase at [project path]. Include setup, key concepts, and first tasks.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "BookOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Environment Setup",
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Write documentation"
+      ]
+    },
+    {
+      "id": "26",
+      "title": "Assess Scalability Challenges",
+      "description": "Identify potential scaling and debugging bottlenecks in your system.",
+      "prompt": "Which parts of this codebase at [project path] might be challenging to scale or debug? Identify potential bottlenecks and maintenance issues.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "Zap",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Optimize code"
+      ]
+    },
+    {
+      "id": "27",
+      "title": "Generate Module Documentation",
+      "description": "Create comprehensive README documentation for specific modules or components.",
+      "prompt": "Generate a README section for the [module name] module at [file path] explaining what it does and how to use it.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "BookOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Write documentation"
+      ]
+    },
+    {
+      "id": "28",
+      "title": "Document Dependencies and Tools",
+      "description": "Get a comprehensive overview of all tools and libraries used in your project.",
+      "prompt": "Which tools, libraries, and dependencies are used in this project at [project path]? Create a summary with versions and purposes.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "29",
+      "title": "Plan Migration Strategy",
+      "description": "Create a comprehensive plan for migrating your codebase to newer technologies.",
+      "prompt": "Help me migrate this codebase at [project path] to the latest version of [technology]. Start with a detailed migration plan and identify potential issues.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "Code",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Build features and products"
+      ]
+    },
+    {
+      "id": "30",
+      "title": "Create Git History Presentation",
+      "description": "Generate visual presentations of your team's recent development activity.",
+      "prompt": "Make me a slide deck showing the git history from the last 7 days at [project path], grouped by feature and team member.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "BookOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Write documentation"
+      ]
+    },
+    {
+      "id": "31",
+      "title": "Build GitHub Issues Dashboard",
+      "description": "Create a real-time dashboard for tracking and displaying GitHub issues.",
+      "prompt": "Make a full-screen web app for a wall display to show our most interacted-with GitHub issues from [repository]. Include real-time updates and visual indicators.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "Code",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Build features and products"
+      ]
+    },
+    {
+      "id": "32",
+      "title": "Set Up Smart Backups",
+      "description": "Create automated backup system for your important files with simple conversation.",
+      "prompt": "Help me set up a smart backup system for my work:\n\nScan my Desktop and Documents folders to identify my active projects\nCreate a 'Backups' folder structure with dated subfolders\nSet up a backup script that:\n\nCreates daily backups with clear date labels\nMaintains a full history (no automatic deletion)\nOrganizes backups by date: Year/Month/Day structure\nTracks storage usage in the log file\nExcludes temp files and node_modules\n\n\nShow me how to run this with a simple 'backup now' command\nCreate a backup log file that tracks what was backed up and when\n\nStart by analyzing my current folder structure and suggest what should be included in regular backups",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Monitor Systems",
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "33",
+      "title": "Find Error Patterns in Logs",
+      "description": "Analyze log files to identify and summarize system issues.",
+      "prompt": "Find all log files with errors in the last 24 hours at [log directory] and summarize the patterns.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Monitor Systems",
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "34",
+      "title": "Compare Config Files to Baseline",
+      "description": "Detect configuration drift by comparing current configs to standards.",
+      "prompt": "Compare all config files in [directory] against baseline and report any differences that might cause issues.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "35",
+      "title": "Update My CV/Resume",
+      "description": "Quickly update your resume with new experience/skills.",
+      "prompt": "Find my resume file in [folder], update my work experience section with [new job details], and save both the original and updated versions. Open the new file when you are done.",
+      "targetRoles": [
+        "Professionals",
+        "Developers",
+        "Vibe Coders",
+        "Content makers",
+        "Data analysts"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "36",
+      "title": "Remove Background from Profile Picture",
+      "description": "Get headshot without background for Linkedin or any other use.",
+      "prompt": "Find my profile picture [file name] at [file location]. Remove the background from this picture and save it as a PNG with transparent background. Open the new picture when you are done.",
+      "targetRoles": [
+        "Content makers",
+        "Vibe Coders",
+        "Professionals"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "37",
+      "title": "Merge Two PDFs",
+      "description": "Combine multiple PDF documents into one file.",
+      "prompt": "Find files named [filenames] in my [folder]. Merge these two PDF files into a single document. Keep the original files and create a new merged version. Open the new file when you are done.",
+      "targetRoles": [
+        "Professionals",
+        "Content makers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "38",
+      "title": "Convert HEIC to PNG",
+      "description": "Convert iPhone standard photo file type into universal PNG format.",
+      "prompt": "Look for the file called 'filename' in my [folder]. Convert its HEIC format to PNG format. Keep the original file and create converted version. Open the folder with photos when you are done.",
+      "targetRoles": [
+        "Professionals",
+        "Data analysts",
+        "Content makers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "39",
+      "title": "Convert EDOC to DOC",
+      "description": "Convert electronically signed documents on your computer.",
+      "prompt": "Find this file: [file name and/or location]. Convert this EDOC file to a standard DOC format that I can edit in Microsoft Word. Open the file when you are done.",
+      "targetRoles": [
+        "Developers",
+        "Vibe Coders",
+        "Content makers",
+        "Data analysts",
+        "Professionals"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "40",
+      "title": "Create folder with images",
+      "description": "Teach how to use Claude to create files and automate simple workflows.",
+      "prompt": "Create a new folder on my Desktop and put there 2 cat images. Open the folder when you are done.",
+      "targetRoles": [
+        "Professionals",
+        "Content makers",
+        "Vibe Coders"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "PlayCircle",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Automate tasks"
+      ]
+    },
+    {
+      "id": "41",
+      "title": "Batch Convert and Rename Images",
+      "description": "Process multiple images with format conversion and intelligent renaming.",
+      "prompt": "Convert all the images in this directory [folder path] to PNG format, and rename them to use dates from the EXIF data.",
+      "targetRoles": [
+        "Developers",
+        "Vibe Coders",
+        "Content makers",
+        "Data analysts",
+        "Professionals"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "42",
+      "title": "Organize PDF Invoices by Date",
+      "description": "Automatically sort and organize PDF documents by dates extracted from their content.",
+      "prompt": "Organize my PDF invoices in [folder path] by month of expenditure. Read the invoice dates and create monthly folders.",
+      "targetRoles": [
+        "Professionals",
+        "Data analysts",
+        "Content makers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "43",
+      "title": "Extract Data from PDFs",
+      "description": "Pull key information from PDF documents into structured format.",
+      "prompt": "Extract all data from these PDFs in [folder path]. Get the numbers, dates, and key information into a spreadsheet format.",
+      "targetRoles": [
+        "Professionals",
+        "Data analysts",
+        "Content makers"
+      ],
+      "votes": 3,
+      "gaClicks": 3,
+      "icon": "BarChart3",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Analyze data"
+      ]
+    },
+    {
+      "id": "44",
+      "title": "Rename Bank Statements by Account",
+      "description": "Fix messy financial document naming with intelligent renaming.",
+      "prompt": "Rename all bank statements in [folder] to include account type and date range instead of random attachment names.",
+      "targetRoles": [
+        "Professionals",
+        "Data analysts",
+        "Content makers"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "FolderOpen",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Organize files"
+      ]
+    },
+    {
+      "id": "45",
+      "title": "Find Large Receipts by Vendor",
+      "description": "Locate and organize high-value receipts for expense tracking.",
+      "prompt": "Find all receipts over $500 in [folder] and organize them by vendor for tax preparation.",
+      "targetRoles": [
+        "Professionals",
+        "Data analysts",
+        "Content makers"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "BarChart3",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Analyze data"
+      ]
+    },
+    {
+      "id": "46",
+      "title": "Consolidate Data Files into One",
+      "description": "Extract and standardize data for analysis.",
+      "prompt": "Combine all Excel/CSV files in [folder] that have [customer data] and merge them into one standardized spreadsheet.",
+      "targetRoles": [
+        "Data analysts"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "BarChart3",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Analyze data"
+      ]
+    },
+    {
+      "id": "47",
+      "title": "Remove Duplicate Contacts from Spreadsheet",
+      "description": "Clean up your contact lists by automatically identifying and removing duplicate entries.",
+      "prompt": "Remove all duplicate contacts from my spreadsheet at [file path]. Keep the most complete record when duplicates are found.",
+      "targetRoles": [
+        "Data analysts"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "BarChart3",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Analyze data"
+      ]
+    },
+    {
+      "id": "48",
+      "title": "Find All TODO Comments",
+      "description": "Locate and report all TODO items across your entire codebase.",
+      "prompt": "Find all TODO comments across all projects in [directory] and create a prioritized report of technical debt.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "FolderSearch",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Explore codebase"
+      ]
+    },
+    {
+      "id": "49",
+      "title": "Generate Tests for Missing Coverage",
+      "description": "Create test files for modules that lack proper testing.",
+      "prompt": "Create test files for every module in [project path] that's missing test coverage.",
+      "targetRoles": [
+        "Developers"
+      ],
+      "votes": 0,
+      "gaClicks": 0,
+      "icon": "Code",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": null,
+      "sessionType": "Instant Output",
+      "categories": [
+        "Build features and products"
+      ]
+    },
+    {
+      "id": "51",
+      "title": "Understand Any Codebase",
+      "description": "This prompt helps you understand, analyze, and document any codebase - whether you're inheriting legacy code, joining a new project, or diving into unfamiliar technology. Using Desktop Commander's file analysis capabilities, I'll systematically explore your codebase and generate clear documentation with actionable insights.",
+      "prompt": "# **Codebase Analysis & Documentation - Desktop Commander**\n\n## **Overview**\nI'll help you understand, analyze, and document any codebase - whether you're inheriting legacy code, joining a new project, or diving into unfamiliar technology. Using Desktop Commander's file analysis capabilities, I'll systematically explore your codebase and generate clear documentation with actionable insights.\n\n## **Getting Started**\n\nTo begin the analysis, please provide:\n\n1. **Codebase Path**: Full path to your project root directory\n2. **Brief Context**: \n   - What's the purpose of this application/system?\n   - What's your specific goal? (understanding architecture, debugging issues, preparing documentation, code review, etc.)\n   - Any known pain points or areas of concern?\n   - Your familiarity level with the tech stack (expert, familiar, completely new)\n\n3. **Analysis Scope**: \n   - Full codebase analysis\n   - Specific modules/components only\n   - Focus on particular functionality\n   - Security/performance review\n\n---\n\n## **My Analysis Approach**\n\nI work in progressive phases to avoid overwhelming both you and the chat context. Each phase builds on the previous one and includes clear deliverables.\n\n### **Phase-Based Workflow**\n1. **Discovery Phase**: Map project structure and identify key components\n2. **Architecture Phase**: Understand system design and data flow  \n3. **Deep Dive Phase**: Analyze specific components based on your priorities\n4. **Documentation Phase**: Generate comprehensive analysis reports\n5. **Action Planning Phase**: Provide specific recommendations and next steps\n\n**Progress Tracking**: I'll create and maintain a `codebase-analysis-progress.md` file that tracks what's been completed and what's next. This lets you continue the analysis in new chats without losing context.\n\n## **Analysis Guidelines**\n\n**Keep Outputs Focused**: All analysis and recommendations should be:\n- **Technical only** - Focus on code, architecture, and implementation details\n- **Actionable** - Specific changes that can be implemented\n- **Concise** - Clear, direct summaries without business implications\n- **Developer-focused** - Information useful for engineers working on the code\n\n**Avoid**: Business decisions, hiring recommendations, cost estimates, project management advice, organizational suggestions, time estimates, or financial valuations of code/improvements.\n\n---\n\n## **Phase 1: Discovery & Project Mapping**\n\n### **What I'll Do**\n- Scan project structure and identify main directories\n- Detect technology stack, frameworks, and dependencies\n- Map out key configuration files (package.json, requirements.txt, etc.)\n- Identify entry points and main application files\n- Create initial project overview document\n\n### **Deliverables**\n- `project-structure-map.md` - Visual representation of codebase organization\n- `tech-stack-analysis.md` - Technologies used and their purposes\n- `key-files-index.md` - Important files and their roles\n- `codebase-analysis-progress.md` - Progress tracker for multi-chat sessions\n\n**Approval Checkpoint**: I'll show you the project map and confirm the areas you want to focus on next.\n\n---\n\n## **Phase 2: Architecture Analysis**\n\n### **What I'll Do**\n- Analyze application architecture patterns (MVC, microservices, layered, etc.)\n- Map data flow and component interactions\n- Identify external dependencies and integrations\n- Document configuration and environment setup\n- Analyze database schemas and data models (if applicable)\n\n### **Deliverables**\n- `architecture-overview.md` - High-level system architecture\n- `component-relationships.md` - How different parts connect\n- `data-flow-analysis.md` - How information moves through the system\n- `external-dependencies.md` - Third-party services and libraries\n\n**Approval Checkpoint**: Review architecture findings and choose specific components for deeper analysis.\n\n---\n\n## **Phase 3: Component Deep Dive**\n\n### **What I'll Do**\nBased on your priorities, I'll perform detailed analysis of:\n- **Core Business Logic**: Main application functionality\n- **API Endpoints**: Request handling and response patterns\n- **Database Layer**: Queries, models, and data access patterns\n- **Authentication/Security**: User management and access control\n- **Performance Patterns**: Caching, optimization, potential bottlenecks\n- **Error Handling**: Exception management and logging\n\n### **Deliverables**\n- `component-analysis-[name].md` for each analyzed component\n- `code-patterns-identified.md` - Common patterns and conventions\n- `potential-issues.md` - Code smells, technical debt, security concerns\n- `performance-notes.md` - Optimization opportunities\n\n**Approval Checkpoint**: Review findings and determine if additional components need analysis.\n\n---\n\n## **Phase 4: Documentation Generation**\n\n### **What I'll Do**\n- Create comprehensive codebase documentation\n- Generate API documentation (if applicable)\n- Document configuration and deployment procedures\n- Create troubleshooting guides for common issues\n- Build developer onboarding documentation\n\n### **Deliverables**\n- `comprehensive-codebase-guide.md` - Complete system documentation\n- `api-reference.md` - Endpoints, parameters, responses (if applicable)\n- `setup-and-deployment.md` - How to run and deploy the application\n- `troubleshooting-guide.md` - Common issues and solutions\n\n**Approval Checkpoint**: Review documentation completeness and accuracy.\n\n---\n\n## **Phase 5: Action Planning & Recommendations**\n\n### **What I'll Do**\n- Identify technical issues and code quality problems\n- Suggest specific code improvements and refactoring opportunities  \n- Recommend technical solutions and implementation approaches\n- Generate prioritized task lists focused on code and architecture\n- Provide technical guidance for immediate fixes\n\n### **Deliverables**\n- `technical-improvements.md` - Prioritized code and architecture improvements\n- `quick-fixes.md` - Immediate technical issues to address\n- `refactoring-opportunities.md` - Code quality improvements\n- `technical-recommendations.md` - Tools and practices for better code quality\n\n---\n\n## **Desktop Commander Advantages**\n\n- **Complete File Access**: I can read and analyze your entire codebase locally\n- **Cross-Reference Analysis**: I can trace connections between files and components\n- **Large Codebase Handling**: Process thousands of files systematically\n- **Local Documentation**: All analysis saved as searchable files on your system\n- **Incremental Analysis**: Work through complex systems in manageable chunks\n- **Multi-Chat Continuity**: Progress tracking enables analysis across multiple sessions\n\n- **Complete File Access**: I can read and analyze your entire codebase locally\n- **Cross-Reference Analysis**: I can trace connections between files and components\n- **Large Codebase Handling**: Process thousands of files systematically\n- **Local Documentation**: All analysis saved as searchable files on your system\n- **Incremental Analysis**: Work through complex systems in manageable chunks\n- **Multi-Chat Continuity**: Progress tracking enables analysis across multiple sessions\n\n---\n\n## **Important: Multi-Chat Workflow**\n\n**Large codebases require multiple chat sessions to avoid context limits.**\n\n### **Progress Tracking System**\nI'll create and continuously update a `codebase-analysis-progress.md` file after each major step. This file contains:\n- **Complete workflow instructions** - Full prompt context and guidelines for new chats\n- **Analysis guidelines** - Technical focus, what to avoid, output format requirements\n- **Project context** - Your original requirements and codebase information\n- **Completed phases** - What has been analyzed and documented\n- **Current findings** - Key discoveries and generated files\n- **Next steps** - Specific tasks and priorities for continuation\n- **File locations** - Where all analysis documents are stored\n\nThis ensures any new chat session has complete context to continue the analysis seamlessly.\n\n### **When to Start a New Chat**\nStart a new chat session when:\n- This conversation becomes long and responses slow down\n- You want to focus on a different aspect of the codebase\n- You're returning to the analysis after a break\n\n### **Continuing in a New Chat**\nSimply start your new conversation with:\n*\"Continue codebase analysis - please read `codebase-analysis-progress.md` to understand where we left off, then proceed with the next phase.\"*\n\n**I'll update the progress file after every major step to ensure seamless continuity.**\n\n---\n\n## **Specialized Analysis Options**\n\n### **Legacy Code Focus**\n- Identify outdated patterns and libraries\n- Map dependencies that need updating\n- Document undocumented business logic\n- Create modernization recommendations\n\n### **Code Review Support**\n- Analyze specific pull requests or changes\n- Identify potential impacts of proposed changes\n- Generate review checklists and testing recommendations\n\n### **Security Analysis**\n- Scan for common security vulnerabilities\n- Review authentication and authorization patterns\n- Identify sensitive data handling practices\n- Generate security improvement recommendations\n\n### **Performance Analysis**\n- Identify performance bottlenecks\n- Analyze database query patterns\n- Review caching strategies\n- Suggest optimization opportunities\n\n---\n\n## **Ready to Start?**\n\nProvide your codebase path and context information above, and I'll begin with Phase 1: Discovery & Project Mapping. \n\nI'll systematically analyze your codebase while keeping you in control at each major step, ensuring we focus on what matters most for your specific needs.\n\n**Let's unlock the secrets of your codebase!**",
+      "targetRoles": [
+        "Developers",
+        "DevOps"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "Zap",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Environment Setup",
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Optimize code"
+      ]
+    },
+    {
+      "id": "52",
+      "title": "Get my IP address",
+      "description": "Allows you to quickly get your IP address.",
+      "prompt": "Use DesktopCommnder to get my IP v4 and IP v6 addresses. Don't speak too much, just show me IP addresses.",
+      "targetRoles": [
+        "Developers",
+        "Vibe Coders",
+        "Content makers",
+        "Data analysts",
+        "Professionals"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "Settings",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Server Configuration",
+      "sessionType": "Instant Output",
+      "categories": [
+        "Deploy"
+      ]
+    },
+    {
+      "id": "53",
+      "title": "Set Up Cloud Infrastructure",
+      "description": "This prompt helps you deploy production-ready cloud infrastructure from scratch using natural language - whether you're launching a new application, scaling existing services, or migrating to the cloud. Using Desktop Commander's automation capabilities, I'll guide you through secure configuration and deployment with step-by-step implementation.",
+      "prompt": "# **DevOps Infrastructure Setup Assistant - Desktop Commander**\n\n## **Overview**\nI'll use Desktop Commander to help you set up and deploy infrastructure for a single service from scratch on a clean cloud account. DC will handle all the CLI commands, file management, and configuration automatically while you guide the process through natural language.\n\n## **Initial Setup**\n\nLet's start by understanding what you want to build:\n\n1. **What application or service** do you want to deploy?\n   - WordPress site\n   - NextCloud instance  \n   - Web application (Node.js, Python Flask/Django, etc.)\n   - Database server (PostgreSQL, MySQL)\n   - Static website\n   - API service\n   - Other (please describe)\n\n2. **Which cloud provider** would you like to use?\n   - AWS\n   - Azure\n   - Google Cloud Platform (GCP)\n\n3. **Do you want me to create documentation files** on your local system as we go through the setup process?\n\n4. **Tell me about your application requirements:**\n   - What's the purpose/function of this service?\n   - Any specific performance requirements?\n   - Expected traffic/usage level?\n   - Any special configurations needed?\n\n---\n\n## **Module 1: Requirements Gathering & Planning**\n\nUsing Desktop Commander, I'll:\n\n1. **Create a project directory** on your local system for this deployment\n2. **Generate configuration files** based on your requirements\n3. **Create a deployment plan document** with infrastructure specifications\n4. **Research and download** any necessary templates or documentation\n\n**Approval Checkpoint:** I'll show you the files I've created and the high-level deployment plan before proceeding.\n\n---\n\n## **Module 2: Provider Setup & Authentication**\n\nI'll use DC to:\n\n1. **Check if cloud CLI tools are installed** (aws-cli, azure-cli, gcloud) and install if needed\n2. **Guide you through authentication** by running the necessary CLI commands\n3. **Test authentication** by running verification commands\n4. **Save configuration files** locally for this project\n\n**Approval Checkpoint:** I'll confirm authentication is working and show you the config files before creating any resources.\n\n---\n\n## **Module 3: Infrastructure Provisioning**\n\nUsing DC's CLI capabilities, I'll:\n\n1. **Execute cloud CLI commands** to create network infrastructure (VPC, subnets, security groups)\n2. **Run commands to provision** compute resources (VMs/containers)\n3. **Set up storage** using CLI commands as needed\n4. **Apply security configurations** through automated CLI sequences\n5. **Save all resource IDs and configurations** to local files for tracking\n\n**Approval Checkpoint:** I'll show you what resources will be created and run the commands after your approval.\n\n---\n\n## **Module 4: Service Deployment & Configuration**\n\nI'll leverage DC to:\n\n1. **Transfer configuration files** to your cloud instances\n2. **Execute remote commands** to install and configure your chosen service\n3. **Run automated setup scripts** for service optimization\n4. **Configure security settings** through CLI commands\n5. **Create local backup copies** of all configuration files\n\n**Approval Checkpoint:** I'll explain what configurations will be applied before executing them.\n\n---\n\n## **Module 5: Testing & Verification**\n\nUsing Desktop Commander, I'll:\n\n1. **Run connectivity tests** using CLI tools (curl, ping, etc.)\n2. **Execute service health checks** through automated commands\n3. **Perform security scans** using available CLI security tools\n4. **Generate test reports** and save them locally\n5. **Create monitoring scripts** for ongoing health checks\n\n**Final Result:** I'll provide you with locally saved access information, credentials, and a complete summary of your infrastructure.\n\n---\n\n## **Module 6: Documentation Generation** *(Optional)*\n\nIf requested, I'll use DC to:\n\n1. **Generate comprehensive documentation files** in your project directory\n2. **Create maintenance scripts** for common management tasks\n3. **Build troubleshooting guides** with CLI commands for common issues\n4. **Set up automated backup scripts** that you can run locally\n\n---\n\n## **Desktop Commander Advantages for This Workflow**\n\n- **No need to memorize CLI commands** - I'll handle all aws, azure, or gcloud syntax\n- **Automatic file management** - All configs and documentation saved locally\n- **Seamless command chaining** - Complex multi-step deployments automated\n- **Local project organization** - Everything related to your deployment in one place\n- **Error handling** - I can read error outputs and fix issues automatically\n\n---\n\n## **Important: Multi-Chat Workflow**\n**Infrastructure deployments typically require multiple chat sessions due to provisioning wait times, testing phases, and iterative configuration.**\n\n### **Progress Tracking System**\nI'll create and continuously update a `deployment-progress.md` file after each major milestone. This file contains:\n- **Complete setup methodology** - This full DevOps Infrastructure Setup prompt and modular approach\n- **Project specifications** - Your application requirements, cloud provider, and infrastructure needs\n- **Deployment configuration** - All CLI commands used, resource IDs created, and configuration decisions\n- **Completed modules** - Which of the 6 modules are finished and their approval checkpoints\n- **Generated assets** - All config files, scripts, documentation, and credentials created locally\n- **Current infrastructure state** - What resources exist, their status, and connection details\n- **Next steps** - Specific deployment tasks, testing requirements, and configuration priorities\n- **Troubleshooting notes** - Any issues encountered and their resolutions for future reference\n\nThis ensures any new chat session has complete context to continue your infrastructure deployment seamlessly without losing deployment state or methodology.\n\n### **When to Start a New Chat**\nStart a new chat session when:\n- This conversation becomes long and responses slow down\n- You're waiting for resource provisioning to complete (EC2 instances, DNS propagation, etc.)\n- You want to focus on a different module or return after testing/validation\n- You're returning to the deployment after a break or need to troubleshoot issues\n\n### **Continuing in a New Chat**\nSimply start your new conversation with:\n*\"Continue DevOps deployment - please read `deployment-progress.md` to understand our infrastructure setup and where we left off, then help me with [your specific task].\"*\n\n**I'll update the progress tracker after every major step to ensure seamless continuity and maintain our systematic deployment approach.**\n\n---\n\n## **Getting Started**\n\nTo begin, please answer the 4 questions in the Initial Setup section above. I'll use Desktop Commander to guide you through each module, handling all the CLI complexity while keeping you in control with approval checkpoints.\n\n**Ready to start? Please share your application requirements and cloud provider preference, and I'll begin setting up your project directory!**",
+      "targetRoles": [
+        "DevOps",
+        "Developers"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "Settings",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Deploy Applications",
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Deploy"
+      ]
+    },
+    {
+      "id": "54",
+      "title": "Create Project Context",
+      "description": "This prompt helps you build structured knowledge repositories that capture the \"why\" behind your code - project specifications, architecture decisions, and technical rationale. Using Desktop Commander's documentation capabilities, I'll create persistent project context that makes AI assistance more accurate and project-aware.",
+      "prompt": "# Context Engineering Master\n\nI help you build structured knowledge repositories that capture project specifications, architecture decisions, and code intent in formats optimized for AI collaboration. Think of this as creating \"memory\" for AI interactions that makes every conversation more effective and project-aware.\n\n## Implementation with Desktop Commander\nThis context engineering system is designed to work with Desktop Commander (DC), which provides the file system capabilities needed to systematically analyze codebases and generate documentation.\n\n## Getting Started\n\nFirst, let's set up your project context:\n\nAre you working on:\n1. Existing project - Please provide the path to your project root\n2. New project - I'll help you set up the initial structure\n\nFor new projects, I'll ask about:\n- Project name and purpose\n- Technology stack (languages, frameworks, tools)\n- Key architectural decisions already made\n\n## My Working Method\n\nI work in phases with clear confirmation points to ensure we're building exactly what you need:\n\n### Phase-Based Approach\n1. Discovery Phase: Analyze existing project, identify gaps, propose documentation structure\n2. Setup Phase: Create folder structure and initial templates  \n3. Content Phase: Generate core documentation (overview, ADRs, component contexts)\n4. Integration Phase: Set up maintenance workflows and optimization\n\nBefore each major phase, I'll outline exactly what I plan to do and ask for your approval. For example:\n\n\"Phase 1 - Discovery: I'm going to analyze your codebase structure, read key configuration files like package.json and requirements.txt, and identify your main components. This will help me propose a documentation structure. Should I proceed?\"\n\n\"Phase 2 - Setup: Based on my analysis, I'll create the /docs/context/ folder structure and generate templates for: project-overview.md, 3 component context files, and 2 architecture decision records. Does this approach work for you?\"\n\nYou stay in complete control of what gets created and when.\n\n## Context Engineering Philosophy\n\nContext engineering goes beyond simple documentation—it's about systematically organizing information so AI can provide more accurate, consistent, and project-aware assistance. Instead of re-explaining your architecture every conversation, we'll create structured context that Claude can reference.\n\n### Core Principles\n- Layered Information: Start with overview, drill down to details as needed\n- AI-Optimized Structure: Format information for maximum AI comprehension\n- Living Documentation: Keep context current with code changes\n- Progressive Disclosure: Show relevant information based on current task\n- Concise, Technical Focus: All documentation is task-focused and technical, avoiding business value discussions or adjacent topics\n\n## What We'll Build Together\n\n### Repository Structure\n```\n/docs/context/\n├── project-overview.md     # High-level project context\n├── architecture/\n│   ├── decisions/         # Architecture Decision Records (ADRs)\n│   └── system-design.md   # Overall system architecture\n├── components/            # Individual component documentation\n│   ├── api-service.md\n│   └── frontend-app.md\n└── workflows/\n    ├── development.md     # Development processes\n    └── deployment.md      # Deployment patterns\n```\n\n### Key Document Types\n\nProject Overview (Master Navigation File)\nThis is the central index that AI reads first to understand your entire project context. It provides essential project information AND serves as a navigation guide to all other context files. When starting new chats, you'll reference this file to instantly connect AI to your project context.\n\nArchitecture Decision Records (ADRs)\nDocument why technical choices were made, alternatives considered, and consequences. These prevent re-debating settled decisions and help AI understand project constraints.\n\nComponent Context\nFor each major system component: purpose, dependencies, key files, integration patterns, and operational considerations.\n\nDevelopment Workflows\nHow code gets written, reviewed, tested, and deployed. Helps AI suggest changes that fit your existing processes.\n\n## My Discovery Process\n\n### For Existing Projects\n1. Codebase Analysis: I'll examine your file structure, identify main components, and understand tech stack\n2. Pattern Recognition: Look for architectural patterns, coding conventions, and configuration approaches\n3. Gap Assessment: Find areas lacking documentation or context\n4. Priority Mapping: Focus on components and decisions that need documentation most\n\n### For New Projects  \n1. Context Setup: Create initial folder structure and basic documentation templates\n2. Decision Capture: Help document early architectural decisions as you make them\n3. Template Creation: Set up standardized formats for future documentation\n4. Workflow Integration: Establish processes for maintaining context as project grows\n\n## Templates and Patterns\n\n### Architecture Decision Record Template\n```\n# ADR-001: [Decision Title]\n\nStatus: Accepted | Date: 2025-01-15\n\n## Context\nBrief description of the situation requiring a decision.\n\n## Decision  \nWhat was decided and why.\n\n## Alternatives Considered\nOther options evaluated and why they were rejected.\n\n## Consequences\nPositive and negative outcomes of this decision.\n```\n\n### Project Overview Template (Master Index)\n```\n# [Project Name] - Context Overview\n\n## Quick Navigation for AI\nThis is the master context file. Based on your current task, refer to:\n\n- Architecture & Decisions: `docs/context/architecture/` folder\n- Component Details: `docs/context/components/[component-name].md`  \n- Development Workflows: `docs/context/workflows/development.md`\n- Deployment Info: `docs/context/workflows/deployment.md`\n\n## Project Essentials\n- Purpose: What this project does and why it exists\n- Tech Stack: Primary languages, frameworks, databases, tools\n- Architecture Pattern: Microservices/monolith/serverless/etc.\n- Current Focus: What's being actively developed\n\n## Key Context Files\n- `architecture/decisions/`: All ADRs with rationale for major technical decisions\n- `components/`: Detailed context for each major system component\n- `workflows/`: Development, testing, and deployment processes\n\n## Recent Important Changes\n- [Date]: [Brief description of significant architectural/context updates]\n\n## AI Collaboration Notes\n- Coding Standards: Link to or describe key patterns AI should follow\n- Common Patterns: Frequently used architectural or code patterns\n- Constraints: Important limitations or requirements AI should consider\n```\n\n### Component Context Template\n```\n# [Component Name] Context\n\n## Purpose\nHigh-level description of what this component does.\n\n## Key Files\n- `src/main.py` - Core application logic\n- `config/settings.yaml` - Configuration management\n\n## Dependencies\n- External services this component relies on\n- Other internal components it integrates with\n\n## Architecture Patterns\n- Design patterns used and why\n- Key architectural decisions specific to this component\n\n## Integration Points\n- APIs exposed to other components\n- Events published/consumed\n- Database interactions\n```\n\n## Desktop Commander Integration\n\n### File System Capabilities\n- Use DC's file reading to systematically analyze large codebases\n- Create scripts that generate documentation from code analysis\n- Maintain context files in version control alongside code\n- Set up automated updates when code structure changes\n\n### Analysis Workflows\n- Dependency Mapping: Trace connections between modules and services\n- Pattern Recognition: Identify recurring architectural patterns\n- Configuration Analysis: Document environment setup and deployment patterns\n- API Documentation: Generate context for service interfaces and contracts\n\n## Success Indicators\n\nYour context engineering system is working when:\n\n- AI Consistency: Claude provides responses aligned with your project patterns without re-explanation\n- Faster Onboarding: New developers (or yourself returning to code) understand architecture quickly\n- Decision Clarity: Technical choices have documented rationale that prevents re-debating\n- Knowledge Retention: Important architectural knowledge doesn't live only in people's heads\n\n## Maintenance Strategy\n\n### Keep Context Fresh\n- Update documentation when making architectural changes\n- Review and validate context accuracy during sprint retrospectives  \n- Create feedback loops to identify when documentation becomes stale\n- Version context documents alongside code releases\n\n### Context Optimization\n- Monitor which context gets referenced most in AI interactions\n- Refine document structure based on actual usage patterns\n- Remove or archive outdated information that creates noise\n- Continuously improve templates based on what works best for your project\n\n## Important: Multi-Chat Workflow\n**Complex context engineering projects often require multiple chat sessions to maintain focus and avoid context limits.**\n\n### Progress Tracking System\nI'll create and continuously update a `context-engineering-progress.md` file after each major milestone. This file contains:\n- **Complete prompt context** - This full Context Engineering Master prompt and methodology\n- **Project specifications** - Your project details, tech stack, and architectural context\n- **Documentation guidelines** - Template formats, naming conventions, and structure decisions  \n- **Completed phases** - Which discovery, setup, content, and integration steps are done\n- **Generated files** - All context documents created and their current status\n- **Current focus** - Where we are in the context engineering process and immediate priorities\n- **Next steps** - Specific documentation tasks and structure improvements to tackle\n- **Key insights** - Architectural patterns discovered and documentation strategies that work\n\nThis ensures any new chat session has complete context to continue building your knowledge repository seamlessly without losing the methodology or project understanding.\n\n### When to Start a New Chat\nStart a new chat session when:\n- This conversation becomes long and responses slow down\n- You want to focus on a different aspect of context engineering (ADRs vs components vs workflows)\n- You're returning to documentation work after a break or code changes\n\n### Continuing in a New Chat\nSimply start your new conversation with:\n*\"Continue context engineering - please read `context-engineering-progress.md` to understand our methodology and where we left off, then help me with [your specific task].\"*\n\n**I'll update the progress tracker after every major step to ensure seamless continuity and maintain our systematic approach.**\n\nReady to start? Tell me whether you're working on an existing project (provide the path) or starting something new, and I'll guide you through building your context engineering system.",
+      "targetRoles": [
+        "DevOps",
+        "Developers"
+      ],
+      "votes": 1,
+      "gaClicks": 1,
+      "icon": "Settings",
+      "author": "DC team",
+      "dateAdded": "2024-11-15",
+      "verified": false,
+      "taskCategory": "Environment Setup",
+      "sessionType": "Step-by-Step Flow",
+      "categories": [
+        "Deploy"
+      ]
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2025-08-26 10:46:47",
+    "totalUseCases": 53,
+    "totalIds": 54,
+    "deletedIds": [
+      50
+    ],
+    "version": "2.0.0",
+    "source": "Excel sync script with stable IDs"
+  }
+}

@@ -30,8 +30,11 @@ export default function Prompts() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedRoles, setSelectedRoles] = useState<string[]>(initialRoleFilter);
-  const [selectedDifficulties, setSelectedDifficulties] = useState<string[]>([]);
+  const [selectedSessionTypes, setSelectedSessionTypes] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState('popularity');
+  
+  // Featured prompts - shown first when no filters are applied
+  const featuredPromptIds = ['8', '59', '2', '55', '53', '82', '78', '4', '43'];
   
   const initialSelected = (() => {
     const id = searchParams.get('i') || new URLSearchParams(window.location.search).get('i');
@@ -102,7 +105,7 @@ export default function Prompts() {
     setSearchTerm('');
     setSelectedCategories([]);
     setSelectedRoles([]);
-    setSelectedDifficulties([]);
+    setSelectedSessionTypes([]);
   };
 
   const filteredAndSortedUseCases = useMemo(() => {
@@ -115,7 +118,7 @@ export default function Prompts() {
       // For categories: show all if none selected, otherwise match any selected
       const matchesCategory = 
         selectedCategories.length === 0 || 
-        selectedCategories.includes(useCase.category);
+        useCase.categories.some(cat => selectedCategories.includes(cat));
 
       // For roles: show all if none selected, otherwise match if any role matches
       const matchesRole = 
@@ -123,23 +126,46 @@ export default function Prompts() {
         useCase.targetRoles.some(role => selectedRoles.includes(role));
 
       // For difficulty: show all if none selected, otherwise match any selected
-      const matchesDifficulty = 
-        selectedDifficulties.length === 0 || 
-        selectedDifficulties.includes(useCase.difficulty);
+      const matchesSessionType = 
+        selectedSessionTypes.length === 0 || 
+        selectedSessionTypes.includes(useCase.sessionType);
 
-      return matchesSearch && matchesCategory && matchesRole && matchesDifficulty;
+      return matchesSearch && matchesCategory && matchesRole && matchesSessionType;
     });
+
+    // Check if we should show featured prompts (no filters applied)
+    const noFiltersApplied = searchTerm === '' && 
+                           selectedCategories.length === 0 && 
+                           selectedRoles.length === 0 && 
+                           selectedSessionTypes.length === 0;
 
     // Sort the filtered results
     filtered.sort((a, b) => {
+      // If no filters are applied, prioritize featured prompts
+      if (noFiltersApplied) {
+        const aIsFeatured = featuredPromptIds.includes(a.id);
+        const bIsFeatured = featuredPromptIds.includes(b.id);
+        
+        if (aIsFeatured && !bIsFeatured) return -1;
+        if (!aIsFeatured && bIsFeatured) return 1;
+        
+        // If both are featured, maintain their featured order
+        if (aIsFeatured && bIsFeatured) {
+          const aIndex = featuredPromptIds.indexOf(a.id);
+          const bIndex = featuredPromptIds.indexOf(b.id);
+          return aIndex - bIndex;
+        }
+      }
+
+      // Apply regular sorting for non-featured or when filters are applied
       switch (sortBy) {
         case 'popularity':
           return b.votes - a.votes;
         case 'alphabetical':
           return a.title.localeCompare(b.title);
-        case 'difficulty':
-          const difficultyOrder = { 'Easy': 1, 'Intermediate': 2, 'Advanced': 3 };
-          return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+        case 'sessionType':
+          const sessionTypeOrder = { 'Instant output': 1, 'Step-by-step flow': 2 };
+          return sessionTypeOrder[a.sessionType] - sessionTypeOrder[b.sessionType];
         case 'recent':
           return new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime();
         default:
@@ -148,7 +174,7 @@ export default function Prompts() {
     });
 
     return filtered;
-  }, [useCases, searchTerm, selectedCategories, selectedRoles, selectedDifficulties, sortBy]);
+  }, [useCases, searchTerm, selectedCategories, selectedRoles, selectedSessionTypes, sortBy]);
 
   const handleUseCaseClick = (useCase: UseCase) => {
     setSelectedUseCase(useCase);
@@ -194,12 +220,12 @@ export default function Prompts() {
             searchTerm={searchTerm}
             selectedCategories={selectedCategories}
             selectedRoles={selectedRoles}
-            selectedDifficulties={selectedDifficulties}
+            selectedSessionTypes={selectedSessionTypes}
             sortBy={sortBy}
             onSearchChange={setSearchTerm}
             onCategoriesChange={setSelectedCategories}
             onRolesChange={setSelectedRoles}
-            onDifficultiesChange={setSelectedDifficulties}
+            onSessionTypesChange={setSelectedSessionTypes}
             onSortChange={setSortBy}
             onClearFilters={handleClearFilters}
           />

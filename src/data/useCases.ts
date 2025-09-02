@@ -12,9 +12,10 @@ export interface UseCase {
   title: string;
   description: string;
   prompt: string;
-  difficulty: 'Easy' | 'Intermediate' | 'Advanced';
+  sessionType: 'Instant output' | 'Step-by-step flow';
   targetRoles: string[];
-  category: string;
+  categories: string[];  // Updated to support multiple categories
+  taskCategory?: string;  // New field for DevOps task categorization
   votes: number;
   icon: string;
   author: string;
@@ -25,8 +26,20 @@ export interface UseCase {
 // Import prompts from JSON file
 export const useCases: UseCase[] = useCasesData.useCases;
 
-// Extract unique categories from prompts
-export const categories = Array.from(new Set(useCases.map(uc => uc.category))).sort();
+// Extract unique categories from prompts and add custom categories
+const dataCategories = Array.from(new Set(useCases.flatMap(uc => uc.categories)));
+const customCategories = ['Optimize workflow']; // Add custom categories that may not have prompts yet
+export const categories = Array.from(new Set([...dataCategories, ...customCategories])).sort();
+
+// Define available task categories for DevOps filtering
+export const taskCategories = [
+  'All Categories',
+  'Environment Setup',
+  'Database Management', 
+  'Server Configuration',
+  'Deploy Applications',
+  'Monitor Systems'
+];
 
 // Extract unique roles from prompts and create role options with special tags
 const uniqueRoles = Array.from(new Set(useCases.flatMap(uc => uc.targetRoles))).sort();
@@ -41,4 +54,10 @@ export const roles: RoleOption[] = uniqueRoles.map(role => {
   return { value: role };
 });
 
-export const difficulties = ['Easy', 'Intermediate', 'Advanced'];
+export const sessionTypes = ['Instant output', 'Step-by-step flow'];
+
+// Session type explanations for tooltips
+export const sessionTypeExplanations = {
+  'Instant output': 'Get immediate, ready-to-use results in a single prompt',
+  'Step-by-step flow': 'This prompt runs in multiple steps and leads you through an iterative workflow'
+};

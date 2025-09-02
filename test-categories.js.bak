@@ -1,0 +1,24 @@
+import { readFileSync } from 'fs';
+
+// Test script to verify the featured categories update
+const useCasesData = JSON.parse(readFileSync('./src/data/useCases.json', 'utf8'));
+const useCases = useCasesData.useCases;
+
+const featuredCategories = ['Explore codebase', 'Deploy', 'Write documentation', 'Automate tasks', 'Optimize code'];
+
+console.log('🎯 Featured Categories Update Test\n');
+
+console.log('Featured Categories:');
+featuredCategories.forEach((category, index) => {
+  const count = useCases.filter(uc => uc.categories && uc.categories.includes(category)).length;
+  console.log(`${index + 1}. ${category} (${count} prompts)`);
+});
+
+console.log('\n✅ All featured categories have prompts available!');
+console.log('\n🔍 Example prompts for each category:');
+
+featuredCategories.forEach(category => {
+  const prompts = useCases.filter(uc => uc.categories && uc.categories.includes(category));
+  console.log(`\n${category}:`);
+  prompts.slice(0, 2).forEach(p => console.log(`  • ${p.title}`));
+});

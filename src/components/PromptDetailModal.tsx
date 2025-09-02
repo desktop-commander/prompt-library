@@ -3,11 +3,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { UseCase } from '@/data/useCases';
+import { UseCase, sessionTypeExplanations } from '@/data/useCases';
 import { formatCompactNumber } from '@/lib/utils';
 import { 
   Heart, 
-  Calendar,
   User,
   FolderSearch,
   FolderOpen,
@@ -64,6 +63,7 @@ const iconMap = {
 
 export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDetailModalProps) {
   const [hasVoted, setHasVoted] = useState(false);
+  const [showSessionTypeExplainer, setShowSessionTypeExplainer] = useState(false);
   const [showWizard, setShowWizard] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const { toast } = useToast();
@@ -93,7 +93,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
       posthog.capture('prompt_modal_opened', {
         prompt_id: useCase.id,
         prompt_title: useCase.title,
-        prompt_category: useCase.category,
+        prompt_categories: useCase.categories,
         prompt_difficulty: useCase.difficulty,
         prompt_author: useCase.author,
         target_roles: useCase.targetRoles,
@@ -281,7 +281,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
     posthog.capture('use_prompt_button_clicked', {
       prompt_id: useCase.id,
       prompt_title: useCase.title,
-      prompt_category: useCase.category,
+      prompt_categories: useCase.categories,
       prompt_difficulty: useCase.difficulty,
       prompt_author: useCase.author,
       time_before_use_seconds: timeInModal,
@@ -311,7 +311,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
       posthog.capture('prompt_modal_closed', {
         prompt_id: useCase.id,
         prompt_title: useCase.title,
-        prompt_category: useCase.category,
+        prompt_categories: useCase.categories,
         time_in_modal_seconds: timeInModal,
         engagement_level: timeInModal > 30 ? 'high' : timeInModal > 10 ? 'medium' : 'low',
         // Phase 3: Enhanced tracking context
@@ -339,7 +339,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
       posthog.capture('prompt_voted', {
         prompt_id: useCase.id,
         prompt_title: useCase.title,
-        prompt_category: useCase.category,
+        prompt_categories: useCase.categories,
         prompt_difficulty: useCase.difficulty,
         prompt_author: useCase.author,
         time_before_vote_seconds: timeInModal,
@@ -360,16 +360,14 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
     }
   };
 
-  const getDifficultyClass = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Easy':
-        return 'difficulty-easy';
-      case 'Intermediate':
-        return 'difficulty-intermediate';
-      case 'Advanced':
-        return 'difficulty-advanced';
+  const getSessionTypeClass = (sessionType: string) => {
+    switch (sessionType) {
+      case 'Instant output':
+        return 'session-instant-output';
+      case 'Step-by-step flow':
+        return 'session-step-by-step-flow';
       default:
-        return 'difficulty-easy';
+        return 'session-instant-output';
     }
   };
 
@@ -409,7 +407,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
     posthog.capture('share_button_clicked', {
       prompt_id: useCase.id,
       prompt_title: useCase.title,
-      prompt_category: useCase.category,
+      prompt_categories: useCase.categories,
       prompt_difficulty: useCase.difficulty,
       prompt_author: useCase.author,
       target_roles: useCase.targetRoles,
@@ -518,22 +516,60 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
                     Verified by DC team
                   </span>
                 )}
-                <Badge className={`difficulty-badge ${getDifficultyClass(useCase.difficulty)} text-xs`}>
-                  {useCase.difficulty}
-                </Badge>
-                <Badge variant="outline" className="text-xs">{useCase.category}</Badge>
+                <div className="relative inline-block">
+                  <Badge 
+                    className={`difficulty-badge ${getSessionTypeClass(useCase.sessionType)} text-xs flex items-center gap-1 cursor-pointer hover:opacity-90 transition-opacity`}
+                    onClick={() => setShowSessionTypeExplainer(!showSessionTypeExplainer)}
+                  >
+                    <span>{useCase.sessionType}</span>
+                    <Info className="h-3 w-3" />
+                  </Badge>
+                  
+                  {/* Floating bubble tooltip */}
+                  {showSessionTypeExplainer && (
+                    <>
+                      {/* Click-outside backdrop */}
+                      <div 
+                        className="fixed inset-0 z-40"
+                        onClick={() => setShowSessionTypeExplainer(false)}
+                      />
+                      
+                      {/* Tooltip bubble */}
+                      <div className="absolute top-full left-0 mt-2 z-50 w-72 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3 animate-in fade-in-0 zoom-in-95 duration-200">
+                        <div className="flex items-start gap-2">
+                          <div className="w-2 h-2 rounded-full bg-blue-500 mt-1 flex-shrink-0"></div>
+                          <div className="flex-1">
+                            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                              {sessionTypeExplanations[useCase.sessionType as keyof typeof sessionTypeExplanations]}
+                            </p>
+                          </div>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setShowSessionTypeExplainer(false);
+                            }}
+                            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                        
+                        {/* Arrow pointing up to the badge */}
+                        <div className="absolute -top-2 left-4 w-4 h-4 bg-white dark:bg-gray-800 border-l border-t border-gray-200 dark:border-gray-700 rotate-45"></div>
+                      </div>
+                    </>
+                  )}
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {useCase.categories.map((category, index) => (
+                    <Badge key={index} variant="outline" className="text-xs">{category}</Badge>
+                  ))}
+                </div>
                 <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
                   <User className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="truncate">{useCase.author}</span>
                 </div>
-                <div className="hidden sm:flex items-center gap-1 text-sm text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
-                  <span>Added {new Date(useCase.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                </div>
-                <div className="sm:hidden flex items-center gap-1 text-xs text-muted-foreground">
-                  <Calendar className="h-3 w-3" />
-                  <span>{new Date(useCase.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-                </div>
+
               </div>
             </div>
             <div className="shrink-0 hidden sm:flex items-center gap-2" aria-label="All-time engagement">
@@ -580,7 +616,7 @@ export function PromptDetailModal({ useCase, isOpen, onClose, onVote }: PromptDe
               <h3 className="text-base sm:text-lg font-semibold">Complete Prompt</h3>
             </div>
             <div 
-              className="p-3 sm:p-4 bg-dc-surface-elevated rounded-lg border max-h-[40vh] overflow-y-auto min-w-0"
+              className="p-3 sm:p-4 bg-dc-surface-elevated rounded-lg border min-w-0"
               onMouseUp={handleTextSelection}
               onKeyUp={handleTextSelection}
               onContextMenu={handleContextMenu}

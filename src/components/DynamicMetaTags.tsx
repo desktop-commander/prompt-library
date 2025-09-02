@@ -29,7 +29,7 @@ export const DynamicMetaTags = ({ useCase, isPromptPage }: DynamicMetaTagsProps)
     if (useCase && isPromptPage) {
       // Dynamic meta tags for individual prompts
       const promptTitle = `${useCase.title} - Desktop Commander Automation Template`;
-      const promptDescription = `${useCase.description} Difficulty: ${useCase.difficulty}. Category: ${useCase.category}. AI automation template for Desktop Commander.`;
+      const promptDescription = `${useCase.description} Session Type: ${useCase.sessionType}. Categories: ${useCase.categories.join(', ')}. AI automation template for Desktop Commander.`;
       const promptUrl = `https://library.desktopcommander.app/?i=${useCase.id}`;
 
       // Update title
@@ -98,8 +98,8 @@ export const DynamicMetaTags = ({ useCase, isPromptPage }: DynamicMetaTagsProps)
           }
         },
         "totalTime": "PT5M",
-        "difficulty": useCase.difficulty,
-        "keywords": `${useCase.category}, ${useCase.targetRoles.join(', ')}, Desktop Commander, AI automation`,
+        "sessionType": useCase.sessionType,
+        "keywords": `${useCase.categories.join(', ')}, ${useCase.targetRoles.join(', ')}, Desktop Commander, AI automation`,
         "aggregateRating": useCase.votes > 0 ? {
           "@type": "AggregateRating",
           "ratingValue": "4.5",

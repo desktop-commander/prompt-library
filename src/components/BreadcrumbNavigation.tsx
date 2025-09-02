@@ -72,7 +72,7 @@ export const BreadcrumbNavigation = ({ items, useCase }: BreadcrumbNavigationPro
 export const getBreadcrumbsForPrompt = (useCase: UseCase): BreadcrumbItem[] => [
   { label: 'Home', href: '/' },
   { label: 'Prompts', href: '/prompts' },
-  { label: useCase.category, href: `/prompts?category=${encodeURIComponent(useCase.category)}` },
+  { label: useCase.categories[0] || 'Uncategorized', href: `/prompts?category=${encodeURIComponent(useCase.categories[0] || '')}` },
   { label: useCase.title, current: true }
 ];
 

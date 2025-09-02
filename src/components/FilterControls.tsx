@@ -3,18 +3,18 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, X } from 'lucide-react';
 import { MultiSelect } from '@/components/MultiSelect';
-import { categories, roles, difficulties, RoleOption } from '@/data/useCases';
+import { categories, roles, sessionTypes, RoleOption } from '@/data/useCases';
 
 interface FilterControlsProps {
   searchTerm: string;
   selectedCategories: string[];
   selectedRoles: string[];
-  selectedDifficulties: string[];
+  selectedSessionTypes: string[];
   sortBy: string;
   onSearchChange: (value: string) => void;
   onCategoriesChange: (value: string[]) => void;
   onRolesChange: (value: string[]) => void;
-  onDifficultiesChange: (value: string[]) => void;
+  onSessionTypesChange: (value: string[]) => void;
   onSortChange: (value: string) => void;
   onClearFilters: () => void;
 }
@@ -23,19 +23,19 @@ export function FilterControls({
   searchTerm,
   selectedCategories,
   selectedRoles,
-  selectedDifficulties,
+  selectedSessionTypes,
   sortBy,
   onSearchChange,
   onCategoriesChange,
   onRolesChange,
-  onDifficultiesChange,
+  onSessionTypesChange,
   onSortChange,
   onClearFilters
 }: FilterControlsProps) {
   const hasActiveFilters = 
     selectedCategories.length > 0 || 
     selectedRoles.length > 0 || 
-    selectedDifficulties.length > 0 ||
+    selectedSessionTypes.length > 0 ||
     searchTerm.length > 0;
 
   return (
@@ -86,12 +86,12 @@ export function FilterControls({
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-muted-foreground">Difficulty</label>
+          <label className="text-sm font-medium text-muted-foreground">Session Type</label>
           <MultiSelect
-            options={difficulties}
-            selected={selectedDifficulties}
-            onChange={onDifficultiesChange}
-            placeholder="All Difficulties"
+            options={sessionTypes}
+            selected={selectedSessionTypes}
+            onChange={onSessionTypesChange}
+            placeholder="All Session Types"
           />
         </div>
 
@@ -104,7 +104,7 @@ export function FilterControls({
             <SelectContent>
               <SelectItem value="popularity">Most Popular</SelectItem>
               <SelectItem value="alphabetical">Alphabetical</SelectItem>
-              <SelectItem value="difficulty">Difficulty</SelectItem>
+              <SelectItem value="sessionType">Session Type</SelectItem>
               <SelectItem value="recent">Recently Added</SelectItem>
             </SelectContent>
           </Select>

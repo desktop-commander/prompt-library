@@ -1,0 +1,36 @@
+// Debug component - add this to any page to test
+import { Zap } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+
+export function SessionTypeDebug() {
+  const testSessionTypes = ['Instant Output', 'Step-by-Step Flow'];
+  
+  const getCardSessionTypeDisplay = (sessionType: string) => {
+    switch (sessionType) {
+      case 'Instant Output':
+        return { text: 'Instant', icon: Zap };
+      case 'Step-by-Step Flow':
+        return { text: 'Step-by-Step', icon: null };
+      default:
+        return { text: sessionType, icon: null };
+    }
+  };
+  
+  return (
+    <div className="p-4 border rounded-lg">
+      <h3>Session Type Debug</h3>
+      {testSessionTypes.map(sessionType => {
+        const display = getCardSessionTypeDisplay(sessionType);
+        return (
+          <div key={sessionType} className="mb-2">
+            <p>Original: {sessionType}</p>
+            <Badge variant="outline" className="flex items-center gap-1 w-fit">
+              {display.icon && <display.icon className="h-3 w-3" />}
+              <span>{display.text}</span>
+            </Badge>
+          </div>
+        );
+      })}
+    </div>
+  );
+}

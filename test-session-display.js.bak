@@ -1,0 +1,22 @@
+// Quick test to verify session type display changes
+import { readFileSync } from 'fs';
+
+const useCasesData = JSON.parse(readFileSync('./src/data/useCases.json', 'utf8'));
+const useCases = useCasesData.useCases;
+
+console.log('🎯 Session Type Display Test\n');
+
+// Count session types
+const instantCount = useCases.filter(uc => uc.sessionType === 'Instant Output').length;
+const stepByStepCount = useCases.filter(uc => uc.sessionType === 'Step-by-Step Flow').length;
+
+console.log('Session Type Distribution:');
+console.log(`⚡ Instant Output → "Instant ⚡" (${instantCount} prompts)`);
+console.log(`📋 Step-by-Step Flow → "Step-by-Step" (${stepByStepCount} prompts)`);
+
+console.log('\n✅ Changes implemented:');
+console.log('- Cards: Shortened labels + lightning icon for Instant');  
+console.log('- Modals: Keep full text (unchanged)');
+console.log('- Tooltips: Removed from cards (broken), kept in modals');
+
+console.log('\n🖥️  Server running at: http://localhost:8087/');
