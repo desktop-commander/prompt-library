@@ -177,6 +177,33 @@ export default function Prompts() {
   }, [useCases, searchTerm, selectedCategories, selectedRoles, selectedSessionTypes, sortBy]);
 
   const handleUseCaseClick = (useCase: UseCase) => {
+    // Get viral session info if available
+    const viralSession = localStorage.getItem('style_scout_viral_session');
+    const viralInfo = viralSession ? JSON.parse(viralSession) : null;
+    
+    // Track prompt click with enhanced metadata including current role filters
+    posthog.capture('prompt_clicked', {
+      prompt_id: useCase.id,
+      prompt_title: useCase.title,
+      prompt_categories: useCase.categories,
+      prompt_session_type: useCase.sessionType,
+      prompt_author: useCase.author,
+      target_roles: useCase.targetRoles,
+      // Current filter context
+      current_role_filters: selectedRoles.length > 0 ? selectedRoles : ['All'],
+      current_category_filters: selectedCategories,
+      current_session_type_filters: selectedSessionTypes,
+      search_term: searchTerm || null,
+      sort_by: sortBy,
+      source_page: 'prompts',
+      // Phase 3: Viral tracking data
+      is_viral_session: !!viralInfo,
+      viral_entry_prompt: viralInfo?.prompt_id,
+      viral_referrer: viralInfo?.referrer,
+      time_since_viral_entry: viralInfo ? 
+        Math.round((new Date().getTime() - new Date(viralInfo.entry_time).getTime()) / 1000) : null
+    });
+    
     setSelectedUseCase(useCase);
     setIsModalOpen(true);
     setSearchParams({ i: useCase.id });
@@ -185,6 +212,33 @@ export default function Prompts() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSearchParams({});
+  };
+
+  const handleRoleChange = (newRoles: string[]) => {
+    // Get viral session info if available
+    const visitCount = parseInt(localStorage.getItem('style_scout_visit_count') || '0');
+    const viralSession = localStorage.getItem('style_scout_viral_session');
+    const viralInfo = viralSession ? JSON.parse(viralSession) : null;
+    
+    // Track role filter change with enhanced metadata
+    posthog.capture('role_filter_changed', {
+      previous_roles: selectedRoles,
+      new_roles: newRoles,
+      current_categories: selectedCategories,
+      current_session_types: selectedSessionTypes,
+      search_term: searchTerm || null,
+      sort_by: sortBy,
+      source_page: 'prompts',
+      // Phase 3: Enhanced tracking
+      visit_count: visitCount,
+      is_viral_session: !!viralInfo,
+      viral_entry_prompt: viralInfo?.prompt_id,
+      viral_referrer: viralInfo?.referrer,
+      time_since_viral_entry: viralInfo ? 
+        Math.round((new Date().getTime() - new Date(viralInfo.entry_time).getTime()) / 1000) : null
+    });
+    
+    setSelectedRoles(newRoles);
   };
 
   useEffect(() => {
@@ -224,7 +278,7 @@ export default function Prompts() {
             sortBy={sortBy}
             onSearchChange={setSearchTerm}
             onCategoriesChange={setSelectedCategories}
-            onRolesChange={setSelectedRoles}
+            onRolesChange={handleRoleChange}
             onSessionTypesChange={setSelectedSessionTypes}
             onSortChange={setSortBy}
             onClearFilters={handleClearFilters}

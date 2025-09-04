@@ -247,7 +247,7 @@ const Index = () => {
     const viralSession = localStorage.getItem('style_scout_viral_session');
     const viralInfo = viralSession ? JSON.parse(viralSession) : null;
     
-    // Track prompt click with enhanced metadata
+    // Track prompt click with enhanced metadata including current filter context
     posthog.capture('prompt_clicked', {
       prompt_id: useCase.id,
       prompt_title: useCase.title,
@@ -255,6 +255,9 @@ const Index = () => {
       prompt_session_type: useCase.sessionType,
       prompt_author: useCase.author,
       target_roles: useCase.targetRoles,
+      // Current filter context
+      current_role_filter: selectedRole,
+      current_category_filter: selectedCategory,
       source_page: 'homepage',
       // Phase 3: Viral tracking data
       is_viral_session: !!viralInfo,
