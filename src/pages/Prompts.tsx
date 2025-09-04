@@ -141,8 +141,8 @@ export default function Prompts() {
 
     // Sort the filtered results
     filtered.sort((a, b) => {
-      // If no filters are applied, prioritize featured prompts
-      if (noFiltersApplied) {
+      // If no filters are applied and sorting is NOT by popularity, prioritize featured prompts
+      if (noFiltersApplied && sortBy !== 'popularity') {
         const aIsFeatured = featuredPromptIds.includes(a.id);
         const bIsFeatured = featuredPromptIds.includes(b.id);
         
@@ -157,10 +157,10 @@ export default function Prompts() {
         }
       }
 
-      // Apply regular sorting for non-featured or when filters are applied
+      // Apply regular sorting (including when popularity is selected)
       switch (sortBy) {
         case 'popularity':
-          return b.votes - a.votes;
+          return b.gaClicks - a.gaClicks;
         case 'alphabetical':
           return a.title.localeCompare(b.title);
         case 'sessionType':

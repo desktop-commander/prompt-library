@@ -17,6 +17,7 @@ export interface UseCase {
   categories: string[];  // Updated to support multiple categories
   taskCategory?: string;  // New field for DevOps task categorization
   votes: number;
+  gaClicks: number;  // Primary click tracking metric for popularity sorting
   icon: string;
   author: string;
   dateAdded: string;
